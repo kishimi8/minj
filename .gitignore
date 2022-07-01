@@ -1,0 +1,21 @@
+node_modules/
+*.lock
+*.log
+bin
+obj
+v16
+#below packages replaced with line 8 /Code/Solutions/packages
+# packages 
+/Code/Solutions/packages
+.vs
+package-lock.json
+$tf/
+
+HAMS_Requirements/
+.tfignore
+*.txt
+*.xlsx
+/Database/DanpheEMR_OS.bak
+
+/Code/Websites/DanpheEMR/Properties/PublishProfiles
+
