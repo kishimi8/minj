@@ -1,0 +1,135 @@
+version: 1
+
+dn: uid=keycloak-admin,ou=users,dc=dcm4che,dc=org
+changetype: add
+uid: keycloak-admin
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+sn:: IA==
+cn:: IA==
+userPassword:: Y2hhbmdlaXQ=
+
+dn: cn=user,ou=users,dc=dcm4che,dc=org
+changetype: modify
+add: member
+member: uid=keycloak-admin,ou=users,dc=dcm4che,dc=org
+
+dn: cn=create-client,ou=realm-management,dc=dcm4che,dc=org
+changetype: modify
+add: member
+member: uid=keycloak-admin,ou=users,dc=dcm4che,dc=org
+
+dn: cn=impersonation,ou=realm-management,dc=dcm4che,dc=org
+changetype: modify
+add: member
+member: uid=keycloak-admin,ou=users,dc=dcm4che,dc=org
+
+dn: cn=manage-authorization,ou=realm-management,dc=dcm4che,dc=org
+changetype: modify
+add: member
+member: uid=keycloak-admin,ou=users,dc=dcm4che,dc=org
+
+dn: cn=manage-clients,ou=realm-management,dc=dcm4che,dc=org
+changetype: modify
+add: member
+member: uid=keycloak-admin,ou=users,dc=dcm4che,dc=org
+
+dn: cn=manage-events,ou=realm-management,dc=dcm4che,dc=org
+changetype: modify
+add: member
+member: uid=keycloak-admin,ou=users,dc=dcm4che,dc=org
+
+dn: cn=manage-identity-providers,ou=realm-management,dc=dcm4che,dc=org
+changetype: modify
+add: member
+member: uid=keycloak-admin,ou=users,dc=dcm4che,dc=org
+
+dn: cn=manage-realm,ou=realm-management,dc=dcm4che,dc=org
+changetype: modify
+add: member
+member: uid=keycloak-admin,ou=users,dc=dcm4che,dc=org
+
+dn: cn=manage-users,ou=realm-management,dc=dcm4che,dc=org
+changetype: modify
+add: member
+member: uid=keycloak-admin,ou=users,dc=dcm4che,dc=org
+
+dn: cn=realm-admin,ou=realm-management,dc=dcm4che,dc=org
+changetype: modify
+add: member
+member: uid=keycloak-admin,ou=users,dc=dcm4che,dc=org
+
+dn: cn=view-authorization,ou=realm-management,dc=dcm4che,dc=org
+changetype: modify
+add: member
+member: uid=keycloak-admin,ou=users,dc=dcm4che,dc=org
+
+dn: cn=view-clients,ou=realm-management,dc=dcm4che,dc=org
+changetype: modify
+add: member
+member: uid=keycloak-admin,ou=users,dc=dcm4che,dc=org
+
+dn: cn=view-events,ou=realm-management,dc=dcm4che,dc=org
+changetype: modify
+add: member
+member: uid=keycloak-admin,ou=users,dc=dcm4che,dc=org
+
+dn: cn=view-identity-providers,ou=realm-management,dc=dcm4che,dc=org
+changetype: modify
+add: member
+member: uid=keycloak-admin,ou=users,dc=dcm4che,dc=org
+
+dn: cn=view-realm,ou=realm-management,dc=dcm4che,dc=org
+changetype: modify
+add: member
+member: uid=keycloak-admin,ou=users,dc=dcm4che,dc=org
+
+dn: cn=view-users,ou=realm-management,dc=dcm4che,dc=org
+changetype: modify
+add: member
+member: uid=keycloak-admin,ou=users,dc=dcm4che,dc=org
+
+dn: cn=query-users,ou=realm-management,dc=dcm4che,dc=org
+changetype: modify
+add: member
+member: uid=keycloak-admin,ou=users,dc=dcm4che,dc=org
+
+dn: cn=query-groups,ou=realm-management,dc=dcm4che,dc=org
+changetype: modify
+add: member
+member: uid=keycloak-admin,ou=users,dc=dcm4che,dc=org
+
+dn: cn=query-realms,ou=realm-management,dc=dcm4che,dc=org
+changetype: modify
+add: member
+member: uid=keycloak-admin,ou=users,dc=dcm4che,dc=org
+
+dn: cn=query-clients,ou=realm-management,dc=dcm4che,dc=org
+changetype: modify
+add: member
+member: uid=keycloak-admin,ou=users,dc=dcm4che,dc=org
+
+dn: cn=view-profile,ou=account,dc=dcm4che,dc=org
+changetype: modify
+add: member
+member: uid=keycloak-admin,ou=users,dc=dcm4che,dc=org
+
+dn: cn=delete-account,ou=account,dc=dcm4che,dc=org
+changetype: modify
+add: member
+member: uid=keycloak-admin,ou=users,dc=dcm4che,dc=org
+
+dn: cn=manage-account,ou=account,dc=dcm4che,dc=org
+changetype: modify
+add: member
+member: uid=keycloak-admin,ou=users,dc=dcm4che,dc=org
+
+dn: cn=manage-consent,ou=account,dc=dcm4che,dc=org
+changetype: modify
+add: member
+member: uid=keycloak-admin,ou=users,dc=dcm4che,dc=org
+
+dn: cn=view-applications,ou=account,dc=dcm4che,dc=org
+changetype: modify
+add: member
+member: uid=keycloak-admin,ou=users,dc=dcm4che,dc=org

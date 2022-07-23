@@ -1,0 +1,1393 @@
+{
+  "-": {
+    "get": {
+      "tags": [
+        "UPS-RS"
+      ],
+      "summary": "Search for Workitems",
+      "operationId": "SearchForWorkitems",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/acceptJsonOrMultipartXml"
+        },
+        {
+          "$ref": "../parameters.json#/filter"
+        },
+        {
+          "$ref": "../parameters.json#/includefield"
+        },
+        {
+          "$ref": "../parameters.json#/fuzzymatching"
+        },
+        {
+          "$ref": "../parameters.json#/limit"
+        },
+        {
+          "$ref": "../parameters.json#/offset"
+        },
+        {
+          "$ref": "../parameters.json#/orderBy"
+        },
+        {
+          "$ref": "../parameters.json#/template"
+        }
+      ],
+      "responses": {
+        "200": {
+          "$ref": "../responses.json#/searchResults"
+        },
+        "204": {
+          "description": "The search completed successfully, but there were zero results."
+        },
+        "400": {
+          "description": "There was a problem with the request."
+        },
+        "404": {
+          "description": "There is no Archive AE with the specified Title."
+        },
+        "500": {
+          "description": "Internal Server Error."
+        }
+      }
+    },
+    "post": {
+      "tags": [
+        "UPS-RS"
+      ],
+      "summary": "Creates a new Workitem",
+      "operationId": "CreateWorkitem",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/workitem"
+        },
+        {
+          "$ref": "../parameters.json#/template"
+        }
+      ],
+      "requestBody": {
+        "$ref": "../requestBodies.json#/workitem"
+      },
+      "responses": {
+        "201": {
+          "description": "The Target Workitem was successfully added to the Worklist."
+        },
+        "400": {
+          "description": "The request payload did not satisfy the requirements for a Workitem or UPS Template workitem creation triggered with SPS Start DateTime in request payload."
+        },
+        "404": {
+          "description": "There is no Archive AE with the specified Title."
+        },
+        "409": {
+          "description": "The Target Workitem already exists."
+        },
+        "500": {
+          "description": "Internal Server Error."
+        }
+      }
+    }
+  },
+  "workitem": {
+    "get": {
+      "tags": [
+        "UPS-RS"
+      ],
+      "summary": "Retrieve Workitem",
+      "operationId": "RetrieveWorkitem",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/workitemPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/acceptJsonOrXml"
+        }
+      ],
+      "responses": {
+        "200": {
+          "$ref": "../responses.json#/workitem"
+        },
+        "400": {
+          "description": "There was a problem with the request."
+        },
+        "404": {
+          "description": "The origin server has no knowledge of the Target Workitem."
+        },
+        "500": {
+          "description": "Internal Server Error."
+        }
+      }
+    },
+    "post": {
+      "tags": [
+        "UPS-RS"
+      ],
+      "summary": "Update existing Workitem",
+      "operationId": "UpdateWorkitem",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/workitem"
+        }
+      ],
+      "requestBody": {
+        "$ref": "../requestBodies.json#/workitem"
+      },
+      "responses": {
+        "201": {
+          "description": "The Target Workitem was updated."
+        },
+        "400": {
+          "description": "There was a problem with the request or UPS Template workitem update triggered with SPS Start DateTime in request payload."
+        },
+        "404": {
+          "description": "The Target Workitem was not found."
+        },
+        "409": {
+          "description": "The request is inconsistent with the current state of the Target Workitem."
+        },
+        "500": {
+          "description": "Internal Server Error."
+        }
+      }
+    }
+  },
+  "state": {
+    "put": {
+      "tags": [
+        "UPS-RS"
+      ],
+      "summary": "Change Workitem State",
+      "operationId": "ChangeWorkitemState",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/workitemPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/requesterPathParam"
+        }
+      ],
+      "requestBody": {
+        "$ref": "../requestBodies.json#/workitemState"
+      },
+      "responses": {
+        "200": {
+          "$ref": "../responses.json#/workitemState"
+        },
+        "400": {
+          "description": "The request cannot be performed, because it is invalid given the current state of the Target Workitem, or the Transaction UID is missing or incorrect."
+        },
+        "404": {
+          "description": "The Target Workitem was not found."
+        },
+        "409": {
+          "description": "The request is inconsistent with the current state of the Target Workitem."
+        },
+        "500": {
+          "description": "Internal Server Error."
+        }
+      }
+    }
+  },
+  "cancelrequest": {
+    "post": {
+      "tags": [
+        "UPS-RS"
+      ],
+      "summary": "Request Cancellation of Workitem",
+      "operationId": "RequestWorkitemCancellation",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/workitemPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/requesterPathParam"
+        }
+      ],
+      "requestBody": {
+        "$ref": "../requestBodies.json#/workitemCancelrequest"
+      },
+      "responses": {
+        "202": {
+          "description": "The request was accepted by the origin server, but the Target Workitem state has not necessarily changed yet."
+        },
+        "400": {
+          "description": "There was a problem with the syntax of the request."
+        },
+        "404": {
+          "description": "The Target Workitem was not found."
+        },
+        "409": {
+          "description": "The request is inconsistent with the current state of the Target Workitem. For example, the Target Workitem is in the SCHEDULED or COMPLETED state."
+        },
+        "500": {
+          "description": "Internal Server Error."
+        }
+      }
+    }
+  },
+  "reschedule": {
+    "post": {
+      "tags": [
+        "UPS-RS"
+      ],
+      "summary": "Reschedule Workitem",
+      "operationId": "RescheduleWorkitem",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/workitemPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/newWorkitem"
+        },
+        {
+          "$ref": "../parameters.json#/upsScheduledTime"
+        }
+      ],
+      "responses": {
+        "201": {
+          "description": "The Target Workitem was successfully rescheduled."
+        },
+        "404": {
+          "description": "The Target Workitem was not found."
+        },
+        "409": {
+          "description": "A Workitem with the specified UID for the new Workitem exists."
+        },
+        "500": {
+          "description": "Internal Server Error."
+        }
+      }
+    }
+  },
+  "subscriber" : {
+    "post": {
+      "tags": [
+        "UPS-RS"
+      ],
+      "summary": "Subscribe to Workitem",
+      "operationId": "SubscribeWorkitem",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/workitemPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/subscriberPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/deletionlock"
+        }
+      ],
+      "responses": {
+        "201": {
+          "description": "The Subscription was created."
+        },
+        "400": {
+          "description": "There was a problem with the syntax of the request."
+        },
+        "404": {
+          "description": "The Target Workitem was not found."
+        },
+        "500": {
+          "description": "Internal Server Error."
+        }
+      }
+    },
+    "delete": {
+      "tags": [
+        "UPS-RS"
+      ],
+      "summary": "Unsubscribe from Workitem",
+      "operationId": "UnsubscribeWorkitem",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/workitemPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/subscriberPathParam"
+        }
+      ],
+      "responses": {
+        "201": {
+          "description": "The Subscription was removed."
+        },
+        "400": {
+          "description": "There was a problem with the syntax of the request."
+        },
+        "404": {
+          "description": "The target Subscription was not found."
+        },
+        "500": {
+          "description": "Internal Server Error."
+        }
+      }
+    }
+  },
+  "globalSubscriber": {
+    "post": {
+      "tags": [
+        "UPS-RS"
+      ],
+      "summary": "Subscribe to Worklist",
+      "operationId": "SubscribeWorklist",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/subscriberPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/deletionlock"
+        }
+      ],
+      "responses": {
+        "201": {
+          "description": "The Subscription was created."
+        },
+        "400": {
+          "description": "There was a problem with the syntax of the request."
+        },
+        "404": {
+          "description": "There is no Archive AE with the specified Title."
+        },
+        "500": {
+          "description": "Internal Server Error."
+        }
+      }
+    },
+    "delete": {
+      "tags": [
+        "UPS-RS"
+      ],
+      "summary": "Unsubscribe from Worklist",
+      "operationId": "UnsubscribeWorklist",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/subscriberPathParam"
+        }
+      ],
+      "responses": {
+        "201": {
+          "description": "The Subscriptions were removed."
+        },
+        "400": {
+          "description": "There was a problem with the syntax of the request."
+        },
+        "404": {
+          "description": "The target Subscription was not found."
+        },
+        "500": {
+          "description": "Internal Server Error."
+        }
+      }
+    }
+  },
+  "filteredSubscriber": {
+    "post": {
+      "tags": [
+        "UPS-RS"
+      ],
+      "summary": "Subscribe to Filtered Worklist",
+      "operationId": "SubscribeFilteredWorklist",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/subscriberPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/filter"
+        },
+        {
+          "$ref": "../parameters.json#/deletionlock"
+        }
+      ],
+      "responses": {
+        "201": {
+          "description": "The Subscription was created."
+        },
+        "400": {
+          "description": "There was a problem with the syntax of the request."
+        },
+        "404": {
+          "description": "There is no Archive AE with the specified Title."
+        },
+        "500": {
+          "description": "Internal Server Error."
+        }
+      }
+    },
+    "delete": {
+      "tags": [
+        "UPS-RS"
+      ],
+      "summary": "Unsubscribe from Filtered Worklist",
+      "operationId": "UnsubscribeFilteredWorklist",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/subscriberPathParam"
+        }
+      ],
+      "responses": {
+        "201": {
+          "description": "The Subscriptions were removed."
+        },
+        "400": {
+          "description": "There was a problem with the syntax of the request."
+        },
+        "404": {
+          "description": "The target Subscription was not found."
+        },
+        "500": {
+          "description": "Internal Server Error."
+        }
+      }
+    }
+  },
+  "globalSubscriberSuspend": {
+    "post": {
+      "tags": [
+        "UPS-RS"
+      ],
+      "summary": "Suspend Subscription from Worklist",
+      "operationId": "SuspendSubscriptionWorklist",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/subscriberPathParam"
+        }
+      ],
+      "responses": {
+        "201": {
+          "description": "The Worklist Subscription was suspended."
+        },
+        "400": {
+          "description": "There was a problem with the syntax of the request."
+        },
+        "404": {
+          "description": "The target Subscription was not found."
+        },
+        "500": {
+          "description": "Internal Server Error."
+        }
+      }
+    }
+  },
+  "filteredSubscriberSuspend": {
+    "post": {
+      "tags": [
+        "UPS-RS"
+      ],
+      "summary": "Suspend Subscription from Filtered Worklist",
+      "operationId": "SuspendSubscriptionFilteredWorklist",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/subscriberPathParam"
+        }
+      ],
+      "responses": {
+        "201": {
+          "description": "The Worklist Subscription was suspended."
+        },
+        "400": {
+          "description": "There was a problem with the syntax of the request."
+        },
+        "404": {
+          "description": "The target Subscription was not found."
+        },
+        "500": {
+          "description": "Internal Server Error."
+        }
+      }
+    }
+  },
+  "count": {
+    "get": {
+      "tags": [
+        "UPS-RS"
+      ],
+      "summary": "Count Workitems",
+      "operationId": "CountWorkitems",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/filter"
+        },
+        {
+          "$ref": "../parameters.json#/fuzzymatching"
+        }
+      ],
+      "responses": {
+        "200": {
+          "$ref": "../responses.json#/countResults"
+        },
+        "400": {
+          "description": "There was a problem with the request."
+        },
+        "404": {
+          "description": "There is no Archive AE with the specified Title."
+        },
+        "500": {
+          "description": "Internal Server Error."
+        }
+      }
+    }
+  },
+  "local.studies": {
+    "post": {
+      "tags": [
+        "UPS-RS"
+      ],
+      "summary": "Create Workitems for local matching Study",
+      "operationId": "CreateWorkitemsForLocalMatchingStudy",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/upsLabel"
+        },
+        {
+          "$ref": "../parameters.json#/upsScheduledTime"
+        },
+        {
+          "$ref": "../parameters.json#/filter"
+        },
+        {
+          "$ref": "../parameters.json#/fuzzymatching"
+        },
+        {
+          "$ref": "../parameters.json#/patientVerificationStatus"
+        },
+        {
+          "$ref": "../parameters.json#/incomplete"
+        },
+        {
+          "$ref": "../parameters.json#/retrievefailed"
+        },
+        {
+          "$ref": "../parameters.json#/storageVerificationFailed"
+        },
+        {
+          "$ref": "../parameters.json#/compressionfailed"
+        },
+        {
+          "$ref": "../parameters.json#/metadataUpdateFailed"
+        },
+        {
+          "$ref": "../parameters.json#/SendingApplicationEntityTitleOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/ReceivingApplicationEntityTitleOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/SendingPresentationAddressOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/ReceivingPresentationAddressOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/StudyReceiveDateTime"
+        },
+        {
+          "$ref": "../parameters.json#/StudyAccessDateTime"
+        },
+        {
+          "$ref": "../parameters.json#/StudySizeInKB"
+        },
+        {
+          "$ref": "../parameters.json#/ExternalRetrieveAET"
+        },
+        {
+          "$ref": "../parameters.json#/ExternalRetrieveAET!"
+        },
+        {
+          "$ref": "../parameters.json#/ExpirationDate"
+        },
+        {
+          "$ref": "../parameters.json#/ExpirationState"
+        },
+        {
+          "$ref": "../parameters.json#/allOfModalitiesInStudy"
+        },
+        {
+          "$ref": "../parameters.json#/storageID"
+        },
+        {
+          "$ref": "../parameters.json#/storageClustered"
+        },
+        {
+          "$ref": "../parameters.json#/storageExported"
+        }
+      ],
+      "requestBody": {
+        "$ref": "../requestBodies.json#/workitem"
+      },
+      "responses": {
+        "202": {
+          "$ref": "../responses.json#/countResults"
+        },
+        "204": {
+          "description": "No matching Study found. No Workitem was created."
+        },
+        "400": {
+          "description": "Validation for one of the query parameters failed"
+        },
+        "404": {
+          "description": "No such Archive AE Title"
+        },
+        "500": {
+          "description": "Internal Server Error."
+        }
+      }
+    }
+  },
+  "local.series": {
+    "post": {
+      "tags": [
+        "UPS-RS"
+      ],
+      "summary": "Create Workitem for local matching Series of Study",
+      "operationId": "CreateWorkitemForLocalMatchingSeriesOfStudy",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/studyPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/upsLabel"
+        },
+        {
+          "$ref": "../parameters.json#/upsScheduledTime"
+        },
+        {
+          "$ref": "../parameters.json#/filter"
+        },
+        {
+          "$ref": "../parameters.json#/fuzzymatching"
+        },
+        {
+          "$ref": "../parameters.json#/patientVerificationStatus"
+        },
+        {
+          "$ref": "../parameters.json#/incomplete"
+        },
+        {
+          "$ref": "../parameters.json#/retrievefailed"
+        },
+        {
+          "$ref": "../parameters.json#/storageVerificationFailed"
+        },
+        {
+          "$ref": "../parameters.json#/compressionfailed"
+        },
+        {
+          "$ref": "../parameters.json#/metadataUpdateFailed"
+        },
+        {
+          "$ref": "../parameters.json#/SendingApplicationEntityTitleOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/ReceivingApplicationEntityTitleOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/SendingPresentationAddressOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/ReceivingPresentationAddressOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/StudyReceiveDateTime"
+        },
+        {
+          "$ref": "../parameters.json#/StudyAccessDateTime"
+        },
+        {
+          "$ref": "../parameters.json#/StudySizeInKB"
+        },
+        {
+          "$ref": "../parameters.json#/ExternalRetrieveAET"
+        },
+        {
+          "$ref": "../parameters.json#/ExternalRetrieveAET!"
+        },
+        {
+          "$ref": "../parameters.json#/ExpirationDate"
+        },
+        {
+          "$ref": "../parameters.json#/ExpirationState"
+        },
+        {
+          "$ref": "../parameters.json#/allOfModalitiesInStudy"
+        },
+        {
+          "$ref": "../parameters.json#/storageID"
+        },
+        {
+          "$ref": "../parameters.json#/storageClustered"
+        },
+        {
+          "$ref": "../parameters.json#/storageExported"
+        }
+      ],
+      "requestBody": {
+        "$ref": "../requestBodies.json#/workitem"
+      },
+      "responses": {
+        "201": {
+          "description": "Workitem was created."
+        },
+        "204": {
+          "description": "No matching Series found. No Workitem was created."
+        },
+        "400": {
+          "description": "Validation for one of the query parameters failed"
+        },
+        "404": {
+          "description": "No such Archive AE Title"
+        },
+        "500": {
+          "description": "Internal Server Error."
+        }
+      }
+    }
+  },
+  "local.instances": {
+    "post": {
+      "tags": [
+        "UPS-RS"
+      ],
+      "summary": "Create Workitem for local matching Instances of Series",
+      "operationId": "CreateWorkitemForLocalMatchingInstancesOfSeries",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/studyPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/seriesPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/upsLabel"
+        },
+        {
+          "$ref": "../parameters.json#/upsScheduledTime"
+        },
+        {
+          "$ref": "../parameters.json#/filter"
+        },
+        {
+          "$ref": "../parameters.json#/fuzzymatching"
+        },
+        {
+          "$ref": "../parameters.json#/patientVerificationStatus"
+        },
+        {
+          "$ref": "../parameters.json#/incomplete"
+        },
+        {
+          "$ref": "../parameters.json#/retrievefailed"
+        },
+        {
+          "$ref": "../parameters.json#/storageVerificationFailed"
+        },
+        {
+          "$ref": "../parameters.json#/compressionfailed"
+        },
+        {
+          "$ref": "../parameters.json#/metadataUpdateFailed"
+        },
+        {
+          "$ref": "../parameters.json#/SendingApplicationEntityTitleOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/ReceivingApplicationEntityTitleOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/SendingPresentationAddressOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/ReceivingPresentationAddressOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/StudyReceiveDateTime"
+        },
+        {
+          "$ref": "../parameters.json#/StudyAccessDateTime"
+        },
+        {
+          "$ref": "../parameters.json#/StudySizeInKB"
+        },
+        {
+          "$ref": "../parameters.json#/ExternalRetrieveAET"
+        },
+        {
+          "$ref": "../parameters.json#/ExternalRetrieveAET!"
+        },
+        {
+          "$ref": "../parameters.json#/ExpirationDate"
+        },
+        {
+          "$ref": "../parameters.json#/ExpirationState"
+        },
+        {
+          "$ref": "../parameters.json#/allOfModalitiesInStudy"
+        },
+        {
+          "$ref": "../parameters.json#/storageID"
+        },
+        {
+          "$ref": "../parameters.json#/storageClustered"
+        },
+        {
+          "$ref": "../parameters.json#/storageExported"
+        }
+      ],
+      "requestBody": {
+        "$ref": "../requestBodies.json#/workitem"
+      },
+      "responses": {
+        "201": {
+          "description": "Workitem was created."
+        },
+        "204": {
+          "description": "No matching Instance found. No Workitem was created."
+        },
+        "400": {
+          "description": "Validation for one of the query parameters failed"
+        },
+        "404": {
+          "description": "No such Archive AE Title"
+        },
+        "500": {
+          "description": "Internal Server Error."
+        }
+      }
+    }
+  },
+  "local.studies.csv": {
+    "post": {
+      "tags": [
+        "UPS-RS"
+      ],
+      "summary": "Create Workitems for local Studies specified in CSV",
+      "operationId": "CreateWorkitemsLocalStudiesCSV",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/upsTemplateUIDPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/csvStudyUIDFieldPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/csvPatientID"
+        },
+        {
+          "$ref": "../parameters.json#/upsLabel"
+        },
+        {
+          "$ref": "../parameters.json#/upsScheduledTime"
+        }
+      ],
+      "requestBody": {
+        "description": "CSV File containing Study Instance UIDs",
+        "required": true,
+        "content": {
+          "text/csv": {
+            "schema": {
+              "type": "file",
+              "format": "binary"
+            }
+          }
+        }
+      },
+      "responses": {
+        "202": {
+          "$ref": "../responses.json#/countResults"
+        },
+        "204": {
+          "description": "Empty file or Incorrect field position or Not a CSV file or Invalid UIDs."
+        },
+        "400": {
+          "description": "CSV field for Study Instance UID is specified as less than 1"
+        },
+        "404": {
+          "description": "No such Archive AE Title or UPS Template Workitem with specified UID not found in DB"
+        },
+        "500": {
+          "description": "Internal Server Error"
+        }
+      }
+    }
+  },
+  "external.studies": {
+    "post": {
+      "tags": [
+        "UPS-RS"
+      ],
+      "summary": "Create Workitems for external matching Studies",
+      "operationId": "CreateWorkitemsForExternalMatchingStudies",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/moveSCPPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/upsLabel"
+        },
+        {
+          "$ref": "../parameters.json#/upsScheduledTime"
+        },
+        {
+          "$ref": "../parameters.json#/filter"
+        },
+        {
+          "$ref": "../parameters.json#/fuzzymatching"
+        },
+        {
+          "$ref": "../parameters.json#/priority"
+        },
+        {
+          "$ref": "../parameters.json#/SplitStudyDateRange"
+        }
+      ],
+      "requestBody": {
+        "$ref": "../requestBodies.json#/workitem"
+      },
+      "responses": {
+        "202": {
+          "$ref": "../responses.json#/countResults"
+        },
+        "204": {
+          "description": "No matching Study found. No Workitem was created."
+        },
+        "400": {
+          "description": "Validation for one of the query parameters failed"
+        },
+        "404": {
+          "description": "No such Archive AE Title or C-MOVE SCP AE Title."
+        },
+        "500": {
+          "description": "Internal Server Error."
+        },
+        "502": {
+          "description": "Failure on query of C-MOVE SCP."
+        }
+      }
+    }
+  },
+  "external.series": {
+    "post": {
+      "tags": [
+        "UPS-RS"
+      ],
+      "summary": "Create Workitem for external matching Series of Study",
+      "operationId": "CreateWorkitemForExternalMatchingSeries",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/moveSCPPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/studyPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/upsLabel"
+        },
+        {
+          "$ref": "../parameters.json#/upsScheduledTime"
+        },
+        {
+          "$ref": "../parameters.json#/filter"
+        },
+        {
+          "$ref": "../parameters.json#/fuzzymatching"
+        },
+        {
+          "$ref": "../parameters.json#/priority"
+        },
+        {
+          "$ref": "../parameters.json#/SplitStudyDateRange"
+        }
+      ],
+      "requestBody": {
+        "$ref": "../requestBodies.json#/workitem"
+      },
+      "responses": {
+        "202": {
+          "$ref": "../responses.json#/countResults"
+        },
+        "204": {
+          "description": "No matching Series found. No Workitem was created."
+        },
+        "400": {
+          "description": "Validation for one of the query parameters failed"
+        },
+        "404": {
+          "description": "No such Archive AE Title or C-MOVE SCP AE Title."
+        },
+        "500": {
+          "description": "Internal Server Error."
+        },
+        "502": {
+          "description": "Failure on query of C-MOVE SCP."
+        }
+      }
+    }
+  },
+  "external.instances": {
+    "post": {
+      "tags": [
+        "UPS-RS"
+      ],
+      "summary": "Create Workitem for external matching Instances of Series",
+      "operationId": "CreateWorkitemForExternalMatchingInstancesOfSeries",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/moveSCPPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/studyPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/seriesPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/upsLabel"
+        },
+        {
+          "$ref": "../parameters.json#/upsScheduledTime"
+        },
+        {
+          "$ref": "../parameters.json#/filter"
+        },
+        {
+          "$ref": "../parameters.json#/fuzzymatching"
+        },
+        {
+          "$ref": "../parameters.json#/priority"
+        },
+        {
+          "$ref": "../parameters.json#/SplitStudyDateRange"
+        }
+      ],
+      "requestBody": {
+        "$ref": "../requestBodies.json#/workitem"
+      },
+      "responses": {
+        "202": {
+          "$ref": "../responses.json#/countResults"
+        },
+        "204": {
+          "description": "No matching Instances found. No Workitem was created."
+        },
+        "400": {
+          "description": "Validation for one of the query parameters failed"
+        },
+        "404": {
+          "description": "No such Archive AE Title or C-MOVE SCP AE Title."
+        },
+        "500": {
+          "description": "Internal Server Error."
+        },
+        "502": {
+          "description": "Failure on query of C-MOVE SCP."
+        }
+      }
+    }
+  },
+  "external2.studies": {
+    "post": {
+      "tags": [
+        "UPS-RS"
+      ],
+      "summary": "Create Workitems for external matching Studies queried from C-FIND SCP",
+      "operationId": "CreateWorkitemsForExternalMatchingStudies2",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/moveSCPPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/findSCPPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/upsLabel"
+        },
+        {
+          "$ref": "../parameters.json#/upsScheduledTime"
+        },
+        {
+          "$ref": "../parameters.json#/filter"
+        },
+        {
+          "$ref": "../parameters.json#/fuzzymatching"
+        },
+        {
+          "$ref": "../parameters.json#/priority"
+        },
+        {
+          "$ref": "../parameters.json#/SplitStudyDateRange"
+        }
+      ],
+      "requestBody": {
+        "$ref": "../requestBodies.json#/workitem"
+      },
+      "responses": {
+        "202": {
+          "$ref": "../responses.json#/countResults"
+        },
+        "204": {
+          "description": "No matching Study found. No Workitem was created."
+        },
+        "400": {
+          "description": "Validation for one of the query parameters failed"
+        },
+        "404": {
+          "description": "No such Archive AE Title, C-FIND SCP AE Title or C-MOVE SCP AE Title."
+        },
+        "500": {
+          "description": "Internal Server Error."
+        },
+        "502": {
+          "description": "Failure on query of C-FIND SCP."
+        }
+      }
+    }
+  },
+  "external2.series": {
+    "post": {
+      "tags": [
+        "UPS-RS"
+      ],
+      "summary": "Create Workitem for external matching Series of Study queried from C-FIND SCP",
+      "operationId": "CreateWorkitemForExternalMatchingSeriesOfStudy2",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/moveSCPPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/studyPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/findSCPPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/upsLabel"
+        },
+        {
+          "$ref": "../parameters.json#/upsScheduledTime"
+        },
+        {
+          "$ref": "../parameters.json#/filter"
+        },
+        {
+          "$ref": "../parameters.json#/fuzzymatching"
+        },
+        {
+          "$ref": "../parameters.json#/priority"
+        },
+        {
+          "$ref": "../parameters.json#/SplitStudyDateRange"
+        }
+      ],
+      "requestBody": {
+        "$ref": "../requestBodies.json#/workitem"
+      },
+      "responses": {
+        "202": {
+          "$ref": "../responses.json#/countResults"
+        },
+        "204": {
+          "description": "No matching Series found. No Workitem was created."
+        },
+        "400": {
+          "description": "Validation for one of the query parameters failed"
+        },
+        "404": {
+          "description": "No such Archive AE Title, C-FIND SCP AE Title or C-MOVE SCP AE Title."
+        },
+        "500": {
+          "description": "Internal Server Error."
+        },
+        "502": {
+          "description": "Failure on query of C-FIND SCP."
+        }
+      }
+    }
+  },
+  "external2.instances": {
+    "post": {
+      "tags": [
+        "UPS-RS"
+      ],
+      "summary": "Create Workitem for external matching Instances of Series queried from C-FIND SCP",
+      "operationId": "CreateWorkitemForExternalMatchingInstancesOfSeries2",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/moveSCPPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/studyPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/seriesPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/findSCPPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/upsLabel"
+        },
+        {
+          "$ref": "../parameters.json#/upsScheduledTime"
+        },
+        {
+          "$ref": "../parameters.json#/filter"
+        },
+        {
+          "$ref": "../parameters.json#/fuzzymatching"
+        },
+        {
+          "$ref": "../parameters.json#/priority"
+        },
+        {
+          "$ref": "../parameters.json#/SplitStudyDateRange"
+        }
+      ],
+      "requestBody": {
+        "$ref": "../requestBodies.json#/workitem"
+      },
+      "responses": {
+        "202": {
+          "$ref": "../responses.json#/countResults"
+        },
+        "204": {
+          "description": "No matching Instances found. No Workitem was created."
+        },
+        "400": {
+          "description": "Validation for one of the query parameters failed"
+        },
+        "404": {
+          "description": "No such Archive AE Title, C-FIND SCP AE Title or C-MOVE SCP AE Title."
+        },
+        "500": {
+          "description": "Internal Server Error."
+        },
+        "502": {
+          "description": "Failure on query of C-FIND SCP."
+        }
+      }
+    }
+  },
+  "external.studies.csv": {
+    "post": {
+      "tags": [
+        "UPS-RS"
+      ],
+      "summary": "Create Workitems for external Studies specified in CSV",
+      "operationId": "CreateWorkitemsExternalStudiesCSV",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/moveSCPPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/csvStudyUIDFieldPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/csvPatientID"
+        },
+        {
+          "$ref": "../parameters.json#/upsTemplateUIDPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/upsLabel"
+        },
+        {
+          "$ref": "../parameters.json#/upsScheduledTime"
+        }
+      ],
+      "responses": {
+        "202": {
+          "$ref": "../responses.json#/countResults"
+        },
+        "204": {
+          "description": "Empty file or Incorrect field position or Not a CSV file or Invalid UIDs or Duplicate Retrieves suppressed."
+        },
+        "400": {
+          "description": "Validation for one of the query parameters failed or CSV field for Study Instance UID specified as less than 1"
+        },
+        "404": {
+          "description": "No such Archive AE Title or Move SCP AE Title or UPS Template Workitem with specified UID not found in DB"
+        },
+        "500": {
+          "description": "Internal Server Error"
+        }
+      }
+    }
+  }
+}
