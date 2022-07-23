@@ -1,0 +1,67 @@
+<ngx-loading-bar [color]="'#2d404f'"></ngx-loading-bar>
+
+<!--<input type="text" [(ngModel)]="testurl">
+<button (click)="onClick()">Alert</button>-->
+<!--<button (click)="msgcomp.setMessage('SetnewMessagetest')">setmessage</button>-->
+<app-messaging></app-messaging>
+<!--<div class="msg_container">-->
+    <!--<li ng-repeat="m in msg" class="{{m.status}} msg_{{m.id}} slideInRight animated"  ng-show="m.text" ng-click="closeBox(m)">-->
+        <!--<span class="close" data-dismiss="alert" aria-label="close">&times;</span>-->
+        <!--<h4>{{m.title}}</h4>-->
+        <!--<p ng-bind-html="m.text"></p>-->
+        <!--<div class="progress"></div>-->
+    <!--</li>-->
+<!--</div>-->
+<!--<button (click)="testLogout()">logout</button>-->
+<!--<button (click)="testUser()">test</button>-->
+<div class="language_switcher" *ngIf="languageSwitcher && languageSwitcher.currentSelectedLanguage">
+    <div class="default_block" (click)="languageSwitcher.open = !languageSwitcher.open">
+        <img src="{{languageSwitcher.currentSelectedLanguage.flag}}">
+        <span>{{languageSwitcher.currentSelectedLanguage.nativeName}}</span>
+    </div>
+    <ul *ngIf="languageSwitcher.open" class="languages">
+        <li *ngFor="let lang of languageSwitcher.languageList" (click)="switchLanguage(lang)">
+            <img src="{{lang.flag}}"> <span>{{lang.nativeName}}</span>
+        </li>
+    </ul>
+</div>
+<div class="config_menu">
+    <div class="user" *ngIf="user && user.user && user.user != 'anonymous'" (clickOutside)="showUserMenu=false">
+        <span (click)="showUserMenu = !showUserMenu" id="usermenu">
+            <div class="username" *ngIf="user && user.user && user.user != 'anonymous'"><i  class="glyphicon glyphicon-user"></i> {{user.user}}</div>
+            <i class="config glyphicon glyphicon-cog"></i>
+        </span>
+        <ul *ngIf="showUserMenu">
+            <li *ngIf="user && user.user && user.user != 'anonymous'"><a href="{{authServerUrl}}/realms/{{realm}}/account" target="_blank" i18n="@@menu.edit_account">Edit Account</a></li>
+            <li *ngIf="hasViewRealm"><a href="{{authServerUrl}}/admin/{{realm}}/console" target="_blank" i18n="@@menu.admin_realm">Admin Realm</a></li>
+            <li *ngIf="hasAdministrator" i18n-title="@@title.app.go_to_wildfly_admin" title="Go to Wildfly Administration Console"><a (click)="gotToWildflyConsole($event)" target="_blank" i18n="@@menu.wildfly_console">Wildfly Console</a></li>
+            <li *ngIf="user && user.user && user.user != 'anonymous'"><a href="" (click)="$event.preventDefault();logout()" i18n="@@menu.logout">Logout</a></li>
+            <li><a (click)="$event.preventDefault();productLabelling()" i18n="@@about">About</a></li>
+        </ul>
+    </div>
+</div>
+<div class="clock" [ngClass]="{'extend':!clockUnExtended}" *ngIf="currentServerTime" (mouseenter)="clockUnExtended = true" (mouseleave)="hideExtendedClock()">
+    <div class="time" i18n-title="@@title.app.server_time_param" title="Server time: {{j4care.fullDateToString(currentServerTime)}}">{{currentServerTime.getHours() < 10 ? '0'+currentServerTime.getHours():currentServerTime.getHours()}}:{{currentServerTime.getMinutes() < 10 ? '0'+currentServerTime.getMinutes():currentServerTime.getMinutes()}}:{{currentServerTime.getSeconds() < 10 ? '0'+currentServerTime.getSeconds():currentServerTime.getSeconds()}}</div>
+    <div class="text">{{myDeviceName}}</div>
+</div>
+<div class="background"></div>
+<!--<app-widgets></app-widgets>-->
+<div class="toggle-button out" (click)="showMenu = true;" *ngIf="!showMenu">
+    <mat-icon class="menu_button">reorder</mat-icon>
+</div>
+<ul id="mainmenu" class="nav slideInLeft animated" *ngIf="showMenu" (clickOutside)="closeFromOutside()" [clickOutsideExceptionClass]="'menu_button'">
+    <div (click)="showMenu = false;" class="glyphicon glyphicon-align-justify toggle-button "></div>
+    <!--<li (click)="showMenu = false;"><a routerLink="queues" routerLinkActive="active">Queues</a></li>-->
+    <li (click)="showMenu = false;" [permission]="{id:'menu-monitoring',param:'visible'}"><a routerLink="monitoring/associations" routerLinkActive="active" i18n="@@menu.monitoring">Monitoring</a></li>
+    <li (click)="showMenu = false;" [permission]="{id:'menu-study',param:'visible'}"><a routerLink="study/study" routerLinkActive="active" i18n="@@menu.navigation">Navigation</a></li>
+    <!--<li (click)="showMenu = false;" *ngIf="isRole('admin')"><a routerLink="control" routerLinkActive="active">Control</a></li>-->
+    <li (click)="showMenu = false;" [permission]="{id:'menu-configuration',param:'visible'}"><a routerLink="device/devicelist" routerLinkActive="active" i18n="@@menu.configuration">Configuration</a></li>
+</ul>
+<img src="assets/img/logo.png" class="logo" i18n-title="@@about" title="About" (click)="productLabelling()" >
+<router-outlet ></router-outlet>
+<div
+        class="scroll_up glyphicon glyphicon-menu-up animated"
+        *ngIf="showScrollButton"
+        [ngClass]="{fadeIn:showScrollButton, fadeOut:!showScrollButton}"
+        (click)="scrollUp()">
+</div>

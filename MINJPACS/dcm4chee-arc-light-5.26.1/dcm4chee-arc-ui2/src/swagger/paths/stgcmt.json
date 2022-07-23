@@ -1,0 +1,883 @@
+{
+  "-": {
+    "get": {
+      "tags": [
+        "STGCMT-RS"
+      ],
+      "summary": "List Storage Commitment Results",
+      "operationId": "listStgCmts",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/stgcmtStatus"
+        },
+        {
+          "$ref": "../parameters.json#/studyUID"
+        },
+        {
+          "$ref": "../parameters.json#/ExporterID"
+        },
+        {
+          "$ref": "../parameters.json#/taskID"
+        },
+        {
+          "$ref": "../parameters.json#/batchID"
+        },
+        {
+          "$ref": "../parameters.json#/updatedBefore"
+        },
+        {
+          "$ref": "../parameters.json#/offset"
+        },
+        {
+          "$ref": "../parameters.json#/limit"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Storage Commitment Result List",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas.json#/stgcmtList"
+              }
+            }
+          }
+        },
+        "500": {
+          "description": "Internal Server Error"
+        }
+      }
+    },
+    "delete": {
+      "tags": [
+        "STGCMT-RS"
+      ],
+      "summary": "Delete Storage Commitment Results",
+      "operationId": "deleteStgCmts",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/stgcmtStatus"
+        },
+        {
+          "$ref": "../parameters.json#/updatedBefore"
+        }
+      ],
+      "responses": {
+        "200": {
+          "$ref": "../responses.json#/deletedCount"
+        },
+        "500": {
+          "description": "Internal Server Error"
+        }
+      }
+    }
+  },
+  "stgcmt": {
+    "delete": {
+      "tags": [
+        "STGCMT-RS"
+      ],
+      "summary": "Delete Storage Commitment Result",
+      "operationId": "deleteStgCmt",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/transactionUIDPathParam"
+        }
+      ],
+      "responses": {
+        "204": {
+          "description": "successful operation"
+        },
+        "404": {
+          "description": "Storage Commitment Result not found"
+        },
+        "500": {
+          "description": "Internal Server Error"
+        }
+      }
+    }
+  },
+  "study": {
+    "post": {
+      "tags": [
+        "STGCMT-RS"
+      ],
+      "summary": "Request Storage Commitment of Study from external Storage Commitment SCP",
+      "operationId": "RequestStorageCommitmentOfStudyExternal",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/studyPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/stgCmtSCPPathParam"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Storage Commitment request accepted by external Storage Commitment SCP ",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas.json#/stgcmtscu"
+              }
+            }
+          }
+        },
+        "404": {
+          "description": "No such Archive AE Title, Study or external AE Title"
+        },
+        "500": {
+          "description": "Internal Server Error"
+        },
+        "502": {
+          "description": "Connection Refused or Storage Commitment SCP Failure",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas.json#/stgcmtscu"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "series1": {
+    "post": {
+      "tags": [
+        "STGCMT-RS"
+      ],
+      "summary": "Request Storage Commitment of Series from external Storage Commitment SCP",
+      "operationId": "RequestStorageCommitmentOfSeriesExternal",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/studyPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/seriesPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/stgCmtSCPPathParam"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Storage Commitment request accepted by external Storage Commitment SCP ",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas.json#/stgcmtscu"
+              }
+            }
+          }
+        },
+        "404": {
+          "description": "No such Archive AE Title, Study, Series or external AE Title"
+        },
+        "500": {
+          "description": "Internal Server Error"
+        },
+        "502": {
+          "description": "Connection Refused or Storage Commitment SCP Failure",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas.json#/stgcmtscu"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "instance": {
+    "post": {
+      "tags": [
+        "STGCMT-RS"
+      ],
+      "summary": "Request Storage Commitment of Instance from external Storage Commitment SCP",
+      "operationId": "RequestStorageCommitmentOfInstanceExternal",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/studyPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/seriesPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/instancePathParam"
+        },
+        {
+          "$ref": "../parameters.json#/stgCmtSCPPathParam"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Storage Commitment request accepted by external Storage Commitment SCP ",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas.json#/stgcmtscu"
+              }
+            }
+          }
+        },
+        "404": {
+          "description": "No such Archive AE Title, Study, Series, SOPInstance or external AE Title"
+        },
+        "500": {
+          "description": "Internal Server Error"
+        },
+        "502": {
+          "description": "Connection Refused or Storage Commitment SCP Failure",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas.json#/stgcmtscu"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "studies": {
+    "post": {
+      "tags": [
+        "STGCMT-RS"
+      ],
+      "summary": "Schedule Storage Commitment of matching Studies from external Storage Commitment SCP",
+      "operationId": "ScheduleStorageCommitmentOfMatchingStudiesExternal",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/stgCmtSCPPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/filter"
+        },
+        {
+          "$ref": "../parameters.json#/fuzzymatching"
+        },
+        {
+          "$ref": "../parameters.json#/patientVerificationStatus"
+        },
+        {
+          "$ref": "../parameters.json#/incomplete"
+        },
+        {
+          "$ref": "../parameters.json#/retrievefailed"
+        },
+        {
+          "$ref": "../parameters.json#/storageVerificationFailed"
+        },
+        {
+          "$ref": "../parameters.json#/compressionfailed"
+        },
+        {
+          "$ref": "../parameters.json#/metadataUpdateFailed"
+        },
+        {
+          "$ref": "../parameters.json#/SendingApplicationEntityTitleOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/ReceivingApplicationEntityTitleOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/SendingPresentationAddressOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/ReceivingPresentationAddressOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/StudyReceiveDateTime"
+        },
+        {
+          "$ref": "../parameters.json#/StudyAccessDateTime"
+        },
+        {
+          "$ref": "../parameters.json#/StudySizeInKB"
+        },
+        {
+          "$ref": "../parameters.json#/ExternalRetrieveAET"
+        },
+        {
+          "$ref": "../parameters.json#/ExternalRetrieveAET!"
+        },
+        {
+          "$ref": "../parameters.json#/ExpirationDate"
+        },
+        {
+          "$ref": "../parameters.json#/ExpirationState"
+        },
+        {
+          "$ref": "../parameters.json#/allOfModalitiesInStudy"
+        },
+        {
+          "$ref": "../parameters.json#/storageID"
+        },
+        {
+          "$ref": "../parameters.json#/storageClustered"
+        },
+        {
+          "$ref": "../parameters.json#/storageExported"
+        },
+        {
+          "$ref": "../parameters.json#/scheduledTime"
+        }
+      ],
+      "responses": {
+        "202": {
+          "$ref": "../responses.json#/countResults"
+        },
+        "400": {
+          "description": "Validation for one of the query parameters failed"
+        },
+        "404": {
+          "description": "No such Archive AE Title or Storage Commitment SCP AE Title"
+        },
+        "500": {
+          "description": "Internal Server Error"
+        }
+      }
+    }
+  },
+  "studies.series": {
+    "post": {
+      "tags": [
+        "STGCMT-RS"
+      ],
+      "summary": "Schedule Storage Commitment of matching Series of Study from external Storage Commitment SCP",
+      "operationId": "ScheduleStorageCommitmentOfMatchingSeriesOfStudyExternal",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/stgCmtSCPPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/studyPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/filter"
+        },
+        {
+          "$ref": "../parameters.json#/fuzzymatching"
+        },
+        {
+          "$ref": "../parameters.json#/patientVerificationStatus"
+        },
+        {
+          "$ref": "../parameters.json#/incomplete"
+        },
+        {
+          "$ref": "../parameters.json#/retrievefailed"
+        },
+        {
+          "$ref": "../parameters.json#/storageVerificationFailed"
+        },
+        {
+          "$ref": "../parameters.json#/compressionfailed"
+        },
+        {
+          "$ref": "../parameters.json#/metadataUpdateFailed"
+        },
+        {
+          "$ref": "../parameters.json#/SendingApplicationEntityTitleOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/ReceivingApplicationEntityTitleOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/SendingPresentationAddressOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/ReceivingPresentationAddressOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/StudyReceiveDateTime"
+        },
+        {
+          "$ref": "../parameters.json#/StudyAccessDateTime"
+        },
+        {
+          "$ref": "../parameters.json#/StudySizeInKB"
+        },
+        {
+          "$ref": "../parameters.json#/ExternalRetrieveAET"
+        },
+        {
+          "$ref": "../parameters.json#/ExternalRetrieveAET!"
+        },
+        {
+          "$ref": "../parameters.json#/ExpirationDate"
+        },
+        {
+          "$ref": "../parameters.json#/ExpirationState"
+        },
+        {
+          "$ref": "../parameters.json#/allOfModalitiesInStudy"
+        },
+        {
+          "$ref": "../parameters.json#/storageID"
+        },
+        {
+          "$ref": "../parameters.json#/storageClustered"
+        },
+        {
+          "$ref": "../parameters.json#/storageExported"
+        },
+        {
+          "$ref": "../parameters.json#/scheduledTime"
+        }
+      ],
+      "responses": {
+        "202": {
+          "$ref": "../responses.json#/countResults"
+        },
+        "400": {
+          "description": "Validation for one of the query parameters failed"
+        },
+        "404": {
+          "description": "No such Archive AE Title, Storage Commitment SCP AE Title or Study"
+        },
+        "500": {
+          "description": "Internal Server Error"
+        }
+      }
+    }
+  },
+  "series": {
+    "post": {
+      "tags": [
+        "STGCMT-RS"
+      ],
+      "summary": "Schedule Storage Commitment of matching Series from external Storage Commitment SCP",
+      "operationId": "ScheduleStorageCommitmentOfMatchingSeriesExternal",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/stgCmtSCPPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/filter"
+        },
+        {
+          "$ref": "../parameters.json#/fuzzymatching"
+        },
+        {
+          "$ref": "../parameters.json#/patientVerificationStatus"
+        },
+        {
+          "$ref": "../parameters.json#/incomplete"
+        },
+        {
+          "$ref": "../parameters.json#/retrievefailed"
+        },
+        {
+          "$ref": "../parameters.json#/storageVerificationFailed"
+        },
+        {
+          "$ref": "../parameters.json#/compressionfailed"
+        },
+        {
+          "$ref": "../parameters.json#/metadataUpdateFailed"
+        },
+        {
+          "$ref": "../parameters.json#/SendingApplicationEntityTitleOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/ReceivingApplicationEntityTitleOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/SendingPresentationAddressOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/ReceivingPresentationAddressOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/StudyReceiveDateTime"
+        },
+        {
+          "$ref": "../parameters.json#/StudyAccessDateTime"
+        },
+        {
+          "$ref": "../parameters.json#/StudySizeInKB"
+        },
+        {
+          "$ref": "../parameters.json#/ExternalRetrieveAET"
+        },
+        {
+          "$ref": "../parameters.json#/ExternalRetrieveAET!"
+        },
+        {
+          "$ref": "../parameters.json#/ExpirationDate"
+        },
+        {
+          "$ref": "../parameters.json#/ExpirationState"
+        },
+        {
+          "$ref": "../parameters.json#/allOfModalitiesInStudy"
+        },
+        {
+          "$ref": "../parameters.json#/storageID"
+        },
+        {
+          "$ref": "../parameters.json#/storageClustered"
+        },
+        {
+          "$ref": "../parameters.json#/storageExported"
+        },
+        {
+          "$ref": "../parameters.json#/scheduledTime"
+        }
+      ],
+      "responses": {
+        "202": {
+          "$ref": "../responses.json#/countResults"
+        },
+        "400": {
+          "description": "Validation for one of the query parameters failed"
+        },
+        "404": {
+          "description": "No such Archive AE Title or Storage Commitment SCP AE Title"
+        },
+        "500": {
+          "description": "Internal Server Error"
+        }
+      }
+    }
+  },
+  "studies.series.instances": {
+    "post": {
+      "tags": [
+        "STGCMT-RS"
+      ],
+      "summary": "Schedule Storage Commitment of matching Instances of Series from external Storage Commitment SCP",
+      "operationId": "ScheduleStorageCommitmentOfMatchingInstancesOfSeriesExternal",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/stgCmtSCPPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/studyPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/seriesPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/filter"
+        },
+        {
+          "$ref": "../parameters.json#/fuzzymatching"
+        },
+        {
+          "$ref": "../parameters.json#/patientVerificationStatus"
+        },
+        {
+          "$ref": "../parameters.json#/incomplete"
+        },
+        {
+          "$ref": "../parameters.json#/retrievefailed"
+        },
+        {
+          "$ref": "../parameters.json#/storageVerificationFailed"
+        },
+        {
+          "$ref": "../parameters.json#/compressionfailed"
+        },
+        {
+          "$ref": "../parameters.json#/metadataUpdateFailed"
+        },
+        {
+          "$ref": "../parameters.json#/SendingApplicationEntityTitleOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/ReceivingApplicationEntityTitleOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/SendingPresentationAddressOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/ReceivingPresentationAddressOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/StudyReceiveDateTime"
+        },
+        {
+          "$ref": "../parameters.json#/StudyAccessDateTime"
+        },
+        {
+          "$ref": "../parameters.json#/StudySizeInKB"
+        },
+        {
+          "$ref": "../parameters.json#/ExternalRetrieveAET"
+        },
+        {
+          "$ref": "../parameters.json#/ExternalRetrieveAET!"
+        },
+        {
+          "$ref": "../parameters.json#/ExpirationDate"
+        },
+        {
+          "$ref": "../parameters.json#/ExpirationState"
+        },
+        {
+          "$ref": "../parameters.json#/allOfModalitiesInStudy"
+        },
+        {
+          "$ref": "../parameters.json#/storageID"
+        },
+        {
+          "$ref": "../parameters.json#/storageClustered"
+        },
+        {
+          "$ref": "../parameters.json#/storageExported"
+        },
+        {
+          "$ref": "../parameters.json#/scheduledTime"
+        }
+      ],
+      "responses": {
+        "202": {
+          "$ref": "../responses.json#/countResults"
+        },
+        "400": {
+          "description": "Validation for one of the query parameters failed"
+        },
+        "404": {
+          "description": "No such Archive AE Title, Storage Commitment SCP AE Title, Study or Series"
+        },
+        "500": {
+          "description": "Internal Server Error"
+        }
+      }
+    }
+  },
+  "studies.instances": {
+    "post": {
+      "tags": [
+        "STGCMT-RS"
+      ],
+      "summary": "Schedule Storage Commitment of matching Instances of Study from external Storage Commitment SCP",
+      "operationId": "ScheduleStorageCommitmentOfMatchingInstancesOfStudyExternal",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/stgCmtSCPPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/studyPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/filter"
+        },
+        {
+          "$ref": "../parameters.json#/fuzzymatching"
+        },
+        {
+          "$ref": "../parameters.json#/patientVerificationStatus"
+        },
+        {
+          "$ref": "../parameters.json#/incomplete"
+        },
+        {
+          "$ref": "../parameters.json#/retrievefailed"
+        },
+        {
+          "$ref": "../parameters.json#/storageVerificationFailed"
+        },
+        {
+          "$ref": "../parameters.json#/compressionfailed"
+        },
+        {
+          "$ref": "../parameters.json#/metadataUpdateFailed"
+        },
+        {
+          "$ref": "../parameters.json#/SendingApplicationEntityTitleOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/ReceivingApplicationEntityTitleOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/SendingPresentationAddressOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/ReceivingPresentationAddressOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/StudyReceiveDateTime"
+        },
+        {
+          "$ref": "../parameters.json#/StudyAccessDateTime"
+        },
+        {
+          "$ref": "../parameters.json#/StudySizeInKB"
+        },
+        {
+          "$ref": "../parameters.json#/ExternalRetrieveAET"
+        },
+        {
+          "$ref": "../parameters.json#/ExternalRetrieveAET!"
+        },
+        {
+          "$ref": "../parameters.json#/ExpirationDate"
+        },
+        {
+          "$ref": "../parameters.json#/ExpirationState"
+        },
+        {
+          "$ref": "../parameters.json#/allOfModalitiesInStudy"
+        },
+        {
+          "$ref": "../parameters.json#/storageID"
+        },
+        {
+          "$ref": "../parameters.json#/storageClustered"
+        },
+        {
+          "$ref": "../parameters.json#/storageExported"
+        },
+        {
+          "$ref": "../parameters.json#/scheduledTime"
+        }
+      ],
+      "responses": {
+        "202": {
+          "$ref": "../responses.json#/countResults"
+        },
+        "400": {
+          "description": "Validation for one of the query parameters failed"
+        },
+        "404": {
+          "description": "No such Archive AE Title, Storage Commitment SCP AE Title or Study"
+        },
+        "500": {
+          "description": "Internal Server Error"
+        }
+      }
+    }
+  },
+  "instances": {
+    "post": {
+      "tags": [
+        "STGCMT-RS"
+      ],
+      "summary": "Schedule Storage Commitment of matching Instances from external Storage Commitment SCP",
+      "operationId": "ScheduleStorageCommitmentOfMatchingInstancesExternal",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/stgCmtSCPPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/filter"
+        },
+        {
+          "$ref": "../parameters.json#/fuzzymatching"
+        },
+        {
+          "$ref": "../parameters.json#/patientVerificationStatus"
+        },
+        {
+          "$ref": "../parameters.json#/incomplete"
+        },
+        {
+          "$ref": "../parameters.json#/retrievefailed"
+        },
+        {
+          "$ref": "../parameters.json#/storageVerificationFailed"
+        },
+        {
+          "$ref": "../parameters.json#/compressionfailed"
+        },
+        {
+          "$ref": "../parameters.json#/metadataUpdateFailed"
+        },
+        {
+          "$ref": "../parameters.json#/SendingApplicationEntityTitleOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/ReceivingApplicationEntityTitleOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/SendingPresentationAddressOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/ReceivingPresentationAddressOfSeries"
+        },
+        {
+          "$ref": "../parameters.json#/StudyReceiveDateTime"
+        },
+        {
+          "$ref": "../parameters.json#/StudyAccessDateTime"
+        },
+        {
+          "$ref": "../parameters.json#/StudySizeInKB"
+        },
+        {
+          "$ref": "../parameters.json#/ExternalRetrieveAET"
+        },
+        {
+          "$ref": "../parameters.json#/ExternalRetrieveAET!"
+        },
+        {
+          "$ref": "../parameters.json#/ExpirationDate"
+        },
+        {
+          "$ref": "../parameters.json#/ExpirationState"
+        },
+        {
+          "$ref": "../parameters.json#/allOfModalitiesInStudy"
+        },
+        {
+          "$ref": "../parameters.json#/storageID"
+        },
+        {
+          "$ref": "../parameters.json#/storageClustered"
+        },
+        {
+          "$ref": "../parameters.json#/storageExported"
+        },
+        {
+          "$ref": "../parameters.json#/scheduledTime"
+        }
+      ],
+      "responses": {
+        "202": {
+          "$ref": "../responses.json#/countResults"
+        },
+        "400": {
+          "description": "Validation for one of the query parameters failed"
+        },
+        "404": {
+          "description": "No such Archive AE Title or Storage Commitment SCP AE Title"
+        },
+        "500": {
+          "description": "Internal Server Error"
+        }
+      }
+    }
+  }
+}

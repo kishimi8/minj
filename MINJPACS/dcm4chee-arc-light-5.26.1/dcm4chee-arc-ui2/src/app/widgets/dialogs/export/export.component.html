@@ -1,0 +1,181 @@
+<div class="vex vex-theme-os export" xmlns="http://www.w3.org/1999/html" (keydown)="dialogKeyHandler($event,dialogRef)">
+    <div class="vex-dialog-form">
+        <h5>{{title}}</h5>
+        <h6 *ngIf="subTitle">{{subTitle}}</h6>
+        <p *ngIf="count && mode==='multiple'">{{count}} <ng-container i18n="@@export.studies_selected_to_be_retrieved">studies selected to be retrieved</ng-container></p>
+        <div class="content" *ngIf="mode === 'multipleExport'">
+            <label *ngIf="noDicomExporters.length === 0" class="text-danger">
+                <input type="radio" name="exportType" value="nonedicom" DISABLED> <ng-container i18n="@@export.create_first_exporter">Create first an exporter!</ng-container>
+            </label>
+            <ng-container *ngIf="noDicomExporters.length > 0">
+                <div class="noneDicomBlock">
+                    <p i18n="@@select_the_exporter">Select the exporter:</p>
+                    <mat-select [(ngModel)]="result.selectedExporter">
+                        <mat-option value="{{exporter.id}}" *ngFor="let exporter of noDicomExporters" title="{{exporter.description}}">{{exporter.id}}</mat-option>
+                    </mat-select>
+                </div>
+                <br>
+                <div>
+                    <input type="text" [(ngModel)]="result.batchID" i18n-placeholder="@@batch_id" placeholder="Batch ID">
+                    <range-picker
+                            [model]="result.scheduledTime"
+                            (modelChange)="result.scheduledTime = $event"
+                            [datePickerMode]="true"
+                            dateFormat="YYYYMMDD"
+                            onlySingleMode="true"
+                            defaultTime="00:00:00"
+                            mode="single"
+                            i18n-placeholder="@@schedule_at_desc"
+                            placeholder="Schedule at (if not set, schedule immediately)"
+                    ></range-picker>
+                </div>
+                <br>
+            </ng-container>
+        </div>
+        <div class="content" *ngIf="externalInternalAetMode === 'internal' &&  mode ==='single'">
+            <p i18n="@@select_the_type_of_the_exporter">Select the type of the exporter:</p>
+            <label>
+                <input type="radio" name="exportType" value="dicom" [(ngModel)]="result.exportType"> <ng-container i18n="@@synchronised_dicom_exporter">Synchronised DICOM C-STORE exporter</ng-container>
+            </label><br>
+            <label>
+                <input type="radio" name="exportType" value="stow" [(ngModel)]="result.exportType"> <ng-container i18n="@@synchronised_stow_exporter">Synchronised DICOM STOW-RS exporter</ng-container>
+            </label><br>
+            <label *ngIf="noDicomExporters.length > 0">
+                <input type="radio" name="exportType" value="nonedicom" [(ngModel)]="result.exportType"> <ng-container i18n="@@queued_exporter">Queued exporter</ng-container>
+            </label>
+            <label *ngIf="noDicomExporters.length === 0" class="text-danger">
+                <input type="radio" name="exportType" value="nonedicom" DISABLED> <ng-container i18n="@@for_queued_exporter_create_an_exporter_first">For queued exporter create an exporter first!</ng-container>
+            </label>
+            <div class="dicomBlock" *ngIf="result.exportType == 'dicom'">
+                <p i18n="@@select_the_destination_aetitle">Select the destination AETitle:</p>
+                <dcm-drop-down
+                        [options]="aesOption"
+                        [(model)]="result.selectedAet"
+                        [editable]="false"
+                        [showSearchField]="true"
+                        [multiSelectMode]="false"
+                        (modelChange)="result.selectedAet = $event"
+                        [showStar]="false"
+                ></dcm-drop-down>
+<!--                <mat-select class="aes" [(ngModel)]="result.selectedAet">
+                    <mat-option value="{{aet.dicomAETitle}}" *ngFor="let aet of aes" title="{{aet.dicomDescription}}">{{aet.dicomAETitle}}</mat-option>
+                </mat-select>-->
+            </div>
+            <div class="dicomBlock" *ngIf="result.exportType == 'stow'">
+                <p i18n="@@select_stow_webapp">Select STOW destination web application:</p>
+                <dcm-drop-down
+                        [options]="stowWebAppsOption"
+                        [(model)]="result.selectedStowWebapp"
+                        [editable]="false"
+                        [showSearchField]="true"
+                        [multiSelectMode]="false"
+                        (modelChange)="result.selectedStowWebapp = $event"
+                        [showStar]="false"
+                ></dcm-drop-down>
+            </div>
+            <div class="noneDicomBlock"  *ngIf="result.exportType != 'dicom' && result.exportType != 'stow'">
+                <p i18n="@@select_the_exporter">Select the exporter:</p>
+<!--                <select [(ngModel)]="result.selectedExporter">
+                    <option value="{{exporter.id}}" *ngFor="let exporter of noDicomExporters">{{exporter.id}}</option>
+                </select>-->
+                <mat-select [(ngModel)]="result.selectedExporter">
+                    <mat-option value="{{exporter.id}}" *ngFor="let exporter of noDicomExporters" title="{{exporter.description}}">{{exporter.id}}</mat-option>
+                </mat-select>
+            </div>
+        </div>
+        <div class="content" *ngIf="externalInternalAetMode === 'external' || mode ==='multiple'">
+            <div class="dicomBlock">
+                <p *ngIf="mode ==='single'" i18n="@@select_the_destination_aetitle_store_scp">Select the destination AETitle (STORE-SCP):</p>
+                <p *ngIf="mode ==='multiple'" i18n="@@select_the_calling_aetitle">Select the calling AETitle:</p>
+                <mat-select class="aes" [(ngModel)]="result.selectedAet">
+                    <mat-option value="{{aet.dicomAETitle}}" *ngFor="let aet of aes" title="{{aet.dicomDescription}}">{{aet.dicomAETitle}}</mat-option>
+                </mat-select>
+                <br>
+                <div *ngIf="mode === 'multiple-retrieve'" class="noneDicomBlock">
+                    <p i18n="@@batch_id">Batch ID:</p>
+                    <input type="text" [(ngModel)]="result.batchID" i18n-placeholder="@@batch_id" placeholder="Batch ID">
+                    <range-picker
+                            [model]="result.scheduledTime"
+                            (modelChange)="result.scheduledTime = $event"
+                            [datePickerMode]="true"
+                            dateFormat="YYYYMMDD"
+                            onlySingleMode="true"
+                            defaultTime="00:00:00"
+                            mode="single"
+                            i18n-placeholder="@@schedule_at_desc"
+                            placeholder="Schedule at (if not set, schedule immediately)"
+                    ></range-picker>
+                </div>
+                <br>
+            </div>
+            <div class="dicomBlock">
+                <p *ngIf="mode ==='single' && !newStudyPage" i18n="@@select_the_external_aetitle_c_move_scp">Select the external AETitle (C-MOVE SCP):</p>
+                <p *ngIf="mode ==='multiple'" i18n="@@select_the_external_aetitle">Select the external AETitle:</p>
+                <mat-select class="aes" [(ngModel)]="result.externalAET" *ngIf="!newStudyPage">
+                    <mat-option value="{{aet.dicomAETitle}}" *ngFor="let aet of aes" title="{{aet.dicomDescription}}">{{aet.dicomAETitle}}</mat-option>
+                </mat-select>
+            </div>
+            <div *ngIf="mode ==='single'">
+                <p i18n="@@queue_name">Queue Name:</p>
+                <mat-select class="aes" [(ngModel)]="result.dcmQueueName">
+                    <mat-option value="">*</mat-option>
+                    <mat-option value="{{queue.value}}" *ngFor="let queue of queues" title="{{queue.title}}">{{queue.text}}</mat-option>
+                </mat-select>
+            </div>
+<!--            <label i18n-title="@@title.export.if_checked_the_process_will_be_queued" title="If checked the process will be queued" *ngIf="mode ==='single'">
+                <input type="checkbox" name="queue" [(ngModel)]="result['queue']"> Queued DICOM export
+            </label><br *ngIf="mode ==='single'">-->
+            <ng-container *ngIf="mode === 'multiple'">
+                <div class="dicomBlock">
+                    <p i18n="@@select_the_query_aetitle">Select the query AETitle:</p>
+                    <mat-select class="aes" [(ngModel)]="result.queryAET">
+                        <mat-option value="{{aet.dicomAETitle}}" *ngFor="let aet of aes" title="{{aet.dicomDescription}}">{{aet.dicomAETitle}}</mat-option>
+                    </mat-select>
+                </div>
+                <div class="dicomBlock">
+                    <p i18n="@@select_the_destination_aetitle">Select the destination AETitle:</p>
+<!--                    <mat-select class="aes" [(ngModel)]="result.destinationAET">
+                        <mat-option value="{{aet.dicomAETitle}}" *ngFor="let aet of aes" title="{{aet.dicomDescription}}">{{aet.dicomAETitle}}</mat-option>
+                    </mat-select>-->
+                    <dcm-drop-down
+                            [options]="aesOption"
+                            [(model)]="result.destinationAET"
+                            [editable]="false"
+                            [showSearchField]="true"
+                            [multiSelectMode]="false"
+                            (modelChange)="result.destinationAET = $event"
+                            [showStar]="false"
+                    ></dcm-drop-down>
+                </div>
+            </ng-container>
+        </div>
+        <div class="content" *ngIf="mode === 'reschedule'">
+            <div class="dicomBlock">
+                <p i18n="@@exporter_id">Exporter ID:</p>
+                <mat-select class="aes" [(ngModel)]="result.selectedExporter">
+                    <mat-option value="{{export.id}}" *ngFor="let export of noDicomExporters" title="{{export.id}}">{{export.id}}</mat-option>
+                </mat-select>
+            </div>
+        </div>
+        <div class="content" *ngIf="result.exportType === 'nonedicom' && !(quantity && quantity === 'single')">
+            <p i18n="@@batch_id">Batch ID</p>
+            <input type="text" [(ngModel)]="result.batchID">
+            <range-picker
+                    [model]="result.scheduledTime"
+                    (modelChange)="result.scheduledTime = $event"
+                    [datePickerMode]="true"
+                    dateFormat="YYYYMMDD"
+                    onlySingleMode="true"
+                    defaultTime="00:00:00"
+                    mode="single"
+                    i18n-placeholder="@@schedule_at_desc"
+                    placeholder="Schedule at (if not set, schedule immediately)"
+            ></range-picker>
+        </div>
+        <div class="dialogbuttons">
+            <button *ngIf="!okButtonLabel" class="save" type="button" (click)="dialogRef.close(result)" [disabled]="!validForm()" i18n="@@EXPORT">EXPORT</button>
+            <button *ngIf="okButtonLabel" class="save" type="button" (click)="dialogRef.close(result)" [disabled]="!validForm()">{{okButtonLabel}}</button>
+            <button class="cancle" type="button" (click)="dialogRef.close(null)" i18n="@@CANCEL">CANCEL</button>
+        </div>
+    </div>
+</div>

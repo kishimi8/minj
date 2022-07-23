@@ -1,0 +1,87 @@
+<div class="main_content white_design">
+    <config-tab></config-tab>
+    <!--<div class="devicelist_block">-->
+        <div class="tab-content">
+            <h2 i18n="@@hl7_applications">Hl7 Applications</h2>
+            <div class="filter_line" *ngIf="advancedConfig">
+                <div class="filter_block">
+                    <filter-generator [filterIdTemplate]="'device-list'" [filterID]="'device-list'" [schema]="filterSchema" [model]="filter" (submit)="getHl7ApplicationsList(0)" [filterTreeHeight]="filterHeight"></filter-generator>
+                </div>
+            </div>
+            <div class="filter_line more_function_block">
+                <div class="filter single_block">
+                    <div class="filter_block">
+                        <div class="line">
+                            <a href="" (click)="$event.preventDefault();advancedConfig=true" *ngIf="!advancedConfig" class="more"><ng-container i18n="@@extended_search">Extended search</ng-container><i class="glyphicon glyphicon-triangle-bottom"></i></a>
+                            <a href="" (click)="$event.preventDefault();advancedConfig=false" *ngIf="advancedConfig" class="more ng-hide"><ng-container i18n="@@extended_search">Extended search</ng-container><i class="glyphicon glyphicon-triangle-top"></i></a>
+                            <input autocomplete="off" id="devicefilter" class="devicefilter" [(ngModel)]="devicefilter" i18n-placeholder="@@search_device" placeholder="Search device"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table class="j4care-table">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th i18n="@@device_name">Device Name</th>
+                    <th i18n="@@hl7_application_description">HL7 Application Description</th>
+                    <th i18n="@@hl7_application_name">Hl7 Application Name</th>
+                    <th i18n-title="@@title.dicom_network_connection" title="Dicom network connection" i18n="@@net_connection">Net. Connection</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let device of hl7Applications | search:devicefilter | slice:moreHl7.start:moreHl7.limit; let i = index">
+                    <td class="buttons_td">
+                        <span class="numbers">{{i+1}}.</span>
+                        <a class="table_btn" i18n-title="@@edit_device" title="Edit device" href="" (click)="$event.preventDefault();editDevice(device.dicomDeviceName)">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+                    </td>
+                    <td><div *ngIf="device['dicomDeviceName']" >
+                        <a i18n-title="@@edit_device"  title="Edit device" href="" routerLink="/device/edit/{{device['dicomDeviceName']}}">
+                            {{device['dicomDeviceName']}}
+                        </a>
+                    </div></td>
+                    <td><div *ngIf="device['dicomDescription']" >{{device['dicomDescription']}}</div></td>
+                    <td><div *ngIf="device['hl7ApplicationName']" >{{device['hl7ApplicationName']}}</div></td>
+                    <td>
+                        <connection-formater [dicomNetworkConnection]="device['dicomNetworkConnection']"></connection-formater>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <button class="load_more" *ngIf="hl7Applications && moreHl7.limit <= hl7Applications.length" (click)="loadMoreDevices()"><i *ngIf="moreHl7.loaderActive" class="fa fa-spinner fa-spin fa-3x fa-fw"></i><ng-container i18n="@@more">More</ng-container></button>
+<!--            <div role="tabpanel"  class="device_modus" id="device_modus">
+                <input autocomplete="off" id="devicefilter" class="devicefilter" [(ngModel)]="devicefilter" placeholder="Search device"/>
+                <div *ngIf="advancedConfig" class="ng-hide">
+                    <div class="row ng-hide filter hidden_filters" *ngIf="advancedConfig">
+                        <div class="col-md-3 block-2-1">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input id="dicomDeviceName" type="text" [(ngModel)]="filter.dicomDeviceName" placeholder="Device name" title="Device name" class="col-md-12 clearable" />
+                                </div>
+                                <div class="col-md-6">
+                                    <input id="hl7ApplicationName" type="text" [(ngModel)]="filter.hl7ApplicationName" placeholder="Hl7 Application Name" title="hl7 Application Name" class="col-md-12 clearable" />
+                                </div>
+                                <div class="col-md-6">
+                                    <input id="dicomApplicationCluster" type="text" [(ngModel)]="filter.dicomApplicationCluster" placeholder="Application Cluster" title="Application Cluster" class="col-md-12 clearable" />
+                                </div>
+                                <div class="col-md-6">
+                                    <button class="col-md-12" (click)="searchHl7Applications()">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="clearform_button" title="Clear all filters" href="" (click)="$event.preventDefault();clearForm()">
+                            Clear <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="morefunctionblock">
+                    <a href="" (click)="$event.preventDefault();advancedConfig=true" *ngIf="!advancedConfig" class="more">Extended search<i class="glyphicon glyphicon-triangle-bottom"></i></a>
+                    <a href="" (click)="$event.preventDefault();advancedConfig=false" *ngIf="advancedConfig" class="more ng-hide">Close extended search<i class="glyphicon glyphicon-triangle-top"></i></a>
+                </div>
+
+            </div>-->
+        </div>
+    <!--</div>-->
+</div>

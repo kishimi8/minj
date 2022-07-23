@@ -1,0 +1,76 @@
+<div class="vex vex-theme-os confirm" [ngClass]="parameters.cssClass" xmlns="http://www.w3.org/1999/html" (keydown)="dialogKeyHandler($event,dialogRef)">
+    <div class="vex-dialog-form">
+        <h5 *ngIf="parameters.title">{{ parameters.title }}</h5>
+        <div class="content">
+            <h3 [innerHtml]="parameters.content">
+            </h3>
+            <div class="inputpart" *ngIf="parameters.pCalendar">
+                <ng-container *ngFor="let calendar of parameters.pCalendar;let index = index;">
+<!--                    <p-calendar
+                            [(ngModel)]="parameters.result.pCalendar[index]"
+                            dateFormat="{{calendar.dateFormat}}"
+                            monthNavigator="{{calendar.monthNavigator}}"
+                            yearNavigator="{{calendar.yearNavigator}}"
+                            yearRange="{{calendar.yearRange}}"
+                            placeholder="{{calendar.placeholder}}"
+                    ></p-calendar>-->
+                    <range-picker
+                            [model]="parameters.result.pCalendar[index]"
+                            (modelChange)="parameters.result.pCalendar[index] = $event"
+                            [datePickerMode]="true"
+                            [placeholder]="calendar.placeholder"
+                            dateFormat="YYYYMMDD"
+                    ></range-picker>
+                </ng-container>
+            </div>
+            <div class="dropdownpart" *ngIf="parameters.select">
+                <select id="reject" name="reject" class="col-md-12" (change)="parameters.result.select = $event.target.value">
+                    <option *ngFor="let s of parameters.select" title="{{s.title}}" value="{{ s.value }}">{{ s.label }}</option>
+                </select>
+            </div>
+            <div class="inputpart" *ngIf="parameters.input">
+                <p [innerHtml]="parameters.input.label"></p>
+                <input *ngIf="!(parameters.input && parameters.input.type && parameters.input.type == 'checkbox')" [(ngModel)]="parameters.result.input" name="{{parameters.input.name}}" type="{{parameters.input.type}}">
+                <input *ngIf="(parameters.input && parameters.input.type && parameters.input.type == 'checkbox')" [checked]="parameters.result.input" (change)="parameters.result.input = !parameters.result.input" name="{{parameters.input.name}}" type="{{parameters.input.type}}">
+                <ng-container *ngIf="parameters.input && parameters.input.type && parameters.input.type == 'checkbox' && parameters.input.checkboxtext"><span [innerHtml]="parameters.input.checkboxtext">{{parameters.input.checkboxtext}}</span></ng-container>
+            </div>
+            <p class="bodytext" *ngIf="parameters.bodytext"  [innerHtml]="parameters.bodytext"></p>
+            <ng-container *ngIf="parameters.checkboxes">
+                <div *ngFor="let checkbox of parameters.checkboxes">
+                    <label title="{{ checkbox.title }}">
+                        <input type="checkbox" name="checkbox.name" [(ngModel)]="parameters.result['checkboxes'][checkbox.name]"> {{ checkbox.label }}
+                    </label>
+                </div>
+            </ng-container>
+            <div *ngIf="parameters.date" class="datepicker">
+<!--                <p-calendar
+                        dataType="string"
+                        [(ngModel)]="parameters.result.date"
+                        dateFormat="{{ parameters.date.format }}"
+                        monthNavigator="true"
+                        yearNavigator="true"
+                        yearRange="1800:2100"
+                        placeholder="{{parameters.date.placeholder}}"
+                ></p-calendar>-->
+                <range-picker
+                        [model]="parameters.result.date"
+                        (modelChange)="parameters.result.date = $event"
+                        [datePickerMode]="true"
+                        [placeholder]="parameters.date.placeholder"
+                        dateFormat="YYYYMMDD"
+                ></range-picker>
+            </div>
+            <div *ngIf="parameters.warningOn && parameters.warningOn.message">
+                <span class="text-danger" *ngIf="(_.hasIn(parameters,parameters.warningOn.conditions[0]) && _.get(parameters,parameters.warningOn.conditions[0]) === true) || _.hasIn(parameters,parameters.warningOn.conditions[1]) && _.get(parameters,parameters.warningOn.conditions[1]) === true">{{ parameters.warningOn.message }}</span>
+            </div>
+            <div *ngIf="parameters.form_schema">
+                <filter-generator [schema]="parameters.form_schema" [filterTreeHeight]="1" [model]="parameters.result.schema_model" [hideClearButtons]="true" [filterID]="parameters.form_id" [doNotSave]="parameters.doNotSave"></filter-generator>
+            </div>
+        </div>
+        <div class="dialogbuttons">
+            <button *ngIf="!parameters.saveButton"  class="save" type="button" (click)="dialogRef.close('ok')" i18n="@@OK">OK</button>
+            <button *ngIf="parameters.saveButton" [disabled]="((parameters.result && parameters.result.input && parameters.result.input === '') || (parameters.result && parameters.result.select && parameters.result.select === ''))" class="save {{parameters.saveButtonClass}}" type="button" (click)="dialogRef.close(parameters.result)">{{ parameters.saveButton }}</button>
+            <button class="cancle" type="button" (click)="dialogRef.close(null)">{{parameters.cancelButton}}</button>
+        </div>
+    </div>
+</div>

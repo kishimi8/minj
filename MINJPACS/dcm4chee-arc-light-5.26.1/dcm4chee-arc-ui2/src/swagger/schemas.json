@@ -1,0 +1,3412 @@
+{
+  "attributes": {
+    "type": "object",
+    "example": {
+      "externalDocs": {
+        "description": "Attributes in DICOM JSON Model Format",
+        "url": "http://dicom.nema.org/medical/dicom/current/output/html/part18.html#chapter_F"
+      }
+    }
+  },
+  "patientVerificationStatus": {
+    "type": "string",
+    "enum": [
+      "UNVERIFIED",
+      "VERIFIED",
+      "NOT_FOUND",
+      "VERIFICATION_FAILED"
+    ]
+  },
+  "ExpirationState": {
+    "type": "string",
+    "enum": [
+      "UPDATEABLE",
+      "FROZEN",
+      "REJECTED",
+      "EXPORT_SCHEDULED",
+      "FAILED_TO_EXPORT",
+      "FAILED_TO_REJECT"
+    ]
+  },
+  "dcmWebServiceClass": {
+    "type": "array",
+    "items": {
+      "type": "string",
+      "enum": [
+        "QIDO_RS",
+        "STOW_RS",
+        "WADO_RS",
+        "WADO_URI",
+        "UPS_RS",
+        "DCM4CHEE_ARC",
+        "DCM4CHEE_ARC_AET",
+        "DCM4CHEE_ARC_AET_DIFF",
+        "PAM",
+        "REJECT",
+        "MOVE",
+        "MOVE_MATCHING",
+        "ELASTICSEARCH"
+      ]
+    }
+  },
+  "accept": {
+    "type": "string",
+    "enum": [
+      "application/dicom+json",
+      "multipart/related;type=application/dicom+xml",
+      "text/csv"
+    ]
+  },
+  "jsonOrMultiPartXml": {
+    "type": "string",
+    "enum": [
+      "application/dicom+json",
+      "multipart/related;type=application/dicom+xml"
+    ]
+  },
+  "jsonOrXml": {
+    "type": "string",
+    "enum": [
+      "application/dicom+json",
+      "application/dicom+xml"
+    ]
+  },
+  "wadoRetrieveAccept": {
+    "type": "string",
+    "enum": [
+      "multipart/related;type=application/dicom",
+      "multipart/related;type=application/octet-stream",
+      "multipart/related;type=application/pdf",
+      "multipart/related;type=image/jpeg",
+      "multipart/related;type=image/jp2",
+      "multipart/related;type=image/jpx",
+      "multipart/related;type=image/dicom-rle",
+      "multipart/related;type=image/jls",
+      "multipart/related;type=text/xml",
+      "multipart/related;type=model/stl",
+      "multipart/related;type=model/obj",
+      "multipart/related;type=model/mtl",
+      "multipart/related;type=video/mpeg",
+      "multipart/related;type=video/mp4",
+      "application/zip"
+    ]
+  },
+  "wadoRetrieveFramesAccept": {
+    "type": "string",
+    "enum": [
+      "multipart/related;type=application/octet-stream",
+      "multipart/related;type=image/jpeg",
+      "multipart/related;type=image/jp2",
+      "multipart/related;type=image/jpx",
+      "multipart/related;type=image/dicom-rle",
+      "multipart/related;type=image/jls"
+    ]
+  },
+  "wadoRetrieveBulkdataAccept": {
+    "type": "string",
+    "enum": [
+      "multipart/related;type=application/octet-stream",
+      "multipart/related;type=application/pdf",
+      "multipart/related;type=text/xml",
+      "multipart/related;type=model/stl",
+      "multipart/related;type=model/obj",
+      "multipart/related;type=model/mtl"
+    ]
+  },
+  "wadoRetrieveMetadataAccept": {
+    "type": "string",
+    "enum": [
+      "multipart/related;type=application/dicom+xml",
+      "application/dicom+json"
+    ]
+  },
+  "wadoRetrieveRenderedAccept": {
+    "type": "string",
+    "enum": [
+      "multipart/related;type=application/pdf",
+      "multipart/related;type=image/jpeg",
+      "multipart/related;type=image/gif",
+      "multipart/related;type=image/png",
+      "multipart/related;type=text/html",
+      "multipart/related;type=text/plain",
+      "multipart/related;type=video/mpeg",
+      "multipart/related;type=video/mp4"
+    ]
+  },
+  "wadoRetrieveRenderedFramesAccept": {
+    "type": "string",
+    "enum": [
+      "multipart/related;type=image/jpeg",
+      "multipart/related;type=image/gif",
+      "multipart/related;type=image/png"
+    ]
+  },
+  "wadoRetrieveThumbnailAccept": {
+    "type": "string",
+    "enum": [
+      "image/png",
+      "image/jpeg",
+      "image/gif"
+    ]
+  },
+  "orderByTime": {
+    "type": "string",
+    "enum": [
+      "createdTime",
+      "-createdTime",
+      "updatedTime",
+      "-updatedTime"
+    ],
+    "default": "-updatedTime"
+  },
+  "newQueueName": {
+    "type": "string"
+  },
+  "dcmQueueName": {
+    "type": "string"
+  },
+  "dcmQueueNameRetrieve": {
+    "type": "string",
+    "default": "Retrieve"
+  },
+  "storageVerificationPolicy": {
+    "type": "string",
+    "enum": [
+      "DB_RECORD_EXISTS",
+      "OBJECT_EXISTS",
+      "OBJECT_SIZE",
+      "OBJECT_FETCH",
+      "OBJECT_CHECKSUM",
+      "S3_MD5SUM"
+    ]
+  },
+  "storageURIScheme": {
+    "type": "string",
+    "enum": [
+      "file",
+      "jclouds",
+      "emc-ecs-s3",
+      "hcp",
+      "documentum"
+    ]
+  },
+  "usage": {
+    "type": "string",
+    "enum": [
+      "dcmObjectStorageID",
+      "dcmMetadataStorageID",
+      "dcmSeriesMetadataStorageID"
+    ]
+  },
+  "priority": {
+    "type": "integer",
+    "enum": [
+      0,
+      1,
+      2
+    ],
+    "default": 0
+  },
+  "stgCmtStatus": {
+    "type": "string",
+    "enum": [
+      "PENDING",
+      "COMPLETED",
+      "WARNING",
+      "FAILED"
+    ]
+  },
+  "cancelTaskStatus": {
+    "type": "string",
+    "enum": [
+      "SCHEDULED",
+      "IN PROCESS"
+    ]
+  },
+  "taskStatus": {
+    "type": "string",
+    "enum": [
+      "SCHEDULED",
+      "IN PROCESS",
+      "COMPLETED",
+      "WARNING",
+      "FAILED",
+      "CANCELED"
+    ]
+  },
+  "aeList": {
+    "title": "AE List",
+    "type": "array",
+    "items": {
+      "required": [
+        "dicomDeviceName",
+        "dicomAETitle",
+        "dicomAssociationInitiator",
+        "dicomAssociationAcceptor"
+      ],
+      "properties": {
+        "dicomDeviceName": {
+          "title": "Device Name",
+          "description": "A unique name for the device which provides this AE",
+          "type": "string"
+        },
+        "dicomAETitle": {
+          "title": "AE Title",
+          "description": "Unique AE title for this Network AE",
+          "type": "string"
+        },
+        "dcmOtherAETitle": {
+          "title": "Other AE Title",
+          "description": "Additional AE Title of Network AE - will also accept Association RQs with such Called AE Title",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hl7ApplicationName": {
+          "title": "HL7 Application name",
+          "description": "HL7 Application and Facility name (Application|Facility) associated with this AE",
+          "type": "string"
+        },
+        "dicomDescription": {
+          "title": "AE Description",
+          "description": "Unconstrained text description of the AE",
+          "type": "string"
+        },
+        "dicomAssociationInitiator": {
+          "title": "Association Initiator",
+          "description": "True if the Network AE can initiate associations, false otherwise",
+          "type": "boolean"
+        },
+        "dicomAssociationAcceptor": {
+          "title": "Association Acceptor",
+          "description": "True if the Network AE can accept associations, false otherwise",
+          "type": "boolean"
+        },
+        "dicomApplicationCluster": {
+          "title": "Application Cluster",
+          "description": "Locally defined names for a subset of related applications",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dicomInstalled": {
+          "title": "installed",
+          "description": "True if the AE is installed on network. If not present, information about the installed status of the AE is inherited from the device",
+          "type": "boolean"
+        },
+        "dicomNetworkConnection": {
+          "title": "Network Connections",
+          "description": "network connections of the device",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "dicomHostname"
+            ],
+            "properties": {
+              "dicomHostname": {
+                "title": "Hostname",
+                "description": "DNS name for this particular connection",
+                "type": "string"
+              },
+              "dicomPort": {
+                "title": "Port",
+                "description": "TCP/UDP port that a service is listening on. May be missing if this network connection is only used for outbound connections",
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 99999,
+                "exclusiveMinimum": true
+              },
+              "dicomTLSCipherSuite": {
+                "title": "TLS CipherSuites",
+                "description": "The TLS CipherSuites that are supported on this particular connection. If not present TLS is disabled",
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "SSL_RSA_WITH_NULL_SHA",
+                    "TLS_RSA_WITH_AES_128_CBC_SHA",
+                    "SSL_RSA_WITH_3DES_EDE_CBC_SHA"
+                  ]
+                }
+              },
+              "dicomInstalled": {
+                "title": "installed",
+                "description": "True if the Network Connection is installed on the network. If not present, information about the installed status of the Network Connection is inherited from the device",
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "aets": {
+    "title": "AE Titles",
+    "type": "array",
+    "items": {
+      "required": [
+        "dicomAETitle"
+      ],
+      "properties": {
+        "dicomAETitle": {
+          "title": "AE Title",
+          "description": "Unique AE title for this Network AE",
+          "type": "string"
+        },
+        "dcmOtherAETitle": {
+          "title": "Other AE Title",
+          "description": "Additional AE Title of Network AE - will also accept Association RQs with such Called AE Title",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dicomDescription": {
+          "title": "AE Description",
+          "description": "Unconstrained text description of the application entity",
+          "type": "string"
+        },
+        "dcmHideNotRejectedInstances": {
+          "title": "Hide Not Rejected Instances",
+          "description": "Indicates that the Q/R Services of the AE hides instances not rejected by any reason; false if absent",
+          "type": "boolean"
+        },
+        "dcmAllowDeletePatient": {
+          "title": "Allow Delete Patient",
+          "description": "Indicates policy for Allow Permanent Deletion of Patients; WITHOUT_STUDIES by default",
+          "type": "string"
+        },
+        "dcmAllowDeleteStudyPermanently": {
+          "title": "Allow Delete Patient",
+          "description": "Indicates policy for Allow Permanent Deletion of Patients; WITHOUT_STUDIES by default",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "associations": {
+    "title": "Open Associations",
+    "type": "array",
+    "items": {
+      "type": "object",
+      "required": [
+        "serialNo",
+        "connectTime",
+        "requestor",
+        "localAETitle",
+        "remoteAETitle",
+        "performedOps",
+        "invokedOps"
+      ],
+      "properties": {
+        "serialNoPathParam": {
+          "title": "Serial No",
+          "description": "serial number of Association",
+          "type": "integer"
+        },
+        "connectTime": {
+          "title": "Connect Time",
+          "description": "Time when this Association was established",
+          "type": "string"
+        },
+        "initiated": {
+          "title": "Initiated",
+          "description": "Indicates if this Association was initiated or accepted by the Archive",
+          "type": "boolean"
+        },
+        "localAETitle": {
+          "title": "Local AE Title",
+          "description": "AE Title of the Archive used as Calling AE Title of requested or as Called AE Title in accepted Associations",
+          "type": "string"
+        },
+        "remoteAETitle": {
+          "title": "Remote AE Title",
+          "description": "AE Title of remote AE used as Called AE Title of requested or as Calling AE Title in accepted Associations",
+          "type": "string"
+        },
+        "performedOps": {
+          "title": "Performed Operations",
+          "description": "Performed Operations in this Association",
+          "type": "array",
+          "items": {
+            "$ref": "#/operation"
+          }
+        },
+        "invokedOps": {
+          "title": "Invoked Operations",
+          "description": "Invoked Operations in this Association",
+          "type": "array",
+          "items": {
+            "$ref": "#/operation"
+          }
+        },
+        "<other-property>": {
+          "title": "Other property",
+          "description": "Other property associated with this Associations",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "attributeFilter": {
+    "title": "Attribute Filter",
+    "description": "Attributes stored in the database",
+    "type": "object",
+    "required": [
+      "dcmEntity",
+      "dcmTag"
+    ],
+    "properties": {
+      "dcmEntity": {
+        "title": "Attribute Entity",
+        "description": "Entity of the Attribute Filter or Export Rule ('Patient', 'Study', 'Series', 'Instance', 'MPPS', 'MWL').",
+        "type": "string",
+        "enum": [
+          "Patient",
+          "Study",
+          "Series",
+          "Instance",
+          "MPPS",
+          "MWL"
+        ]
+      },
+      "dcmTag": {
+        "title": "Attribute Tag",
+        "description": "DICOM Tag as hex string",
+        "type": "array",
+        "items" : { "type": "string" },
+        "format": "dcmTag"
+      },
+      "dcmCustomAttribute1": {
+        "title": "Custom Attribute 1",
+        "description": "Configure any attribute from the DICOM object which shall be inserted in database as Custom Attribute 1. Eg. DicomAttribute[@tag=\"00200070\"]/Value[@number=\"1\"] or for a Private attribute DicomAttribute[@tag=\"00E10024\" and @privateCreator=\"ELSCINT1\"]/Value[@number=\"1\"]",
+        "type": "string"
+      },
+      "dcmCustomAttribute2": {
+        "title": "Custom Attribute 2",
+        "description": "Configure any attribute from the DICOM object which shall be inserted in database as Custom Attribute 2. Eg. DicomAttribute[@tag=\"00200070\"]/Value[@number=\"1\"] or for a Private attribute DicomAttribute[@tag=\"00E10024\" and @privateCreator=\"ELSCINT1\"]/Value[@number=\"1\"]",
+        "type": "string"
+      },
+      "dcmCustomAttribute3": {
+        "title": "Custom Attribute 3",
+        "description": "Configure any attribute from the DICOM object which shall be inserted in database as Custom Attribute 3. Eg. DicomAttribute[@tag=\"00200070\"]/Value[@number=\"1\"] or for a Private attribute DicomAttribute[@tag=\"00E10024\" and @privateCreator=\"ELSCINT1\"]/Value[@number=\"1\"]",
+        "type": "string"
+      },
+      "dcmAttributeUpdatePolicy": {
+        "title": "Attribute Update Policy",
+        "description": "Specifies update policy for extracted attributes into the DB on Series, Study & Patient level on receive of further instance of the entity. PRESERVE (= nullify attributes in the new dataset which are not present in the original dataset), SUPPLEMENT (= attributes not present in original dataset will be supplemented), REPLACE (= original dataset is completely replaced), MERGE (= attribute values will be written from new dataset), OVERWRITE (= attribute values if null in new dataset, will be nullified in original dataset). If absent, PRESERVE will be applied",
+        "type": "string",
+        "enum": [
+          "PRESERVE",
+          "SUPPLEMENT",
+          "MERGE",
+          "OVERWRITE",
+          "REPLACE"
+        ]
+      }
+    }
+  },
+  "attributeSets": {
+    "title": "Attribute Sets",
+    "type": "array",
+    "items": {
+      "required": [
+        "type",
+        "id"
+      ],
+      "properties": {
+        "type": {
+          "title": "Attribute Set Type",
+          "description": "Specifies if this Attribute Set is used by Query Parameter 'comparefield' of DIFF-RS or by Query Parameter 'includefields' of WADO-RS requests.",
+          "type": "string",
+          "enum": [
+            "DIFF_RS",
+            "WADO_RS"
+          ]
+        },
+        "id": {
+          "title": "Attribute Set ID",
+          "description": "ID used by Query Parameter 'comparefield' of DIFF-RS requests and by Query Parameter 'includefields' of WADO-RS Metadata requests to refer this Attribute Set.",
+          "type": "string"
+        },
+        "title": {
+          "title": "Attribute Set Title",
+          "description": "Title of this Attribute Set.",
+          "type": "string"
+        },
+        "description": {
+          "title": "Attribute Set Description",
+          "description": "Unconstrained text description of this Attribute Set",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "deviceList": {
+    "title": "DeviceList",
+    "type": "array",
+    "items": {
+      "required": [
+        "dicomDeviceName",
+        "dicomInstalled"
+      ],
+      "properties": {
+        "dicomDeviceName": {
+          "title": "Device Name",
+          "description": "A unique name for this device",
+          "type": "string"
+        },
+        "dicomDescription": {
+          "title": "Device Description",
+          "description": "Unconstrained text description of the device",
+          "type": "string"
+        },
+        "dicomManufacturer": {
+          "title": "Manufacturer",
+          "description": "Should be the same as the value of Manufacturer (0008,0070) in SOP instances created by this device",
+          "type": "string"
+        },
+        "dicomManufacturerModelName": {
+          "title": "Manufacturer Model Name",
+          "description": "Should be the same as the value of Manufacturer Model Name (0008,1090) in SOP instances created by this device",
+          "type": "string"
+        },
+        "dicomSoftwareVersion": {
+          "title": "Software Version",
+          "description": "Should be the same as the values of Software Versions (0018,1020) in SOP instances created by this device",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dicomStationName": {
+          "title": "Station Name",
+          "description": "Should be the same as the value of Station Name (0008,1010) in SOP instances created by this device",
+          "type": "string"
+        },
+        "dicomPrimaryDeviceType": {
+          "title": "Primary Device Type",
+          "description": "Represents the kind of device and is most applicable for acquisition modalities",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dicomInstitutionName": {
+          "title": "Institution Name",
+          "description": "Should be the same as the value of Institution Name (0008,0080) in SOP Instances created by this device",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dicomInstitutionDepartmentName": {
+          "title": "Institution Department Name",
+          "description": "Should be the same as the value of Institutional Department Name (0008,1040) in SOP Instances created by this device",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dicomInstalled": {
+          "title": "installed",
+          "description": "Boolean to indicate whether this device is presently installed on the network",
+          "type": "boolean"
+        },
+        "hasArcDevExt": {
+          "title": "Has Archive Device Extension",
+          "description": "Boolean to indicate whether this device has an archive device extension or not",
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "diffBatchList": {
+    "title": "RetrieveBatchList",
+    "type": "array",
+    "items": {
+      "required": [
+        "BatchID",
+        "tasks",
+        "dicomDeviceName",
+        "LocalAET",
+        "PrimaryAET",
+        "SecondaryAET",
+        "checkMissing",
+        "checkDifferent",
+        "createdTimeRange",
+        "updatedTimeRange",
+        "scheduledTimeRange",
+        "processingStartTimeRange",
+        "processingEndTimeRange"
+      ],
+      "properties": {
+        "batchID": {
+          "title": "Retrieve Batch ID",
+          "description": "Retrieve Batch ID",
+          "type": "string"
+        },
+        "tasks": {
+          "title": "Tasks",
+          "type": "object",
+          "properties": {
+            "scheduled": {
+              "title": "Scheduled Tasks",
+              "description": "Number of scheduled tasks in the batch",
+              "type": "integer"
+            },
+            "in-process": {
+              "title": "In process Tasks",
+              "description": "Number of in process tasks in the batch",
+              "type": "integer"
+            },
+            "warning": {
+              "title": "Warning Tasks",
+              "description": "Number of completed tasks in the batch",
+              "type": "integer"
+            },
+            "failed": {
+              "title": "Failed Tasks",
+              "description": "Number of failed tasks in the batch",
+              "type": "integer"
+            },
+            "canceled": {
+              "title": "Canceled Tasks",
+              "description": "Number of canceled tasks in the batch",
+              "type": "integer"
+            },
+            "completed": {
+              "title": "Completed Tasks",
+              "description": "Number of completed tasks in the batch",
+              "type": "integer"
+            }
+          }
+        },
+        "dicomDeviceName": {
+          "title": "Device Name",
+          "description": "Name of Devices performing tasks in the batch",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "LocalAET": {
+          "title": "Local AET",
+          "description": "Archive AE Title which was used as Calling AET",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "PrimaryAET": {
+          "title": "Primary AET",
+          "description": "AE Title of the primary C-FIND SCP",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "SecondaryAET": {
+          "title": "Secondary AET",
+          "description": "AE Title of the secondary C-FIND SCP",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "checkMissing": {
+          "title": "Check Missing",
+          "description": "Indicates if the task checks for studies only available at the primary C-FIND SCP",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "items": {
+            "type": "boolean"
+          }
+        },
+        "checkDifferent": {
+          "title": "Check Different",
+          "description": "Indicates if the task checks for different attributes of studies available at the primary and the secondary C-FIND SCP",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "items": {
+            "type": "boolean"
+          }
+        },
+        "comparefield": {
+          "title": "Compare Field",
+          "description": "Refers set of attributes which are compared by tasks of this batch",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "matches": {
+          "title": "matches",
+          "description": "number of studies compared by tasks of this batch",
+          "type": "integer"
+        },
+        "missing": {
+          "title": "missing",
+          "description": "number of studies only available at the primary C-FIND SCP",
+          "type": "integer"
+        },
+        "different": {
+          "title": "different",
+          "description": "number of studies which differs in the compared attributes between the primary and the secondary C-FIND SCP",
+          "type": "integer"
+        },
+        "createdTimeRange": {
+          "title": "Created Time Range",
+          "description": "time range when tasks of the batch were created",
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "updatedTimeRange": {
+          "title": "Updated Time Range",
+          "description": "time range when tasks of the batch were last updated",
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "scheduledTimeRange": {
+          "title": "Scheduled Time Range",
+          "description": "time range when next attempt to process tasks of the batch are scheduled",
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "processingStartTimeRange": {
+          "title": "Processing Start Time Range",
+          "description": "time range when last attempt to process tasks of the batch started",
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "processingEndTimeRange": {
+          "title": "Processing End Time Range",
+          "description": "time range when last attempt to process tasks of the batch finished",
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  },
+  "task": {
+    "title": "Task",
+    "required": [
+      "taskID",
+      "dicomDeviceName",
+      "queue",
+      "type",
+      "status",
+      "failures",
+      "createdTime",
+      "updatedTime",
+      "scheduledTime"
+    ],
+    "properties": {
+      "taskID": {
+        "title": "Task ID",
+        "description": "id of Task",
+        "type": "string"
+      },
+      "dicomDeviceName": {
+        "title": "Archive Device by which the Task is processed",
+        "description": "name of queue",
+        "type": "string"
+      },
+      "queue": {
+        "title": "Queue Name",
+        "description": "name of queue",
+        "type": "string"
+      },
+      "status": {
+        "title": "Task Status",
+        "description": "status of task",
+        "type": "string",
+        "enum": [
+          "SCHEDULED",
+          "IN PROCESS",
+          "COMPLETED",
+          "WARNING",
+          "FAILED",
+          "CANCELED"
+        ]
+      },
+      "failures": {
+        "title": "Failures",
+        "description": "number of failed attempts to process this task",
+        "type": "integer"
+      },
+      "createdTime": {
+        "title": "Created Time",
+        "description": "time when this task was created",
+        "type": "string",
+        "format": "date-time"
+      },
+      "updatedTime": {
+        "title": "Updated Time",
+        "description": "time when this task was last updated",
+        "type": "string",
+        "format": "date-time"
+      },
+      "scheduledTime": {
+        "title": "Scheduled Time",
+        "description": "time when next attempt to process this task is scheduled",
+        "type": "string",
+        "format": "date-time"
+      },
+      "processingStartTime": {
+        "title": "Processing Start Time",
+        "description": "time when last attempt to process this task started",
+        "type": "string",
+        "format": "date-time"
+      },
+      "processingEndTime": {
+        "title": "Processing End Time",
+        "description": "time when last attempt to process this task finished",
+        "type": "string",
+        "format": "date-time"
+      },
+      "errorMessage": {
+        "title": "Error Message",
+        "description": "error message of last failed attempt to process this task",
+        "type": "string"
+      },
+      "outcomeMessage": {
+        "title": "Outcome Message",
+        "description": "outcome message of process this task",
+        "type": "string"
+      },
+      "batchID": {
+        "title": "Batch ID",
+        "description": "Batch ID of this task",
+        "type": "string"
+      },
+      "RequesterURI": {
+        "title": "Request URI",
+        "description": "Endpoint URI of RESTful Service by which this task was scheduled",
+        "type": "string"
+      },
+      "RequesterUserID": {
+        "title": "Requester User ID",
+        "description": "ID of user who invoked the RESTful Service, if the user has been authenticated, or the IP of the HTTP client if the user has not been authenticated.",
+        "type": "string"
+      },
+      "RequesterHostName": {
+        "title": "Requester Hostname",
+        "description": "Hostname of HTTP client which invoked the RESTful Service",
+        "type": "string"
+      }
+    }
+  },
+  "taskList": {
+    "title": "TaskList",
+    "oneOf": [
+      {
+        "$ref": "#/exportTaskList"
+      },
+      {
+        "$ref": "#/retrieveTaskList"
+      },
+      {
+        "$ref": "#/stgverTaskList"
+      },
+      {
+        "$ref": "#/diffTaskList"
+      },
+      {
+        "$ref": "#/stgcmtscpTaskList"
+      },
+      {
+        "$ref": "#/stgcmtscuTaskList"
+      },
+      {
+        "$ref": "#/rejectTaskList"
+      },
+      {
+        "$ref": "#/hl7TaskList"
+      },
+      {
+        "$ref": "#/restTaskList"
+      },
+      {
+        "$ref": "#/ianTaskList"
+      },
+      {
+        "$ref": "#/mppsTaskList"
+      }
+    ]
+  },
+  "exportTaskList": {
+    "title": "ExportTaskList",
+    "type": "array",
+    "items": {
+      "$ref": "#/exportTask"
+    }
+  },
+  "exportTask": {
+    "title": "ExportTask",
+    "allOf": [
+      {
+        "$ref": "#/task"
+      },
+      {
+        "required": [
+          "type",
+          "ExporterID"
+        ],
+        "properties": {
+          "type": {
+            "title": "Task Type",
+            "description": "type of task",
+            "type": "string",
+            "enum": [
+              "EXPORT"
+            ]
+          },
+          "ExporterID": {
+            "title": "Exporter ID",
+            "description": "ID of exporter performing the Task",
+            "type": "string"
+          },
+          "LocalAET": {
+            "title": "Local AET",
+            "description": "AET configured in Exporter",
+            "type": "string"
+          },
+          "StudyInstanceUID": {
+            "title": "Study Instance UID",
+            "description": "Unique Identifier of the Study",
+            "type": "string"
+          },
+          "SeriesInstanceUID": {
+            "title": "Series Instance UID",
+            "description": "Unique Identifier of the Series",
+            "type": "string"
+          },
+          "SOPInstanceUID": {
+            "title": "SOP Instance UID",
+            "description": "Unique Identifier of the Object",
+            "type": "string"
+          },
+          "Modality": {
+            "title": "Modality",
+            "description": "Modality",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "NumberOfInstances": {
+            "title": "Number of Instances ",
+            "description": "Number of Instances",
+            "type": "integer"
+          }
+        }
+      }
+    ]
+  },
+  "retrieveTaskList": {
+    "title": "RetrieveTaskList",
+    "type": "array",
+    "items": {
+      "$ref": "#/retrieveTask"
+    }
+  },
+  "retrieveTask": {
+    "title": "RetrieveTask",
+    "allOf": [
+      {
+        "$ref": "#/task"
+      },
+      {
+        "required": [
+          "type",
+          "LocalAET",
+          "RemoteAET",
+          "DestinationAET",
+          "StudyInstanceUID"
+        ],
+        "properties": {
+          "type": {
+            "title": "Task Type",
+            "description": "type of task",
+            "type": "string",
+            "enum": [
+              "RETRIEVE"
+            ]
+          },
+          "LocalAET": {
+            "title": "Local AET",
+            "description": "Archive AE Title which was used as Calling AET",
+            "type": "string"
+          },
+          "RemoteAET": {
+            "title": "Remote AET",
+            "description": "AE Title of the C-MOVE SCP",
+            "type": "string"
+          },
+          "DestinationAET": {
+            "title": "Destination AET",
+            "description": "Move Destination AE Title",
+            "type": "string"
+          },
+          "FindSCP": {
+            "title": "Find SCP",
+            "description": "AE Title of C-FIND SCP to verify, if a Study is already available at the Destination",
+            "type": "string"
+          },
+          "StudyInstanceUID": {
+            "title": "Study Instance UID",
+            "description": "Unique Identifier of the Study to be retrieved",
+            "type": "string"
+          },
+          "SeriesInstanceUID": {
+            "title": "Series Instance UID",
+            "description": "Unique Identifier of the Series to be retrieved",
+            "type": "string"
+          },
+          "SOPInstanceUID": {
+            "title": "SOP Instance UID",
+            "description": "Unique Identifier of the Object to be retrieved",
+            "type": "string"
+          },
+          "statusCode": {
+            "title": "DICOM Status Code",
+            "description": "DICOM Status Code in hex",
+            "type": "string"
+          },
+          "errorComment": {
+            "title": "DICOM Error Comment",
+            "type": "string"
+          },
+          "remaining": {
+            "title": "Number of Remaining Sub-Operations",
+            "type": "integer"
+          },
+          "completed": {
+            "title": "Number of Completed Sub-Operations",
+            "type": "integer"
+          },
+          "failed": {
+            "title": "Number of Failed Sub-Operations",
+            "type": "integer"
+          },
+          "warning": {
+            "title": "Number of Warning Sub-Operations",
+            "type": "integer"
+          }
+        }
+      }
+    ]
+  },
+  "stgverTaskList": {
+    "title": "StorageVerificationTaskList",
+    "type": "array",
+    "items": {
+      "allOf": [
+        {
+          "$ref": "#/task"
+        },
+        {
+          "required": [
+            "type",
+            "LocalAET",
+            "StudyInstanceUID"
+          ],
+          "properties": {
+            "type": {
+              "title": "Task Type",
+              "description": "type of task",
+              "type": "string",
+              "enum": [
+                "STGVER"
+              ]
+            },
+            "LocalAET": {
+              "title": "Local AET",
+              "description": "Archive AE Title",
+              "type": "string"
+            },
+            "StgCmtPolicy": {
+              "title": "Storage Commitment Policy",
+              "description": "Storage Commitment Policy",
+              "type": "string",
+              "enum": [
+                "DB_RECORD_EXISTS",
+                "OBJECT_EXISTS",
+                "OBJECT_SIZE",
+                "OBJECT_FETCH",
+                "OBJECT_CHECKSUM",
+                "S3_MD5SUM"
+              ]
+            },
+            "UpdateLocationStatus": {
+              "title": "Update Location Status",
+              "description": "Indicates if the Status of the Location DB record shall be updated on Storage Verification accordingly.",
+              "type": "boolean"
+            },
+            "StorageID": {
+              "title": "Storage IDs",
+              "description": "Indicates that for successful Storage Verification the object must be stored on (one of) the specified Storage System",
+              "type": "array",
+              "item": {
+                "type": "string"
+              }
+            },
+            "StudyInstanceUID": {
+              "title": "Study Instance UID",
+              "description": "Unique Identifier of the Study",
+              "type": "string"
+            },
+            "SeriesInstanceUID": {
+              "title": "Series Instance UID",
+              "description": "Unique Identifier of the Series",
+              "type": "string"
+            },
+            "SOPInstanceUID": {
+              "title": "SOP Instance UID",
+              "description": "Unique Identifier of the Object",
+              "type": "string"
+            },
+            "completed": {
+              "title": "Number of Instances for which Storage Verification succeeded",
+              "type": "integer"
+            },
+            "failed": {
+              "title": "Number of Instances for which Storage Verification failed",
+              "type": "integer"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "diffTaskList": {
+    "title": "DiffTaskList",
+    "type": "array",
+    "items": {
+      "allOf": [
+        {
+          "$ref": "#/task"
+        },
+        {
+          "required": [
+            "type",
+            "LocalAET",
+            "PrimaryAET",
+            "SecondaryAET",
+            "checkMissing",
+            "checkDifferent"
+          ],
+          "properties": {
+            "type": {
+              "title": "Task Type",
+              "description": "type of task",
+              "type": "string",
+              "enum": [
+                "DIFF"
+              ]
+            },
+            "LocalAET": {
+              "title": "Local AET",
+              "description": "Archive AE Title which was used as Calling AET",
+              "type": "string"
+            },
+            "PrimaryAET": {
+              "title": "Primary AET",
+              "description": "AE Title of the primary C-FIND SCP",
+              "type": "string"
+            },
+            "SecondaryAET": {
+              "title": "Secondary AET",
+              "description": "AE Title of the secondary C-FIND SCP",
+              "type": "string"
+            },
+            "QueryString": {
+              "title": "Query String",
+              "description": "Query Parameters of DIFF request",
+              "type": "string"
+            },
+            "checkMissing": {
+              "title": "Check Missing",
+              "description": "Indicates if the task checks for studies only available at the primary C-FIND SCP",
+              "type": "boolean"
+            },
+            "checkDifferent": {
+              "title": "Check Different",
+              "description": "Indicates if the task checks for different attributes of studies available at the primary and the secondary C-FIND SCP",
+              "type": "boolean"
+            },
+            "comparefield": {
+              "title": "Compare Field",
+              "description": "Refers set of attributes which are compared by this task",
+              "type": "string"
+            },
+            "matches": {
+              "title": "matches",
+              "description": "number of studies compared by this task",
+              "type": "integer"
+            },
+            "missing": {
+              "title": "missing",
+              "description": "number of studies only available at the primary C-FIND SCP",
+              "type": "integer"
+            },
+            "different": {
+              "title": "different",
+              "description": "number of studies which differs in the compared attributes between the primary and the secondary C-FIND SCP",
+              "type": "integer"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "stgcmtscpTaskList": {
+    "title": "StgCmtSCPTaskList",
+    "type": "array",
+    "items": {
+      "allOf": [
+        {
+          "$ref": "#/task"
+        },
+        {
+          "required": [
+            "type",
+            "LocalAET",
+            "RemoteAET"
+          ],
+          "properties": {
+            "type": {
+              "title": "Task Type",
+              "description": "type of task",
+              "type": "string",
+              "enum": [
+                "STGCMTSCP"
+              ]
+            },
+            "LocalAET": {
+              "title": "Local AET",
+              "description": "Archive AE acting as Storage Commitment SCP",
+              "type": "string"
+            },
+            "RemoteAET": {
+              "title": "Remote AET",
+              "description": "Remote AE acting as Storage Commitment SCU",
+              "type": "string"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "stgcmtscuTaskList": {
+    "title": "StgCmtSCUTaskList",
+    "type": "array",
+    "items": {
+      "allOf": [
+        {
+          "$ref": "#/task"
+        },
+        {
+          "required": [
+            "type",
+            "LocalAET",
+            "RemoteAET",
+            "StudyInstanceUID"
+          ],
+          "properties": {
+            "type": {
+              "title": "Task Type",
+              "description": "type of task",
+              "type": "string",
+              "enum": [
+                "STGCMTSCU"
+              ]
+            },
+            "LocalAET": {
+              "title": "Local AET",
+              "description": "Archive AE acting as Storage Commitment SCU",
+              "type": "string"
+            },
+            "RemoteAET": {
+              "title": "Remote AET",
+              "description": "Remote AE acting as Storage Commitment SCP",
+              "type": "string"
+            },
+            "StudyInstanceUID": {
+              "title": "Study Instance UID",
+              "description": "Unique Identifier of the Study which Storage Commitment is requested",
+              "type": "string"
+            },
+            "SeriesInstanceUID": {
+              "title": "Series Instance UID",
+              "description": "Unique Identifier of the Series which Storage Commitment is requested",
+              "type": "string"
+            },
+            "SOPInstanceUID": {
+              "title": "SOP Instance UID",
+              "description": "Unique Identifier of the Object which Storage Commitment is requested",
+              "type": "string"
+            },
+            "ExporterID": {
+              "title": "Exporter ID",
+              "description": "ID of exporter by which the Storage Commitment Task was scheduled.",
+              "type": "string"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "rejectTaskList": {
+    "title": "RejectTaskList",
+    "type": "array",
+    "items": {
+      "allOf": [
+        {
+          "$ref": "#/task"
+        },
+        {
+          "required": [
+            "type",
+            "LocalAET",
+            "StudyInstanceUID",
+            "Code"
+          ],
+          "properties": {
+            "type": {
+              "title": "Task Type",
+              "description": "type of task",
+              "type": "string",
+              "enum": [
+                "REJECT"
+              ]
+            },
+            "LocalAET": {
+              "title": "Local AET",
+              "description": "Archive AE performing the Rejection by creating and storing a corresponding Rejection Note",
+              "type": "string"
+            },
+            "StudyInstanceUID": {
+              "title": "Study Instance UID",
+              "description": "Unique Identifier of the Study which is rejected",
+              "type": "string"
+            },
+            "SeriesInstanceUID": {
+              "title": "Series Instance UID",
+              "description": "Unique Identifier of the Series which is rejected",
+              "type": "string"
+            },
+            "SOPInstanceUID": {
+              "title": "SOP Instance UID",
+              "description": "Unique Identifier of the Object which is rejected",
+              "type": "string"
+            },
+            "Code": {
+              "title": "Rejection Code",
+              "description": "Rejection Code",
+              "type": "string",
+              "enum": [
+                "(110514, DCM, \"Incorrect worklist entry selected\")",
+                "(113001, DCM, \"Rejected for Quality Reasons\")",
+                "(113037, DCM, \"Rejected for Patient Safety Reasons\")",
+                "(113038, DCM, \"Incorrect Modality Worklist Entry\")",
+                "(113039, DCM, \"Data Retention Policy Expired\")"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  },
+  "hl7TaskList": {
+    "title": "HL7TaskList",
+    "type": "array",
+    "items": {
+      "allOf": [
+        {
+          "$ref": "#/task"
+        },
+        {
+          "required": [
+            "type",
+            "SendingApplication",
+            "SendingFacility",
+            "ReceivingApplication",
+            "ReceivingFacility",
+            "MessageType",
+            "MessageControlID"
+          ],
+          "properties": {
+            "type": {
+              "title": "Task Type",
+              "description": "type of task",
+              "type": "string",
+              "enum": [
+                "HL7"
+              ]
+            },
+            "SendingApplication": {
+              "title": "Sending Application",
+              "description": "HL7 Sending Application",
+              "type": "string"
+            },
+            "SendingFacility": {
+              "title": "Sending Facility",
+              "description": "HL7 Sending Facility",
+              "type": "string"
+            },
+            "ReceivingApplication": {
+              "title": "Receiving Application",
+              "description": "HL7 Receiving Application",
+              "type": "string"
+            },
+            "ReceivingFacility": {
+              "title": "Receiving Facility",
+              "description": "HL7 Receiving Facility",
+              "type": "string"
+            },
+            "MessageType": {
+              "title": "Message Type",
+              "description": "HL7 Message Type",
+              "type": "string"
+            },
+            "MessageControlID": {
+              "title": "Message Control ID",
+              "description": "HL7 Message Control ID",
+              "type": "string"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "restTaskList": {
+    "title": "RestTaskList",
+    "type": "array",
+    "items": {
+      "allOf": [
+        {
+          "$ref": "#/task"
+        },
+        {
+          "required": [
+            "type",
+            "RSOperation",
+            "WebApplicationName"
+          ],
+          "properties": {
+            "type": {
+              "title": "Task Type",
+              "description": "type of task",
+              "type": "string",
+              "enum": [
+                "REST"
+              ]
+            },
+            "RSOperation": {
+              "title": "RESTful Operation",
+              "description": "Type of RESTful Operation",
+              "type": "string",
+              "enum": [
+                "CreatePatient",
+                "UpdatePatient",
+                "DeletePatient",
+                "ChangePatientID",
+                "ChangePatientID2",
+                "MergePatient",
+                "MergePatient2",
+                "UnmergePatient",
+                "UpdateStudy",
+                "DeleteStudy",
+                "ReimportStudy",
+                "RejectStudy",
+                "RejectSeries",
+                "RejectInstance",
+                "ApplyRetentionPolicy",
+                "UpdateStudyExpirationDate",
+                "UpdateSeriesExpirationDate",
+                "CreateMWL",
+                "UpdateMWL",
+                "DeleteMWL",
+                "UpdateStudyAccessControlID",
+                "MoveStudyToPatient",
+                "SupplementIssuer"
+              ]
+            },
+            "WebApplicationName": {
+              "title": "Web Application Name",
+              "description": "Name of Target Web Application",
+              "type": "string"
+            },
+            "RequestQueryString": {
+              "title": "Request Query String",
+              "description": "Request Query String",
+              "type": "string"
+            },
+            "PatientID": {
+              "title": "Patient ID",
+              "description": "ID of Patient concerned by the RESTful Operation",
+              "type": "string"
+            },
+            "TLSAllowAnyHostname": {
+              "title": "TLS Allow Any Hostname",
+              "description": "Indicates if the hostname in the HTTPS server’s certificate is not validated",
+              "type": "boolean"
+            },
+            "TLSDisableTrustManager": {
+              "title": "TLS Disable Trust Manager",
+              "description": "Indicates if the HTTPS server’s certificate is not validated at all",
+              "type": "boolean"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "ianTaskList": {
+    "title": "IANTaskList",
+    "type": "array",
+    "items": {
+      "allOf": [
+        {
+          "$ref": "#/task"
+        },
+        {
+          "required": [
+            "type",
+            "LocalAET",
+            "RemoteAET",
+            "SOPInstanceUID"
+          ],
+          "properties": {
+            "type": {
+              "title": "Task Type",
+              "description": "type of task",
+              "type": "string",
+              "enum": [
+                "IAN"
+              ]
+            },
+            "LocalAET": {
+              "title": "Local AET",
+              "description": "Archive AE acting as IAN SCU",
+              "type": "string"
+            },
+            "RemoteAET": {
+              "title": "Remote AET",
+              "description": "Remote AE acting as IAN SCP",
+              "type": "string"
+            },
+            "SOPInstanceUID": {
+              "title": "SOP Instance UID",
+              "description": "SOP Instance UID of IAN",
+              "type": "string"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "mppsTaskList": {
+    "title": "MPPSTaskList",
+    "type": "array",
+    "items": {
+      "allOf": [
+        {
+          "$ref": "#/task"
+        },
+        {
+          "required": [
+            "type",
+            "LocalAET",
+            "RemoteAET",
+            "SOPInstanceUID",
+            "DIMSE"
+          ],
+          "properties": {
+            "type": {
+              "title": "Task Type",
+              "description": "type of task",
+              "type": "string",
+              "enum": [
+                "MPPS"
+              ]
+            },
+            "LocalAET": {
+              "title": "Local AET",
+              "description": "Archive AE acting as MPPS SCU",
+              "type": "string"
+            },
+            "RemoteAET": {
+              "title": "Remote AET",
+              "description": "Remote AE acting as MPPS SCP",
+              "type": "string"
+            },
+            "SOPInstanceUID": {
+              "title": "SOP Instance UID",
+              "description": "SOP Instance UID of MPPS",
+              "type": "string"
+            },
+            "DIMSE": {
+              "title": "DIMSE",
+              "description": "DIMSE request of MPPS",
+              "type": "string",
+              "enum": [
+                "N_CREATE_RQ",
+                "N_SET_RQ"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  },
+  "echo": {
+    "title": "Verification Result",
+    "type": "object",
+    "required": [
+      "result"
+    ],
+    "properties": {
+      "result": {
+        "title": "Result",
+        "description": "Result (0=Success, 1=IncompatibleConnection, 2=FailedToConnect, 3=AssociationRejected, 4=FailedToSendCEchoRQ, 5=FailedToSendCEchoRQ, 6=FailedToReceiveCEchoRSP, 7=FailedToRelease)",
+        "type": "integer"
+      },
+      "errorMessage": {
+        "title": "ErrorMessage",
+        "description": "Error Message",
+        "type": "string"
+      },
+      "connectionTime": {
+        "title": "ConnectionTime",
+        "description": "Connection Time in ms",
+        "type": "integer"
+      },
+      "echoTime": {
+        "title": "EchoTime",
+        "description": "Echo Time in ms",
+        "type": "integer"
+      },
+      "releaseTime": {
+        "title": "ReleaseTime",
+        "description": "Release Time in ms",
+        "type": "integer"
+      }
+    }
+  },
+  "export": {
+    "title": "Verification Result",
+    "type": "object",
+    "required": [
+      "result"
+    ],
+    "properties": {
+      "result": {
+        "title": "Result",
+        "description": "Result (0=Success, 1=IncompatibleConnection, 2=FailedToConnect, 3=AssociationRejected, 4=FailedToSendCEchoRQ, 5=FailedToSendCEchoRQ, 6=FailedToReceiveCEchoRSP, 7=FailedToRelease)",
+        "type": "integer"
+      },
+      "errorMessage": {
+        "title": "ErrorMessage",
+        "description": "Error Message",
+        "type": "string"
+      },
+      "connectionTime": {
+        "title": "ConnectionTime",
+        "description": "Connection Time in ms",
+        "type": "integer"
+      },
+      "echoTime": {
+        "title": "EchoTime",
+        "description": "Echo Time in ms",
+        "type": "integer"
+      },
+      "releaseTime": {
+        "title": "ReleaseTime",
+        "description": "Release Time in ms",
+        "type": "integer"
+      }
+    }
+  },
+  "exportBatchList": {
+    "title": "ExportBatchList",
+    "type": "array",
+    "items": {
+      "required": [
+        "batchID",
+        "tasks",
+        "dicomDeviceName",
+        "ExporterID",
+        "createdTimeRange",
+        "updatedTimeRange",
+        "scheduledTimeRange",
+        "processingStartTimeRange",
+        "processingEndTimeRange"
+      ],
+      "properties": {
+        "batchID": {
+          "title": "Export Batch ID",
+          "description": "Export Batch ID",
+          "type": "string"
+        },
+        "tasks": {
+          "title": "Tasks",
+          "type": "object",
+          "properties": {
+            "scheduled": {
+              "title": "Scheduled Tasks",
+              "description": "Number of scheduled tasks in the batch",
+              "type": "integer"
+            },
+            "in-process": {
+              "title": "In process Tasks",
+              "description": "Number of in process tasks in the batch",
+              "type": "integer"
+            },
+            "warning": {
+              "title": "Warning Tasks",
+              "description": "Number of warning tasks in the batch",
+              "type": "integer"
+            },
+            "failed": {
+              "title": "Failed Tasks",
+              "description": "Number of failed tasks in the batch",
+              "type": "integer"
+            },
+            "canceled": {
+              "title": "Canceled Tasks",
+              "description": "Number of canceled tasks in the batch",
+              "type": "integer"
+            },
+            "completed": {
+              "title": "Completed Tasks",
+              "description": "Number of completed tasks in the batch",
+              "type": "integer"
+            }
+          }
+        },
+        "dicomDeviceName": {
+          "title": "Device Name",
+          "description": "Name of Devices performing tasks in the batch",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "ExporterID": {
+          "title": "Exporter ID",
+          "description": "ID of exporters performing tasks in the batch",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "createdTimeRange": {
+          "title": "Created Time Range",
+          "description": "time range when tasks of the batch were created",
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "updatedTimeRange": {
+          "title": "Updated Time Range",
+          "description": "time range when tasks of the batch were last updated",
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "scheduledTimeRange": {
+          "title": "Scheduled Time Range",
+          "description": "time range when next attempt to process tasks of the batch are scheduled",
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "processingStartTimeRange": {
+          "title": "Processing Start Time Range",
+          "description": "time range when last attempt to process tasks of the batch started",
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "processingEndTimeRange": {
+          "title": "Processing End Time Range",
+          "description": "time range when last attempt to process tasks of the batch finished",
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  },
+  "exporters": {
+    "title": "Exporters",
+    "type": "array",
+    "items": {
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "title": "Exporter ID",
+          "description": "Exporter ID",
+          "type": "string"
+        },
+        "description": {
+          "title": "Exporter Description",
+          "description": "Unconstrained text description of the exporter",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "idGenerators": {
+    "title": "ID Generators",
+    "type": "array",
+    "items": {
+      "type": "string"
+    }
+  },
+  "hl7appList": {
+    "title": "HL7 Application List",
+    "type": "array",
+    "items": {
+      "required": [
+        "dicomDeviceName",
+        "hl7ApplicationName"
+      ],
+      "properties": {
+        "dicomDeviceName": {
+          "title": "Device Name",
+          "description": "A unique name for the device which provides this HL7 Application",
+          "type": "string"
+        },
+        "hl7ApplicationName": {
+          "title": "HL7 Application name",
+          "description": "HL7 Application and Facility name (Application|Facility)",
+          "type": "string"
+        },
+        "hl7OtherApplicationName": {
+          "title": "Other HL7 Application Name",
+          "description": "Additional HL7 Application and Facility name (Application|Facility) - will also accept HL7 messages with such Receiving Application and Facility name",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dicomDescription": {
+          "title": "HL7 Application Description",
+          "description": "Unconstrained text description of the HL7 Application",
+          "type": "string"
+        },
+        "dicomApplicationCluster": {
+          "title": "Application Cluster",
+          "description": "Locally defined names for a subset of related applications",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dicomInstalled": {
+          "title": "installed",
+          "description": "True if the HL7 Application is installed on network. If not present, information about the installed status of the HL7 Application is inherited from the device",
+          "type": "boolean"
+        },
+        "dicomNetworkConnection": {
+          "title": "Network Connections",
+          "description": "network connections of the device",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "dicomHostname"
+            ],
+            "properties": {
+              "dicomHostname": {
+                "title": "Hostname",
+                "description": "DNS name for this particular connection",
+                "type": "string"
+              },
+              "dicomPort": {
+                "title": "Port",
+                "description": "TCP/UDP port that a service is listening on. May be missing if this network connection is only used for outbound connections",
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 99999,
+                "exclusiveMinimum": true
+              },
+              "dicomTLSCipherSuite": {
+                "title": "TLS CipherSuites",
+                "description": "The TLS CipherSuites that are supported on this particular connection. If not present TLS is disabled",
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "SSL_RSA_WITH_NULL_SHA",
+                    "TLS_RSA_WITH_AES_128_CBC_SHA",
+                    "SSL_RSA_WITH_3DES_EDE_CBC_SHA"
+                  ]
+                }
+              },
+              "dicomInstalled": {
+                "title": "installed",
+                "description": "True if the Network Connection is installed on the network. If not present, information about the installed status of the Network Connection is inherited from the device",
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "ianscu": {
+    "title": "Send Instance Availability Notification",
+    "type": "object",
+    "required": [
+      "status"
+    ],
+    "properties": {
+      "status": {
+        "title": "Status Code",
+        "description": "DICOM Status Code in hex",
+        "type": "string"
+      },
+      "error": {
+        "title": "Error Comment",
+        "type": "string"
+      },
+      "instances": {
+        "title": "Number of Instances",
+        "type": "integer"
+      }
+    }
+  },
+  "metrics": {
+    "title": "Metrics Descriptors",
+    "type": "array",
+    "items": {
+      "required": [
+        "dcmMetricsName",
+        "dcmMetricsRetentionPeriod"
+      ],
+      "properties": {
+        "dcmMetricsName": {
+          "title": "Metrics Name",
+          "description": "Metrics Name",
+          "type": "string"
+        },
+        "dicomDescription": {
+          "title": "Metrics Description",
+          "description": "Unconstrained text description of the metrics",
+          "type": "string"
+        },
+        "dcmMetricsRetentionPeriod": {
+          "title": "Metrics Retention Period",
+          "description": "Metrics Retention Period in minutes",
+          "type": "integer",
+          "default": 60,
+          "minimum": 1
+        },
+        "dcmUnit": {
+          "title": "Metrics Unit",
+          "description": "Unit of metrics data",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "metric": {
+    "title": "Metric",
+    "type": "array",
+    "items": {
+      "properties": {
+        "count": {
+          "title": "Number of values",
+          "type": "integer"
+        },
+        "avg": {
+          "title": "Average value",
+          "type": "number"
+        },
+        "min": {
+          "title": "Minimal value",
+          "type": "number"
+        },
+        "max": {
+          "title": "Maximal value",
+          "type": "number"
+        }
+      }
+    }
+  },
+  "operation": {
+    "title": "Operation",
+    "type": "object",
+    "properties": {
+      "C-STORE": {
+        "$ref": "#/rq_rsp"
+      },
+      "C-GET": {
+        "$ref": "#/rq_rsp"
+      },
+      "C-FIND": {
+        "$ref": "#/rq_rsp"
+      },
+      "C-MOVE": {
+        "$ref": "#/rq_rsp"
+      },
+      "C-ECHO": {
+        "$ref": "#/rq_rsp"
+      },
+      "N-EVENT-REPORT": {
+        "$ref": "#/rq_rsp"
+      },
+      "N-GET": {
+        "$ref": "#/rq_rsp"
+      },
+      "N-SET": {
+        "$ref": "#/rq_rsp"
+      },
+      "N-ACTION": {
+        "$ref": "#/rq_rsp"
+      },
+      "N-CREATE": {
+        "$ref": "#/rq_rsp"
+      },
+      "N-DELETE": {
+        "$ref": "#/rq_rsp"
+      }
+    }
+  },
+  "pdqServices": {
+    "title": "PDQ Services",
+    "type": "array",
+    "items": {
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "name": {
+          "title": "PDQ Service ID",
+          "description": "PDQ Service ID",
+          "type": "string"
+        },
+        "description": {
+          "title": "PDQ Service Description",
+          "description": "Unconstrained text description of the PDQ Service",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "queueList": {
+    "title": "QueueList",
+    "type": "array",
+    "items": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "title": "Queue Name",
+          "description": "name of queue",
+          "type": "string"
+        },
+        "description": {
+          "title": "Queue Description",
+          "description": "description of queue",
+          "type": "string"
+        },
+        "exporterIDs": {
+          "title": "Associated Exporters",
+          "description": "Associated Exporters of queue",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "reject": {
+    "title": "Reject Result",
+    "type": "object",
+    "required": [
+      "status"
+    ],
+    "properties": {
+      "status": {
+        "title": "Status Code",
+        "description": "DICOM Status Code in hex",
+        "type": "string"
+      },
+      "error": {
+        "title": "Error Comment",
+        "type": "string"
+      },
+      "failed": {
+        "title": "Number of Instances failed to reject",
+        "type": "integer"
+      },
+      "rejected": {
+        "title": "Number of Rejected Instances",
+        "type": "integer"
+      }
+    }
+  },
+  "rejectionNotes": {
+    "title": "Rejection Notes",
+    "type": "array",
+    "items": {
+      "required": [
+        "label",
+        "type",
+        "codeValue",
+        "codingSchemeDesignator",
+        "codeMeaning"
+      ],
+      "properties": {
+        "label": {
+          "title": "Label",
+          "description": "Label of Rejection Note",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "description": "Label of Rejection Note",
+          "type": "string",
+          "enum": [
+            "REJECTED_FOR_QUALITY_REASONS",
+            "REJECTED_FOR_PATIENT_SAFETY_REASONS",
+            "INCORRECT_MODALITY_WORKLIST_ENTRY",
+            "DATA_RETENTION_POLICY_EXPIRED",
+            "REVOKE_REJECTION"
+          ]
+        },
+        "codeValuePathParam": {
+          "title": "Code Value",
+          "description": "Code Value of Rejection Note",
+          "type": "string"
+        },
+        "codingSchemeDesignatorPathParam": {
+          "title": "Coding Scheme Designator",
+          "description": "Coding Scheme Designator of Rejection Note",
+          "type": "string"
+        },
+        "codeMeaning": {
+          "title": "Code Meaning",
+          "description": "Code Meaning of Rejection Note",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "retrieveBatchList": {
+    "title": "RetrieveBatchList",
+    "type": "array",
+    "items": {
+      "required": [
+        "BatchID",
+        "tasks",
+        "dicomDeviceName",
+        "dcmQueueName",
+        "LocalAET",
+        "RemoteAET",
+        "DestinationAET",
+        "createdTimeRange",
+        "updatedTimeRange",
+        "scheduledTimeRange",
+        "processingStartTimeRange",
+        "processingEndTimeRange"
+      ],
+      "properties": {
+        "batchID": {
+          "title": "Retrieve Batch ID",
+          "description": "Retrieve Batch ID",
+          "type": "string"
+        },
+        "tasks": {
+          "title": "Tasks",
+          "type": "object",
+          "properties": {
+            "scheduled": {
+              "title": "Scheduled Tasks",
+              "description": "Number of scheduled tasks in the batch",
+              "type": "integer"
+            },
+            "in-process": {
+              "title": "In process Tasks",
+              "description": "Number of in process tasks in the batch",
+              "type": "integer"
+            },
+            "warning": {
+              "title": "Warning Tasks",
+              "description": "Number of completed tasks in the batch",
+              "type": "integer"
+            },
+            "failed": {
+              "title": "Failed Tasks",
+              "description": "Number of failed tasks in the batch",
+              "type": "integer"
+            },
+            "canceled": {
+              "title": "Canceled Tasks",
+              "description": "Number of canceled tasks in the batch",
+              "type": "integer"
+            },
+            "completed": {
+              "title": "Completed Tasks",
+              "description": "Number of completed tasks in the batch",
+              "type": "integer"
+            }
+          }
+        },
+        "dicomDeviceName": {
+          "title": "Device Name",
+          "description": "Name of Devices performing tasks in the batch",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "dcmQueueName": {
+          "title": "Queue Name",
+          "description": "Name of Queues performing tasks in the batch",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "LocalAET": {
+          "title": "Local AET",
+          "description": "Archive AE Title which was used as Calling AET",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "RemoteAET": {
+          "title": "Remote AET",
+          "description": "AE Title of the C-MOVE SCP",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "DestinationAET": {
+          "title": "Destination AET",
+          "description": "Move Destination AE Title",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "createdTimeRange": {
+          "title": "Created Time Range",
+          "description": "time range when tasks of the batch were created",
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "updatedTimeRange": {
+          "title": "Updated Time Range",
+          "description": "time range when tasks of the batch were last updated",
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "scheduledTimeRange": {
+          "title": "Scheduled Time Range",
+          "description": "time range when next attempt to process tasks of the batch are scheduled",
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "processingStartTimeRange": {
+          "title": "Processing Start Time Range",
+          "description": "time range when last attempt to process tasks of the batch started",
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "processingEndTimeRange": {
+          "title": "Processing End Time Range",
+          "description": "time range when last attempt to process tasks of the batch finished",
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  },
+  "rq_rsp": {
+    "type": "object",
+    "required": [
+      "RQ",
+      "RSP"
+    ],
+    "properties": {
+      "RQ": {
+        "title": "RQ",
+        "description": "Number of received/sent DIMSE-RQ",
+        "type": "integer"
+      },
+      "RSP": {
+        "title": "RSP",
+        "description": "Number of sent/received DIMSE-RSP",
+        "type": "integer"
+      }
+    }
+  },
+  "stgcmtList": {
+    "title": "StorageCommitmentList",
+    "type": "array",
+    "items": {
+      "required": [
+        "dicomDeviceName",
+        "transactionUID",
+        "status",
+        "studyUID",
+        "exporterID",
+        "requested",
+        "createdTime",
+        "updatedTime"
+      ],
+      "properties": {
+        "dicomDeviceName": {
+          "title": "Device Name",
+          "description": "A unique name for this device",
+          "type": "string"
+        },
+        "transactionUIDPathParam": {
+          "title": "Transaction UID",
+          "description": "Transaction UID of Storage Commitment",
+          "type": "string"
+        },
+        "status": {
+          "title": "Storage Commitment Status",
+          "description": "Status of Storage Commitment",
+          "type": "string",
+          "enum": [
+            "PENDING",
+            "COMPLETED",
+            "WARNING",
+            "FAILED"
+          ]
+        },
+        "studyUID": {
+          "title": "Study Instance UID",
+          "description": "Unique Identifier of the Study",
+          "type": "string"
+        },
+        "seriesUID": {
+          "title": "Series Instance UID",
+          "description": "Unique Identifier of the Series",
+          "type": "string"
+        },
+        "objectUID": {
+          "title": "SOP Instance UID",
+          "description": "Unique Identifier of the Object",
+          "type": "string"
+        },
+        "exporterID": {
+          "title": "Exporter ID",
+          "description": "Exporter ID to filter by",
+          "type": "string"
+        },
+        "taskID": {
+          "title": "Task PK",
+          "description": "Task PK of Export Task",
+          "type": "integer"
+        },
+        "batchID": {
+          "title": "Batch ID",
+          "description": "Batch ID of Export Task",
+          "type": "string"
+        },
+        "requested": {
+          "title": "Requested",
+          "description": "number of instances requested for Storage Commitment",
+          "type": "integer"
+        },
+        "failures": {
+          "title": "Failures",
+          "description": "number of instances for which Storage Commitment failed",
+          "type": "integer"
+        },
+        "createdTime": {
+          "title": "Created Time",
+          "description": "time when this Storage Commitment was requested",
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedTime": {
+          "title": "Updated Time",
+          "description": "time when this Storage Commitment was last updated",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  },
+  "stgcmtscu": {
+    "title": "Request Storage Commitment",
+    "type": "object",
+    "required": [
+      "status"
+    ],
+    "properties": {
+      "status": {
+        "title": "Status Code",
+        "description": "DICOM Status Code in hex",
+        "type": "string"
+      },
+      "error": {
+        "title": "Error Comment",
+        "type": "string"
+      },
+      "instances": {
+        "title": "Number of Instances",
+        "type": "integer"
+      }
+    }
+  },
+  "supplementIssuerResult": {
+    "title": "Supplement Issuer of Patient ID results",
+    "type": "object",
+    "properties": {
+      "pids": {
+        "title": "Patient IDs",
+        "description": "Successfully supplemented Patient IDs encoded as HL7 CX",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "ambiguous": {
+        "title": "Ambiguous Patient IDs",
+        "description": "Ambiguous Patient IDs which did not got unique by supplementing the Issuer as HL7 CX",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "pid",
+            "count"
+          ],
+          "properties": {
+            "pid": {
+              "title": "Ambiguous Patient ID",
+              "description": "Ambiguous Patient ID as HL7 CX",
+              "type": "string"
+            },
+            "count": {
+              "title": "Ambiguous Patient ID Count",
+              "description": "Ambiguous Patient ID Count",
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "failures": {
+        "title": "Failures",
+        "description": "Other failures not caused by ambiguous Patient IDs",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": [
+            "pid",
+            "errorMessage"
+          ],
+          "properties": {
+            "pid": {
+              "title": "Failed to supplement Patient ID",
+              "description": "Failed to supplement Patient ID as HL7 CX",
+              "type": "string"
+            },
+            "errorMessage": {
+              "title": "Error Message",
+              "description": "error message",
+              "type": "string"
+            }
+          }
+        }
+      },
+      "tooManyDuplicates" : {
+        "title": "tooManyDuplicates",
+        "description": "Patient ID which number of duplicates exceeds configured fetch size",
+        "type": "string"
+      }
+    }
+  },
+  "updateCharsetOfPatientResult": {
+    "title": "Update Character Set of Patient result",
+    "type": "object",
+    "properties": {
+      "updated": {
+        "title": "Number of updated Patients",
+        "description": "Number of Patients which LO, LT, PN, SH, ST, UT attributes were transcoded to the new Character Set",
+        "type": "integer"
+      },
+      "failures": {
+        "title": "Failures",
+        "description": "Patient IDs encoded as HL7 CX of Patients which LO, LT, PN, SH, ST, UT attributes could not be transcoded to the new Character Set",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "stgverBatchList": {
+    "title": "StorageVerificationBatchList",
+    "type": "array",
+    "items": {
+      "required": [
+        "BatchID",
+        "tasks",
+        "dicomDeviceName",
+        "LocalAET",
+        "createdTimeRange",
+        "updatedTimeRange",
+        "scheduledTimeRange",
+        "processingStartTimeRange",
+        "processingEndTimeRange"
+      ],
+      "properties": {
+        "batchID": {
+          "title": "Storage Verification Batch ID",
+          "description": "Storage Verification Batch ID",
+          "type": "string"
+        },
+        "tasks": {
+          "title": "Tasks",
+          "type": "object",
+          "properties": {
+            "scheduled": {
+              "title": "Scheduled Tasks",
+              "description": "Number of scheduled tasks in the batch",
+              "type": "integer"
+            },
+            "in-process": {
+              "title": "In process Tasks",
+              "description": "Number of in process tasks in the batch",
+              "type": "integer"
+            },
+            "warning": {
+              "title": "Warning Tasks",
+              "description": "Number of completed tasks in the batch",
+              "type": "integer"
+            },
+            "failed": {
+              "title": "Failed Tasks",
+              "description": "Number of failed tasks in the batch",
+              "type": "integer"
+            },
+            "canceled": {
+              "title": "Canceled Tasks",
+              "description": "Number of canceled tasks in the batch",
+              "type": "integer"
+            },
+            "completed": {
+              "title": "Completed Tasks",
+              "description": "Number of completed tasks in the batch",
+              "type": "integer"
+            }
+          }
+        },
+        "dicomDeviceName": {
+          "title": "Device Name",
+          "description": "Name of Devices performing tasks in the batch",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "LocalAET": {
+          "title": "Local AET",
+          "description": "Archive AE Titles performing tasks in the batch",
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "createdTimeRange": {
+          "title": "Created Time Range",
+          "description": "time range when tasks of the batch were created",
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "updatedTimeRange": {
+          "title": "Updated Time Range",
+          "description": "time range when tasks of the batch were last updated",
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "scheduledTimeRange": {
+          "title": "Scheduled Time Range",
+          "description": "time range when next attempt to process tasks of the batch are scheduled",
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "processingStartTimeRange": {
+          "title": "Processing Start Time Range",
+          "description": "time range when last attempt to process tasks of the batch started",
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "processingEndTimeRange": {
+          "title": "Processing End Time Range",
+          "description": "time range when last attempt to process tasks of the batch finished",
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  },
+  "storageList": {
+    "title": "Storage Systems",
+    "type": "array",
+    "items": {
+      "required": [
+        "dcmStorageID",
+        "dcmURI"
+      ],
+      "properties": {
+        "dcmStorageID": {
+          "title": "Storage ID",
+          "description": "Storage ID",
+          "type": "string"
+        },
+        "dcmURI": {
+          "title": "Storage URI",
+          "description": "RFC2079: Uniform Resource Identifier",
+          "type": "string"
+        },
+        "dcmDigestAlgorithm": {
+          "title": "Digest Algorithm",
+          "description": "Algorithm for generation of check sums: 'MD5' or 'SHA-1'",
+          "type": "string"
+        },
+        "dcmInstanceAvailability": {
+          "title": "Instance Availability",
+          "description": "Instance Availability: ONLINE, NEARLINE or OFFLINE",
+          "type": "string"
+        },
+        "dcmStorageDuration": {
+          "title": "Storage Duration",
+          "description": "Indicates if the Storage is used as permanent (=PERMANENT), cache (=CACHE) or temporary (=TEMPORARY) storage.",
+          "type": "string"
+        },
+        "dcmReadOnly": {
+          "title": "Read Only",
+          "description": "Indicates if a Storage System is read only",
+          "type": "boolean"
+        },
+        "storageThreshold": {
+          "title": "Storage Threshold",
+          "description": "Minimal Usable Space on Storage System. If the usable space fall below that value the Storage System will be removed from the list of configured Storage Systems of the Network AE requesting that Storage System in bytes",
+          "type": "number"
+        },
+        "deleterThreshold": {
+          "title": "Deleter Threshold",
+          "description": "Minimal Usable Space on Storage System to trigger deletion. If present, studies are deleted from the Storage System, if the usable space fall below that value",
+          "type": "object",
+          "properties": {
+            "": "number",
+            "nn[<schedule>]": "number"
+          }
+        },
+        "dcmDeleterThreads": {
+          "title": "Deleter Threads",
+          "description": "Number of Threads used for deletion of objects from the Storage System.",
+          "type": "number"
+        },
+        "dcmExternalRetrieveAET": {
+          "title": "External Retrieve AETs",
+          "description": "Constrain deletion of Studies, additionally to configured deleter thresholds and/or deletion retention period constraints, if usable space falls below the configured threshold, to Studies which objects are retrievable using one of the AEs from an external C-MOVE SCP.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dcmExportStorageID": {
+          "title": "Export Storage ID",
+          "description": "Constrain deletion of Studies, additionally to configured deleter thresholds and/or deletion retention period constraints, if usable space falls below the configured threshold, to Studies which objects are also accessible from the specified other storage.",
+          "type": "string"
+        },
+        "dcmNoDeletionConstraint": {
+          "title": "No Deletion Constraint",
+          "description": "Delete Studies from cache/temporary Storage System, if no Deleter Threshold and no other deletion constraint is configured.",
+          "type": "boolean"
+        },
+        "dcmRetrieveCacheStorageID": {
+          "title": "Retrieve Cache Storage ID",
+          "description": "Specifies another Storage to which objects are copied in parallel on retrieve to increase the performance on accessing storage systems which provides more bandwidth using multiple connections in parallel.",
+          "type": "string"
+        },
+        "dcmStorageClusterID": {
+          "title": "Storage Cluster ID",
+          "description": "Specifies storage cluster to which the storage system belongs.",
+          "type": "string"
+        },
+        "dcmRetrieveCacheMaxParallel": {
+          "title": "Retrieve Cache Max Parallel",
+          "description": "Maximal number of parallel copies to cache storage on retrieve.",
+          "type": "integer"
+        },
+        "dcmProperty": {
+          "title": "Storage Property",
+          "description": "Property in format <name>=<value>",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dicomAETitle": {
+          "title": "AE Title",
+          "description": "AE Title associated with the Storage System",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dcmDeleteStudiesOlderThan": {
+          "title": "Delete Studies Older Than",
+          "description": "Delete Studies from the Storage System configured for cache (dcmStorageDuration=CACHE) or temporary (dcmStorageDuration=TEMPORARY) storage, if their Study Date is longer ago than the specified value in ISO-8601 period format. Format [nn\"[\"<schedule>\"]\"](PnYnMnD|PnW).",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dcmDeleteStudiesReceivedBefore": {
+          "title": "Delete Studies Received Before",
+          "description": "Delete Studies from the Storage System configured for cache (dcmStorageDuration=CACHE) or temporary (dcmStorageDuration=TEMPORARY) storage, if they were received longer ago than the specified value in ISO-8601 period format. Format [nn\"[\"<schedule>\"]\"](PnYnMnD|PnW).",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dcmDeleteStudiesNotUsedSince": {
+          "title": "Delete Studies Not Used Since",
+          "description": "Delete Studies from the Storage System configured for cache (dcmStorageDuration=CACHE) or temporary (dcmStorageDuration=TEMPORARY) storage, if they were last accessed longer ago than the specified value in ISO-8601 period format. Format [nn\"[\"<schedule>\"]\"](PnYnMnD|PnW).",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "usage": {
+          "title": "Usage",
+          "description": "Usage of the Storage System",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "dcmObjectStorageID",
+              "dcmMetadataStorageID",
+              "dcmSeriesMetadataStorageID"
+            ]
+          }
+        },
+        "usableSpace": {
+          "title": "Usable Space",
+          "description": "Usable Space left on Storage System in bytes",
+          "type": "number"
+        },
+        "totalSpace": {
+          "title": "Total Space",
+          "description": "Total Space on Storage System in bytes",
+          "type": "number"
+        }
+      }
+    }
+  },
+  "webappList": {
+    "title": "Web Application List",
+    "type": "array",
+    "items": {
+      "required": [
+        "dicomDeviceName",
+        "hl7ApplicationName"
+      ],
+      "properties": {
+        "dicomDeviceName": {
+          "title": "Device Name",
+          "description": "A unique name for the device which provides this Web Application",
+          "type": "string"
+        },
+        "dcmWebApplicationName": {
+          "title": "Web Application name",
+          "description": "Web Application name",
+          "type": "string"
+        },
+        "dcmWebServicePath": {
+          "title": "Web Service Path",
+          "description": "Web Service Path",
+          "type": "string"
+        },
+        "dcmKeycloakClientID": {
+          "title": "Keycloak Client ID",
+          "description": "Keycloak Client ID",
+          "type": "string"
+        },
+        "dcmWebServiceClass": {
+          "title": "Web Service Class",
+          "description": "Web Service Class",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "QIDO_RS",
+              "STOW_RS",
+              "WADO_RS",
+              "WADO_URI",
+              "UPS_RS",
+              "DCM4CHEE_ARC",
+              "DCM4CHEE_ARC_AET",
+              "DCM4CHEE_ARC_AET_DIFF",
+              "PAM",
+              "REJECT",
+              "MOVE",
+              "MOVE_MATCHING",
+              "ELASTICSEARCH"
+            ]
+          }
+        },
+        "dicomAETitle": {
+          "title": "AE Title",
+          "description": "AE title of Network AE associated with this Web Application",
+          "type": "string",
+          "format": "dcmArchiveAETitle"
+        },
+        "dicomDescription": {
+          "title": "Web Application Description",
+          "description": "Unconstrained text description of the Web Application",
+          "type": "string"
+        },
+        "dicomApplicationCluster": {
+          "title": "Application Cluster",
+          "description": "Locally defined names for a subset of related applications",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dcmProperty": {
+          "title": "Property",
+          "description": "Property in format <name>=<value>",
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "dicomInstalled": {
+          "title": "installed",
+          "description": "True if the Web Application is installed on network. If not present, information about the installed status of the Web Application is inherited from the device",
+          "type": "boolean"
+        },
+        "dicomNetworkConnection": {
+          "title": "Network Connections",
+          "description": "network connections of the device",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "dicomHostname"
+            ],
+            "properties": {
+              "dicomHostname": {
+                "title": "Hostname",
+                "description": "DNS name for this particular connection",
+                "type": "string"
+              },
+              "dicomPort": {
+                "title": "Port",
+                "description": "TCP/UDP port that a service is listening on. May be missing if this network connection is only used for outbound connections",
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 99999,
+                "exclusiveMinimum": true
+              },
+              "dicomTLSCipherSuite": {
+                "title": "TLS CipherSuites",
+                "description": "The TLS CipherSuites that are supported on this particular connection. If not present TLS is disabled",
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "SSL_RSA_WITH_NULL_SHA",
+                    "TLS_RSA_WITH_AES_128_CBC_SHA",
+                    "SSL_RSA_WITH_3DES_EDE_CBC_SHA"
+                  ]
+                }
+              },
+              "dicomInstalled": {
+                "title": "installed",
+                "description": "True if the Network Connection is installed on the network. If not present, information about the installed status of the Network Connection is inherited from the device",
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "device": {
+    "title": "Device",
+    "description": "DICOM Device related information",
+    "type": "object",
+    "required": ["dicomDeviceName", "dicomInstalled"],
+    "properties": {
+      "dicomDeviceName": {
+        "title": "Device Name",
+        "description": "A unique name for this device",
+        "type": "string"
+      },
+      "dicomDescription": {
+        "title": "Device Description",
+        "description": "Unconstrained text description of the device",
+        "type": "string"
+      },
+      "dicomVendorData":{
+        "title": "Vendor Device Data",
+        "description": "Device specific vendor configuration information",
+        "type": "boolean"
+      },
+      "dicomDeviceUID": {
+        "title": "Device UID",
+        "description": "Unique identifier of the device",
+        "type": "string",
+        "pattern": "^[0-2]((\\.0)|(\\.[1-9][0-9]*))*$"
+      },
+      "dicomManufacturer": {
+        "title": "Manufacturer",
+        "description": "Should be the same as the value of Manufacturer (0008,0070) in SOP instances created by this device",
+        "type": "string"
+      },
+      "dicomManufacturerModelName": {
+        "title": "Manufacturer Model Name",
+        "description": "Should be the same as the value of Manufacturer Model Name (0008,1090) in SOP instances created by this device",
+        "type": "string"
+      },
+      "dicomSoftwareVersion": {
+        "title": "Software Version",
+        "description": "Should be the same as the values of Software Versions (0018,1020) in SOP instances created by this device",
+        "type": "array",
+        "order":6,
+        "items": {
+          "type": "string"
+        }
+      },
+      "dicomStationName": {
+        "title": "Station Name",
+        "description": "Should be the same as the value of Station Name (0008,1010) in SOP instances created by this device",
+        "type": "string"
+      },
+      "dicomDeviceSerialNumber": {
+        "title": "Device Serial Number",
+        "description": "Should be the same as the value of Device Serial Number (0018,1000) in SOP instances created by this device",
+        "type": "string"
+      },
+      "dicomPrimaryDeviceType": {
+        "title": "Primary Device Type",
+        "description": "Represents the kind of device and is most applicable for acquisition modalities",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "dicomInstitutionName": {
+        "title": "Institution Name",
+        "description": "Should be the same as the value of Institution Name (0008,0080) in SOP Instances created by this device",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "dicomInstitutionCode": {
+        "title": "Institution Code",
+        "description": "Institution Code(s) in format (CV, CSD, \"CM\")",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "dicomInstitutionAddress": {
+        "title": "Institution Address",
+        "description": "Should be the same as the value of Institution Address (0008,0081) attribute in SOP Instances created by this device",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "dicomInstitutionDepartmentName": {
+        "title": "Institution Department Name",
+        "description": "Should be the same as the value of Institutional Department Name (0008,1040) in SOP Instances created by this device",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "dicomIssuerOfPatientID": {
+        "title": "Issuer of Patient ID",
+        "description": "Default value for the Issuer of Patient ID (0010,0021), and optionally also default values for the Universal Entity ID (0040,0032) and the Universal Entity ID Type (0040,0033) of the Item of the Issuer of Patient ID Qualifiers Sequence (0010,0024) for SOP Instances created or queried by this device. Format: <Issuer of Patient ID>['&'<Universal Entity ID>'&'<Universal Entity ID Type>]",
+        "type": "string"
+      },
+      "dicomIssuerOfAccessionNumber": {
+        "title": "Issuer of Accession Number",
+        "description": "Default values for the Local Namespace Entity ID (0040,0031), the Universal Entity ID (0040,0032) and the Universal Entity ID Type (0040,0033) of the Item of the Issuer of Accession Number Sequence (0008,0051) for SOP Instances created or queried by this device. Format: <Local Namespace Entity ID>['&'<Universal Entity ID>'&'<Universal Entity ID Type>]",
+        "type": "string"
+      },
+      "dicomOrderPlacerIdentifier": {
+        "title": "Order Placer Identifier",
+        "description": "Default values for the Local Namespace Entity ID (0040,0031), the Universal Entity ID (0040,0032) and the Universal Entity ID Type (0040,0033) of the Item of the Order Placer Identifier Sequence (0040,0026) for SOP Instances created or queried by this device. Format: <Local Namespace Entity ID>['&'<Universal Entity ID>'&'<Universal Entity ID Type>]",
+        "type": "string"
+      },
+      "dicomOrderFillerIdentifier": {
+        "title": "Order Filler Identifier",
+        "description": "Default values for the Local Namespace Entity ID (0040,0031), the Universal Entity ID (0040,0032) and the Universal Entity ID Type (0040,0033) of the Item of the Order Filler Identifier Sequence (0040,0027) for SOP Instances created or queried by this device. Format: <Local Namespace Entity ID>['&'<Universal Entity ID>'&'<Universal Entity ID Type>]",
+        "type": "string"
+      },
+      "dicomIssuerOfAdmissionID": {
+        "title": "Issuer of Admission ID",
+        "description": "Default values for the Local Namespace Entity ID (0040,0031), the Universal Entity ID (0040,0032) and the Universal Entity ID Type (0040,0033) of the Item of the Issuer of Admission ID Sequence (0038,0014) for SOP Instances created or queried by this device. Format: <Local Namespace Entity ID>['&'<Universal Entity ID>'&'<Universal Entity ID Type>]",
+        "type": "string"
+      },
+      "dicomIssuerOfServiceEpisodeID": {
+        "title": "Issuer of Service Episode ID",
+        "description": "Default values for the Local Namespace Entity ID (0040,0031), the Universal Entity ID (0040,0032) and the Universal Entity ID Type (0040,0033) of the Item of the Issuer of Service Episode ID Sequence (0038,0064) for SOP Instances created or queried by this device. Format: <Local Namespace Entity ID>['&'<Universal Entity ID>'&'<Universal Entity ID Type>]",
+        "type": "string"
+      },
+      "dicomIssuerOfContainerIdentifier": {
+        "title": "Issuer of Container Identifier",
+        "description": "Default values for the Local Namespace Entity ID (0040,0031), the Universal Entity ID (0040,0032) and the Universal Entity ID Type (0040,0033) of the Item of the Issuer of Container Identifier Sequence (0040,0513) for SOP Instances created or queried by this device. Format: <Local Namespace Entity ID>['&'<Universal Entity ID>'&'<Universal Entity ID Type>]",
+        "type": "string"
+      },
+      "dicomIssuerOfSpecimenIdentifier": {
+        "title": "Issuer of Specimen Identifier",
+        "description": "Default values for the Local Namespace Entity ID (0040,0031), the Universal Entity ID (0040,0032) and the Universal Entity ID Type (0040,0033) of the Item of the Issuer of Specimen Identifier Sequence (0040,0562) for SOP Instances created or queried by this device. Format: <Local Namespace Entity ID>['&'<Universal Entity ID>'&'<Universal Entity ID Type>]",
+        "type": "string"
+      },
+      "dicomAuthorizedNodeCertificateReference": {
+        "title": "Authorized Node Certificate Reference",
+        "description": "The DNs for the certificates of nodes that are authorized to connect to this device",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "dicomThisNodeCertificateReference": {
+        "title": "This Node Certificate Reference",
+        "description": "The DNs of the public certificate(s) for this node",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "dicomInstalled": {
+        "title": "installed",
+        "description": "Boolean to indicate whether this device is presently installed on the network",
+        "type": "boolean",
+        "default": true
+      },
+      "dicomNetworkConnection": {
+        "title": "Network Connections",
+        "description": "network connections of the device",
+        "type": "array",
+        "items": {
+          "$ref": "#/networkConnection"
+        }
+      },
+      "dicomNetworkAE": {
+        "title": "Network AEs",
+        "description": "Application entity provided by the device",
+        "type": "array",
+        "order":26,
+        "items": {
+          "$ref": "#/networkAE"
+        }
+      }
+    }
+  },
+  "networkConnection": {
+    "title": "Network Connection",
+    "description": "Describes one TCP/UDP port on one network device.",
+    "type": "object",
+    "required": [
+      "dicomHostname"
+    ],
+    "properties": {
+      "cn": {
+        "title": "Name",
+        "description": "Arbitrary/Meaningful name for the Network Connection object",
+        "type": "string"
+      },
+      "dicomHostname": {
+        "title": "Hostname",
+        "description": "DNS name for this particular connection",
+        "type": "string"
+      },
+      "dicomPort": {
+        "title": "Port",
+        "description": "TCP/UDP port that a service is listening on. May be missing if this network connection is only used for outbound connections",
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 99999
+      },
+      "dicomTLSCipherSuite": {
+        "title": "TLS CipherSuites",
+        "description": "The TLS CipherSuites that are supported on this particular connection. If not present TLS is disabled",
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "SSL_RSA_WITH_NULL_SHA",
+            "TLS_RSA_WITH_AES_128_CBC_SHA",
+            "SSL_RSA_WITH_3DES_EDE_CBC_SHA"
+          ]
+        }
+      },
+      "dicomInstalled": {
+        "title": "installed",
+        "description": "True if the Network Connection is installed on the network. If not present, information about the installed status of the Network Connection is inherited from the device",
+        "type": "boolean"
+      }
+    }
+  },
+  "networkAE": {
+    "title": "Network AE",
+    "description": "Application entity that provides services on a network",
+    "type": "object",
+    "required": [
+      "dicomAETitle",
+      "dicomNetworkConnectionReference",
+      "dicomAssociationInitiator",
+      "dicomAssociationAcceptor"
+    ],
+    "properties": {
+      "dicomAETitle": {
+        "title": "AE Title",
+        "description": "Unique AE title for this Network AE",
+        "type": "string"
+      },
+      "dicomNetworkConnectionReference": {
+        "title": "Network Connection Reference",
+        "description": "JSON Pointers to the Network Connection objects for this AE",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "dicomAssociationInitiator": {
+        "title": "Association Initiator",
+        "description": "True if the Network AE can initiate associations.",
+        "type": "boolean",
+        "default": false
+      },
+      "dicomAssociationAcceptor": {
+        "title": "Association Acceptor",
+        "description": "True if the Network AE can accept associations.",
+        "type": "boolean",
+        "default": false
+      },
+      "dicomDescription": {
+        "title": "AE Description",
+        "description": "Unconstrained text description of the application entity",
+        "type": "string"
+      },
+      "dicomApplicationCluster": {
+        "title": "Application Cluster",
+        "description": "Locally defined names for a subset of related applications",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "dicomPreferredCalledAETitle": {
+        "title": "Preferred Called AE Title",
+        "description": "AE Title(s) that are preferred for initiating associations",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "dicomPreferredCallingAETitle": {
+        "title": "Preferred Calling AE Title",
+        "description": "AE Title(s) that are preferred for accepting associations",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "dicomSupportedCharacterSet": {
+        "title": "Supported Character Set",
+        "description": "Character Set(s) supported by the Network AE for data sets it receives",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "dicomInstalled": {
+        "title": "installed",
+        "description": "True if the AE is installed on network. If not present, information about the installed status of the AE is inherited from the device",
+        "type": "boolean"
+      },
+      "dicomTransferCapability": {
+        "title": "Transfer Capabilities",
+        "description": "transfer capabilities provided by the application entity",
+        "type": "array",
+        "items": {
+          "$ref": "#/transferCapability"
+        }
+      }
+    }
+  },
+  "transferCapability": {
+    "title": "Transfer Capability",
+    "description": "Each transfer capability specifies the SOP class that the Network AE can support, the mode that it can utilize (SCP or SCU), and the Transfer Syntax(es) that it can utilize",
+    "type": "object",
+    "required": [
+      "dicomSOPClass",
+      "dicomTransferRole",
+      "dicomTransferSyntax"
+    ],
+    "properties": {
+      "cn": {
+        "title": "Name",
+        "description": "Arbitrary/Meaningful name for the Transfer Capability object",
+        "type": "string"
+      },
+      "dicomSOPClass": {
+        "title": "SOP Class",
+        "description": "SOP Class UID",
+        "type": "string"
+      },
+      "dicomTransferRole": {
+        "title": "DICOM Transfer Role",
+        "description": "DICOM Transfer Role.",
+        "type": "string",
+        "enum": [
+          "SCP",
+          "SCU"
+        ]
+      },
+      "dicomTransferSyntax": {
+        "title": "Transfer Syntax",
+        "description": "Transfer syntax(es) that may be requested as an SCU or that are offered as an SCP.",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

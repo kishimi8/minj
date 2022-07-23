@@ -1,0 +1,374 @@
+{
+  "-": {
+    "get": {
+      "tags": [
+        "MWL-RS"
+      ],
+      "summary": "Search for Scheduled Procedure Steps",
+      "operationId": "SearchForSPS",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/accept"
+        },
+        {
+          "$ref": "../parameters.json#/filter"
+        },
+        {
+          "$ref": "../parameters.json#/includefield"
+        },
+        {
+          "$ref": "../parameters.json#/fuzzymatching"
+        },
+        {
+          "$ref": "../parameters.json#/limit"
+        },
+        {
+          "$ref": "../parameters.json#/offset"
+        },
+        {
+          "$ref": "../parameters.json#/includedefaults"
+        },
+        {
+          "$ref": "../parameters.json#/orderBy"
+        },
+        {
+          "$ref": "../parameters.json#/patientVerificationStatus"
+        }
+      ],
+      "responses": {
+        "200": {
+          "$ref": "../responses.json#/searchResultsJSON"
+        },
+        "204": {
+          "description": "The search completed successfully, but there were zero results."
+        },
+        "400": {
+          "description": "There was a problem with the request."
+        },
+        "404": {
+          "description": "There is no Archive AE with the specified Title."
+        },
+        "500": {
+          "description": "Internal Server Error."
+        }
+      }
+    },
+    "post": {
+      "tags": [
+        "MWL-RS"
+      ],
+      "summary": "Create/Update Scheduled Procedure Step",
+      "operationId": "CreateUpdateSPS",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        }
+      ],
+      "requestBody": {
+        "$ref": "../requestBodies.json#/createUpdateSPS"
+      },
+      "responses": {
+        "200": {
+          "$ref": "../responses.json#/createUpdateSPSSuccessful"
+        },
+        "400": {
+          "description": "Missing Patient ID or Scheduled Procedure Step Sequence in request body"
+        },
+        "404": {
+          "description": "There is no Archive AE with the specified Title or Patient does not exist."
+        },
+        "500": {
+          "description": "Internal Server Error."
+        }
+      }
+    }
+  },
+  "count": {
+    "get": {
+      "tags": [
+        "MWL-RS"
+      ],
+      "summary": "Count Scheduled Procedure Steps",
+      "operationId": "CountScheduledProcedureSteps",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/filter"
+        },
+        {
+          "$ref": "../parameters.json#/fuzzymatching"
+        }
+      ],
+      "responses": {
+        "200": {
+          "$ref": "../responses.json#/countResults"
+        },
+        "400": {
+          "description": "There was a problem with the request."
+        },
+        "404": {
+          "description": "There is no Archive AE with the specified Title."
+        },
+        "500": {
+          "description": "Internal Server Error."
+        }
+      }
+    }
+  },
+  "deleteMWL": {
+    "delete": {
+      "tags": [
+        "MWL-RS"
+      ],
+      "summary": "Delete Scheduled Procedure Step",
+      "operationId": "DeleteSPS",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/studyPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/spsIDPathParam"
+        }
+      ],
+      "responses": {
+        "204": {
+          "description": "Scheduled Procedure Step deleted successfully."
+        },
+        "404": {
+          "description": "There is no Archive AE with the specified Title or Scheduled Procedure Step not found."
+        },
+        "500": {
+          "description": "Internal Server Error."
+        }
+      }
+    }
+  },
+  "status": {
+    "post": {
+      "tags": [
+        "MWL-RS"
+      ],
+      "summary": "Change Status of Scheduled Procedure Step",
+      "operationId": "ChangeStatusSPS",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/studyPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/spsIDPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/spsStatusPathParam"
+        }
+      ],
+      "responses": {
+        "204": {
+          "description": "Change State of Scheduled Procedure Step successfully."
+        },
+        "404": {
+          "description": "There is no Archive AE with the specified Title or Scheduled Procedure Step not found."
+        },
+        "500": {
+          "description": "Internal Server Error."
+        }
+      }
+    }
+  },
+  "mstatus": {
+    "post": {
+      "tags": [
+        "MWL-RS"
+      ],
+      "summary": "Change Status of matching Scheduled Procedure Steps",
+      "operationId": "ChangeStatusMatchingSPS",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/filter"
+        },
+        {
+          "$ref": "../parameters.json#/fuzzymatching"
+        },
+        {
+          "$ref": "../parameters.json#/spsStatusPathParam"
+        }
+      ],
+      "responses": {
+        "200": {
+          "$ref": "../responses.json#/countResults"
+        },
+        "400": {
+          "description": "There was a problem with the request."
+        },
+        "404": {
+          "description": "There is no Archive AE with the specified Title."
+        },
+        "500": {
+          "description": "Internal Server Error."
+        }
+      }
+    }
+  },
+  "linkInstancesWithMWL": {
+    "post": {
+      "tags": [
+        "IOCM-RS"
+      ],
+      "summary": "Link Instances with MWL Entry",
+      "operationId": "LinkInstancesWithMWLEntry",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/studyPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/spsIDPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/codeValuePathParam"
+        },
+        {
+          "$ref": "../parameters.json#/codingSchemeDesignatorPathParam"
+        }
+      ],
+      "requestBody": {
+        "$ref": "../requestBodies.json#/HierarchicalSOPInstanceReference"
+      },
+      "responses": {
+        "200": {
+          "description": "All matching Instances linked with MWLItem",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas.json#/attributes"
+              }
+            }
+          }
+        },
+        "202": {
+          "description": "This indicates that some Instances were linked with MWLItem, but failures exist for others.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas.json#/attributes"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "JSON request body not well formed or Missing Study Instance UID in request body or Duplicate rejection note or subsequent occurrence of rejected object or Rejection failed as instance is already rejected or Patient ID missing in object"
+        },
+        "403": {
+          "description": "Retention period not yet expired or rejection for retention policy expired is not allowed"
+        },
+        "404": {
+          "description": "No such Application Entity, Study, MWL Item or Rejection Note or No such instance(s) found for rejection."
+        },
+        "409": {
+          "description": "Link Instances with MWLItem failed for all or Conflicting patient ID or attributes are not allowed.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas.json#/attributes"
+              }
+            }
+          }
+        },
+        "500": {
+          "description": "Internal Server Error."
+        }
+      }
+    }
+  },
+  "linkInstancesWithExternalMWL": {
+    "post": {
+      "tags": [
+        "IOCM-RS"
+      ],
+      "summary": "Link Instances with External MWL Entry",
+      "operationId": "LinkInstancesWithExternalMWLEntry",
+      "parameters": [
+        {
+          "$ref": "../parameters.json#/archiveAETPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/mwlSCPPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/studyPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/spsIDPathParam"
+        },
+        {
+          "$ref": "../parameters.json#/codeValuePathParam"
+        },
+        {
+          "$ref": "../parameters.json#/codingSchemeDesignatorPathParam"
+        }
+      ],
+      "requestBody": {
+        "$ref": "../requestBodies.json#/HierarchicalSOPInstanceReference"
+      },
+      "responses": {
+        "200": {
+          "description": "All matching Instances linked with MWLItem",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas.json#/attributes"
+              }
+            }
+          }
+        },
+        "202": {
+          "description": "This indicates that some Instances were linked with MWLItem, but failures exist for others.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas.json#/attributes"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "JSON request body not well formed or Missing Study Instance UID in request body or Duplicate rejection note or subsequent occurrence of rejected object or Rejection failed as instance is already rejected or Patient ID missing in object"
+        },
+        "403": {
+          "description": "Retention period not yet expired or rejection for retention policy expired is not allowed"
+        },
+        "404": {
+          "description": "No such Application Entity, Study, MWL Item or Rejection Note or No such instance(s) found for rejection."
+        },
+        "409": {
+          "description": "Multiple MWL items returned by MWL SCP or Link Instances with MWLItem failed for all or Conflicting patient ID or attributes are not allowed.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas.json#/attributes"
+              }
+            }
+          }
+        },
+        "500": {
+          "description": "Internal Server Error."
+        }
+      }
+    }
+  }
+}
