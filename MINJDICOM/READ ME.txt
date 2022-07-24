@@ -1,0 +1,29 @@
+===================================================
+            Running The MINJDICOM on Tomcat 7.0 Servlet/JSP Container
+            ===================================================
+
+Apache Tomcat 7.0 requires a Java Standard Edition Runtime
+Environment (JRE) version 7.0.
+
+
+(1) Download and Install a Java JDK version 7.0
+
+(2) Download and Extract The Source Code To C:/MINJDICOM      
+
+(2) Configure Environment Variables
+	(a) set JAVA_HOME to jdk dir e.g C:\Program Files\Java\jdk1.7.0_79 
+	(b) set JRE_HOME  to jre dir e.g C:\Program Files\Java\jdk1.7.0_79/jre
+	(c) Set MINJDICOM_HOME to C:/MINJDICOM 
+
+(3) Start Up MINJDICOM
+
+(4.1) Tomcat can be started by executing one of the following commands:
+      
+       Press Windows + R, paste the code below:
+      		%MINJDICOM_HOME%\bin\startup.bat         
+  
+(4.2) After startup, the default web applications included with Tomcat will be
+      available by visiting:
+
+      http://localhost:8080/
+
