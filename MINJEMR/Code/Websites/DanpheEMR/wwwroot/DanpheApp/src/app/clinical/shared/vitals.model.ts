@@ -40,7 +40,7 @@ export class Vitals {
 
     public VitalsValidator: FormGroup = null;
 
-    public  Nadi : string=null;
+    public  Nadi : number=0;
     public  Mala :string=null;
     public  Mutra :string=null
     public  Jivha :string=null

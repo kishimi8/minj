@@ -18,8 +18,7 @@ export enum MasterType {
   AuditReportType="auditReportType",//mumbai-team-june2021-danphe-accounting-cache-change
   LedgerGroups="ledgerGroups",//mumbai-team-june2021-danphe-accounting-cache-change
   Ledgers="ledgers",//mumbai-team-june2021-danphe-accounting-cache-change
-  LedgersAll="ledgersAll",//mumbai-team-june2021-danphe-accounting-cache-change
-  ProcedureBillItemPrices="procedure-billitemprices" //it get only procedures from bill item price table
+  LedgersAll="ledgersAll"//mumbai-team-june2021-danphe-accounting-cache-change
 
 }
 const httpClient = new HttpClient(new HttpXhrBackend({ build: () => new XMLHttpRequest() }));
@@ -65,11 +64,6 @@ export class DanpheCache {
         case MasterType.AllMasters: {
           var subdivisions=this.getservice(type,null);         //get data from master api like departments, taxes,serivce departmens.
           return subdivisions;
-        }
-        break;
-        case MasterType.ProcedureBillItemPrices: {
-          var procedureBillItemPrices=this.getservice(type,null);         
-          return procedureBillItemPrices;
         }
         break;
       }
@@ -118,10 +112,6 @@ export class DanpheCache {
         break;        
         case MasterType.AllMasters:{
           url = '/api/Master?type=AllMasters';
-        }
-        break;
-        case MasterType.ProcedureBillItemPrices:{
-          url = '/api/Settings?reqType=procedure-billitemprices';
         }
         break;
 

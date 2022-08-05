@@ -2834,30 +2834,30 @@ namespace DanpheEMR.Controllers
                         billingTransactionPostVM.VisitItems = AddVisitItems(billingDbContext, billingTransactionPostVM.VisitItems, currentUser.EmployeeId);
                     }
 
-                        billingTransactionModel.BillingTransactionItems = new List<BillingTransactionItemModel>();
+                    billingTransactionModel.BillingTransactionItems = new List<BillingTransactionItemModel>();
 
-                        if (billingTransactionPostVM.LabRequisition != null && billingTransactionPostVM.LabRequisition.Count > 0)
-                        {
-                            MapLabRequsitionId(billingTransactionPostVM.Txn.BillingTransactionItems, billingTransactionPostVM.LabRequisition);
-                        }
-                        if (billingTransactionPostVM.ImagingItemRequisition != null && billingTransactionPostVM.ImagingItemRequisition.Count > 0)
-                        {
-                            MapRadiologyRequisitionId(billingTransactionPostVM.Txn.BillingTransactionItems, billingTransactionPostVM.ImagingItemRequisition);
-                        }
-                        if (billingTransactionPostVM.VisitItems != null && billingTransactionPostVM.VisitItems.Count > 0)
-                        {
-                            MapPatientVisitId(billingTransactionPostVM.Txn.BillingTransactionItems, billingTransactionPostVM.VisitItems);
-                        }
-                        billingTransactionModel = billingTransactionPostVM.Txn;
+                    if (billingTransactionPostVM.LabRequisition != null && billingTransactionPostVM.LabRequisition.Count > 0)
+                    {
+                        MapLabRequsitionId(billingTransactionPostVM.Txn.BillingTransactionItems, billingTransactionPostVM.LabRequisition);
+                    }
+                    if (billingTransactionPostVM.ImagingItemRequisition != null && billingTransactionPostVM.ImagingItemRequisition.Count > 0)
+                    {
+                        MapRadiologyRequisitionId(billingTransactionPostVM.Txn.BillingTransactionItems, billingTransactionPostVM.ImagingItemRequisition);
+                    }
+                    if (billingTransactionPostVM.VisitItems != null && billingTransactionPostVM.VisitItems.Count > 0)
+                    {
+                        MapPatientVisitId(billingTransactionPostVM.Txn.BillingTransactionItems, billingTransactionPostVM.VisitItems);
+                    }
+                    billingTransactionModel = billingTransactionPostVM.Txn;
 
-                        billingTransactionModel = PostBillingTransaction(billingDbContext, billingTransactionModel, currentUser);
+                    billingTransactionModel = PostBillingTransaction(billingDbContext, billingTransactionModel, currentUser);
 
-                        billingTransactionModel.BillingUserName = currentUser.UserName;
+                    billingTransactionModel.BillingUserName = currentUser.UserName;
 
-                        if (billingTransactionModel != null)
-                        {
-                            billingTransactionScope.Commit();
-                        }
+                    if (billingTransactionModel != null)
+                    {
+                        billingTransactionScope.Commit();
+                    }
                     responseData.Status = "OK";
                 }
                 catch (Exception ex)
@@ -2950,7 +2950,7 @@ namespace DanpheEMR.Controllers
             for (int i = 0; i < itms.Count; i++)
             {
                 itms[i].RequisitionId = imagingRequisitions[i].ImagingRequisitionId;
-                
+
             }
 
             return itms;
@@ -3258,30 +3258,30 @@ namespace DanpheEMR.Controllers
                         billingTransactionPostVM.VisitItems = AddVisitItems(billingDbContext, billingTransactionPostVM.VisitItems, currentUser.EmployeeId);
                     }
 
-                        billingTransactionModel.BillingTransactionItems = new List<BillingTransactionItemModel>();
+                    billingTransactionModel.BillingTransactionItems = new List<BillingTransactionItemModel>();
 
-                        if (billingTransactionPostVM.LabRequisition != null && billingTransactionPostVM.LabRequisition.Count > 0)
-                        {
-                            MapLabRequsitionId(billingTransactionPostVM.Txn.BillingTransactionItems, billingTransactionPostVM.LabRequisition);
-                        }
-                        if (billingTransactionPostVM.ImagingItemRequisition != null && billingTransactionPostVM.ImagingItemRequisition.Count > 0)
-                        {
-                            MapRadiologyRequisitionId(billingTransactionPostVM.Txn.BillingTransactionItems, billingTransactionPostVM.ImagingItemRequisition);
-                        }
-                        if (billingTransactionPostVM.VisitItems != null && billingTransactionPostVM.VisitItems.Count > 0)
-                        {
-                            MapPatientVisitId(billingTransactionPostVM.Txn.BillingTransactionItems, billingTransactionPostVM.VisitItems);
-                        }
-                        billingTransactionModel = billingTransactionPostVM.Txn;
+                    if (billingTransactionPostVM.LabRequisition != null && billingTransactionPostVM.LabRequisition.Count > 0)
+                    {
+                        MapLabRequsitionId(billingTransactionPostVM.Txn.BillingTransactionItems, billingTransactionPostVM.LabRequisition);
+                    }
+                    if (billingTransactionPostVM.ImagingItemRequisition != null && billingTransactionPostVM.ImagingItemRequisition.Count > 0)
+                    {
+                        MapRadiologyRequisitionId(billingTransactionPostVM.Txn.BillingTransactionItems, billingTransactionPostVM.ImagingItemRequisition);
+                    }
+                    if (billingTransactionPostVM.VisitItems != null && billingTransactionPostVM.VisitItems.Count > 0)
+                    {
+                        MapPatientVisitId(billingTransactionPostVM.Txn.BillingTransactionItems, billingTransactionPostVM.VisitItems);
+                    }
+                    billingTransactionModel = billingTransactionPostVM.Txn;
 
-                        billingTransactionModel.BillingTransactionItems = PostProvisionalBilling(billingDbContext, billingTransactionModel, currentUser);
+                    billingTransactionModel.BillingTransactionItems = PostProvisionalBilling(billingDbContext, billingTransactionModel, currentUser);
 
-                        billingTransactionModel.BillingUserName = currentUser.UserName;
+                    billingTransactionModel.BillingUserName = currentUser.UserName;
 
-                        if (billingTransactionModel.BillingTransactionItems != null && billingTransactionModel.BillingTransactionItems.Count > 0)
-                        {
-                            provisionalBillingTxnScope.Commit();
-                        }
+                    if (billingTransactionModel.BillingTransactionItems != null && billingTransactionModel.BillingTransactionItems.Count > 0)
+                    {
+                        provisionalBillingTxnScope.Commit();
+                    }
                     responseData.Status = "OK";
                 }
                 catch (Exception ex)

@@ -67,7 +67,7 @@ namespace DanpheEMR.Controllers.Billing
                 billingTransaction.PaymentReceivedBy = billingTransaction.CreatedBy;
             }
 
-            BillingFiscalYear fiscYear = BillingBL.GetFiscalYear(connString);
+            BillingFiscalYear fiscYear = BillingBL.GetFiscalYear(connString); 
 
             //ashim: 26Aug2018: Moved from client side to server side.
             billingTransaction.CreatedOn = currentDate;

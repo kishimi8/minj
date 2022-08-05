@@ -4,7 +4,6 @@ import { RouterOutlet, RouterModule } from '@angular/router';
 import { SecurityService } from "../security/shared/security.service"
 import { VisitService } from '../appointments/shared/visit.service';
 import { CoreService } from '../core/shared/core.service';
-import { DanpheCache, MasterType } from '../shared/danphe-cache-service-utility/cache-services';
 
 @Component({
 
@@ -19,8 +18,6 @@ export class ClinicalComponent {
     public primaryNavItems: Array<any> = null;
     public secondaryNavItems: Array<any> = null;
     constructor(public securityService: SecurityService, public visitService: VisitService, public coreService: CoreService) {
-        DanpheCache.GetData(MasterType.ICD, null);
-        DanpheCache.GetData(MasterType.ProcedureBillItemPrices,null);
         //get the chld routes of Clinical from valid routes available for this user.
         this.validRoutes = this.securityService.GetChildRoutes("Doctors/PatientOverviewMain/Clinical");
         if (this.visitService.globalVisit.VisitType == "outpatient") {

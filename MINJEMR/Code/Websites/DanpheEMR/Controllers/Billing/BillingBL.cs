@@ -62,7 +62,7 @@ namespace DanpheEMR.Controllers.Billing
         {
             using (new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadUncommitted }))
             {
-                int fiscalYearId = GetFiscalYear(connString).FiscalYearId;
+                int fiscalYearId = 4;
                 DanpheEMR.DalLayer.BillingDbContext billDbContext = new DalLayer.BillingDbContext(connString);
                 int? invoiceNumber = (from txn in billDbContext.BillingTransactions
                                       where txn.FiscalYearId == fiscalYearId

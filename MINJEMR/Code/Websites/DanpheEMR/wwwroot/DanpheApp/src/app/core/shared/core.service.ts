@@ -2389,23 +2389,6 @@ export class CoreService {
     this.AllMembershipTypes = results;
   }
 
-  ShowAyurvedVitals() {
-    var enable = this.Parameters.find(
-      (val) =>
-        val.ParameterName == "ShowAyurvedVitals" &&
-        val.ParameterGroupName.toLowerCase() == "clinical"
-    );
-    if (enable) {
-      let val = enable.ParameterValue.toLowerCase();
-      if (val == "true") {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      return false;
-    }
-  }
 
 }
 

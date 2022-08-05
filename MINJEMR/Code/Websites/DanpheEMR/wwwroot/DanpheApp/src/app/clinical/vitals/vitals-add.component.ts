@@ -7,7 +7,6 @@ import { MessageboxService } from '../../shared/messagebox/messagebox.service';
 
 import { Vitals } from "../shared/vitals.model";
 import { PatientService } from "../../patients/shared/patient.service";
-import { CoreService } from "../../core/shared/core.service";
 
 @Component({
   selector: "vitals-add",
@@ -45,7 +44,7 @@ export class VitalsAddComponent {
   public selectedIndex: number = null;
   public loading: boolean = false;
   public painDataList: Array<any> = new Array<any>();
-  public showAyurvedVitals: boolean = false;
+
   //@Input("showVitalAddBox")
   //public set showVitalAddBox(val: boolean) {
   //  this.showAddVitalBox = val;
@@ -87,10 +86,8 @@ export class VitalsAddComponent {
     public ioAllergyVitalsBLService: IOAllergyVitalsBLService,
     public changeDetector: ChangeDetectorRef, public msgBoxServ: MessageboxService,
     public patientService: PatientService,
-    public renderer2: Renderer2,
-    public coreService: CoreService) {
+    public renderer2: Renderer2) {
     this.painData.push({ BodyPart: "", PainScale: null });
-    this.showAyurvedVitals = this.coreService.ShowAyurvedVitals();
   }
 
   ngOnInit() {

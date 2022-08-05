@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DanpheEMR.ServerModel</RootNamespace>
     <AssemblyName>DanpheEMR.ServerModel</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -182,8 +182,6 @@
     <Compile Include="ClinicalModels\ObjectiveNoteModel.cs" />
     <Compile Include="ClinicalModels\PatientClinicalInfoModel.cs" />
     <Compile Include="ClinicalModels\PatientImages.cs" />
-    <Compile Include="ClinicalModels\PatientVisitNote.cs" />
-    <Compile Include="ClinicalModels\PatientVisitProcedure.cs" />
     <Compile Include="ClinicalModels\PrescriptionNotesModel.cs" />
     <Compile Include="ClinicalModels\PrescriptionSlip\AcceptanceModel.cs" />
     <Compile Include="ClinicalModels\PrescriptionSlip\AdviceDiagnosisModel.cs" />
