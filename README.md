@@ -95,7 +95,7 @@
    <h1 class="w3-xxxlarge w3-text-primary"><b>MINJDICOM Setup & Installation</b></h1>
    <hr style="width: 70px; height: 2px; background-color: #1eb685;opacity: 1;margin: 0 0 20px 0;" class="w3-round"> 
    ===================================================
-  <h1>Running The MINJDICOM on Tomcat 7.0 Servlet/JSP Container</h1>
+  <h1>Running The MINJDICOM on Tomcat 7.0 Servlet/JSP Container </h1>
    ===================================================
 
 Apache Tomcat 7.0 requires a Java Standard Edition Runtime
