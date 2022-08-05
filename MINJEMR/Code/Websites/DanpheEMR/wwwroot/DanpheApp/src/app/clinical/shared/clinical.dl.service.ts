@@ -107,17 +107,6 @@ export class ClinicalDLService {
   public GetPatientClinicalDetailsForNotes(patientVisitId: number, patientId: number) {
     return this.http.get<any>("/api/Clinical?patientVisitId=" + patientVisitId + "&patientId=" + patientId + "&reqType=notes", this.options);
   }
-  //Patient visit note
-  public GetPatientVisitNote(patientVisitId: number, patientId: number) {
-    return this.http.get<any>("/api/Clinical?patientVisitId=" + patientVisitId + "&patientId=" + patientId + "&reqType=patient-visit-note", this.options);
-  }
-  //patient-visit-procedures 
-  public GetPatientVisitProcedures(patientVisitId: number, patientId: number) {
-    return this.http.get<any>("/api/Clinical?patientVisitId=" + patientVisitId + "&patientId=" + patientId + "&reqType=patient-visit-procedures", this.options);
-  }
-  public GetPatientVisitNoteAllData( patientId: number,patientVisitId: number) {
-    return this.http.get<any>("/api/Clinical?patientVisitId=" + patientVisitId + "&patientId=" + patientId + "&reqType=patient-visit-note-all-data", this.options);
-  }
   //notes
   public GetMasterReactionList() {
     return this.http.get<any>("/api/Master?type=reaction", this.options);
@@ -208,19 +197,8 @@ export class ClinicalDLService {
     let data = JSON.stringify(pastMedical);
     return this.http.post<any>("/api/Clinical?reqType=pastmedical", data, this.options);
   }
-  public PostPatientVisitNote(patientVisitNote) {
-    let data = JSON.stringify(patientVisitNote);
-    return this.http.post<any>("/api/Clinical?reqType=patient-visit-note", data, this.options);
-  }
-  
-  public PostPatientVisitProcedures(patientVisitProcedures) {
-    let data = JSON.stringify(patientVisitProcedures);
-    return this.http.post<any>("/api/Clinical?reqType=patient-visit-procedures", data, this.options);
-  }
-  public PutPatientVisitNote(patientVisitNote) {
-    return this.http.put<any>("/api/Clinical?reqType=patient-visit-note", patientVisitNote, this.options);
 
-  }
+
   public PutClinical(clinicalObj: string, reqType: string) {
     return this.http.put<any>("/api/Clinical?reqType=" + reqType, clinicalObj, this.options);
 

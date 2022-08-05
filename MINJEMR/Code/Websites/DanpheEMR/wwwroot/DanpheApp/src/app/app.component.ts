@@ -70,7 +70,7 @@ export class AppComponent {
     this.GetAllValidRouteList();
     this.http = _http;
     //we're initializing parameters in the First component that will be loaded into the application.
-    //i.e: bootstrap component. 
+    //i.e: bootstrap component.
     this.coreService.InitializeParameters().subscribe(res => {
       this.CallBackLoadParameters(res);
     });
@@ -110,7 +110,7 @@ export class AppComponent {
     this.LoadAccountingHospitalInfo();
 
     //to show-hide loading image when route changes from one to another.
-    //we've to subscribe to the router event to do that. 
+    //we've to subscribe to the router event to do that.
     router.events.subscribe((event: RouterEvent) => {
       this.navigationInterceptor(event);
     });
@@ -163,11 +163,11 @@ export class AppComponent {
 
   // Sets initial value to true to show loading spinner on first load
   loading: boolean = true;
-  public loadingScreen: boolean = false; //default not showing loading screen 
+  public loadingScreen: boolean = false; //default not showing loading screen
   ngAfterViewChecked() {
     this.changeDetector.detectChanges();
   }
-  //this function takes parameter value from database for shwo or hide every http request loading screen   
+  //this function takes parameter value from database for shwo or hide every http request loading screen
   setLoadingScreenVal() {
     try {
       var parVal = this.coreService.Parameters.filter(p => p.ParameterName == "showLoadingScreen" && p.ParameterGroupName.toLowerCase() == "common");
@@ -285,7 +285,7 @@ export class AppComponent {
         });
   }
 
-  //sud: 20June'20--To Do Later-- Bring ACtive hospital and assign to security service.. 
+  //sud: 20June'20--To Do Later-- Bring ACtive hospital and assign to security service..
   // GetActiveAccHospital(): void {
   //   this.securityBlService.GetActiveBillingCounter()
   //     .subscribe(res => {
@@ -349,7 +349,7 @@ export class AppComponent {
   }
 
 
-  //set valid permissions of user 
+  //set valid permissions of user
   //Ajay 09-10-2018
   SetValidUserPermissions(): void {
     this.securityBlService.GetValidUserPermissionList()
@@ -384,7 +384,7 @@ export class AppComponent {
       //commented: customername, landingpage, empilabels etc for UAT: sudarshan--13jul2017
       //this.pageParameters.CustomerName = res.Results.filter(a => a.ParameterName == 'CustomerName')[0]["ParameterValue"];
       //this.pageParameters.LandingPageCustLogo = res.Results.filter(a => a.ParameterName == 'LandingPageCustLogo')[0]["ParameterValue"];
-      //remove below hardcode value for image path as possible..sudarshan:13Apr'17-- 
+      //remove below hardcode value for image path as possible..sudarshan:13Apr'17--
       //this.pageParameters.LandingPageCustLogo = "/themes/theme-default/images/hospitals-logo/" + this.pageParameters.LandingPageCustLogo;
       //this.pageParameters.EmpiLabel = res.Results.filter(a => a.ParameterName == 'UniquePatientIdLabelName')[0]["ParameterValue"];
 
@@ -430,7 +430,7 @@ export class AppComponent {
 
   }
 
-  // START: VIKAS : default caledar date preference for user 
+  // START: VIKAS : default caledar date preference for user
   openShowDatePreference() {
     this.showDatePopup = true;
   }
@@ -449,20 +449,11 @@ export class AppComponent {
 
   }
   DatePreferenceData(type) {
-    if (type == 'np') {
-      this.empPre.en = false;
-      this.empPre.np = true;
-      this.selectedDatePref = "np";
-      this.defaultCal = "Nepali (BS)";
-      this.coreService.DatePreference = type;
-    }
-    else {
       this.empPre.np = false;
       this.empPre.en = true;
       this.selectedDatePref = "en";
       this.defaultCal = "English (AD)";
       this.coreService.DatePreference = type;
-    }
   }
 
   SaveEmpPref() {

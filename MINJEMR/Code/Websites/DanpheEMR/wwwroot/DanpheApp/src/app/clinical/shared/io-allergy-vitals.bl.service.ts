@@ -7,8 +7,6 @@ import { InputOutput } from './input-output.model';
 //import { NotesModel } from '../notes/shared/notes.model';
 import * as _ from 'lodash';
 import * as moment from 'moment/moment';
-import { PatientVisitNoteModel } from './clinical-patient-visit-note.model';
-import { PatientVisitProcedureModel } from './clinical-patient-visit-procedure.model';
 @Injectable()
 export class IOAllergyVitalsBLService {
 
@@ -53,19 +51,6 @@ export class IOAllergyVitalsBLService {
     //notes
     public GetPatientClinicalDetailsForNotes(patientVisitId: number, patientId: number) {
         return this.clinicalDLService.GetPatientClinicalDetailsForNotes(patientVisitId, patientId)
-            .map(res => res);
-    }
-    public GetPatientVisitNote(patientVisitId: number, patientId: number) {
-        return this.clinicalDLService.GetPatientVisitNote(patientVisitId, patientId)
-            .map(res => res);
-    }
-    public GetPatientVisitNoteAllData(patientId: number,patientVisitId: number, ) {
-        return this.clinicalDLService.GetPatientVisitNoteAllData(patientId,patientVisitId)
-            .map(res => res);
-    }
-    
-    public GetPatientVisitProcedures(patientVisitId: number, patientId: number) {
-        return this.clinicalDLService.GetPatientVisitProcedures(patientVisitId, patientId)
             .map(res => res);
     }
     //allergy
@@ -148,24 +133,6 @@ export class IOAllergyVitalsBLService {
         // we make the json string
 
         return this.clinicalDLService.PostVitals(data)
-            .map(res => res);
-    }
-    //POSt: Patient visit note 
-    public PostPatientVisitNote(patVisitNote:PatientVisitNoteModel){
-        var temp = _.omit(patVisitNote, ['PatientVisitNoteValidator']);
-        return this.clinicalDLService.PostPatientVisitNote(temp)
-            .map(res => res);
-    }
-    
-    //POSt: Patient visit procedures
-    public PostPatientVisitProcedures(patVisitProcedures){
-        return this.clinicalDLService.PostPatientVisitProcedures(patVisitProcedures)
-            .map(res => res);
-    }
-    //Put: Patient visit note 
-    public PutPatientVisitNote(patVisitNote:PatientVisitNoteModel){
-        var temp = _.omit(patVisitNote, ['PatientVisitNoteValidator']);
-        return this.clinicalDLService.PutPatientVisitNote(temp)
             .map(res => res);
     }
     //vitals

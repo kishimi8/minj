@@ -19,8 +19,6 @@ export class RPT_APPT_DailyAppointmentReportModel {
     public AppointmentStatus: string = "";
 
     public DailyAppointmentValidator: FormGroup = null;
-    public Diagnosis: string = "";
-    public DiagnosisList: any[];
 
     constructor() {
 

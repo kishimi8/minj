@@ -1,0 +1,336 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Audit.WebApi.Core</name>
+    </assembly>
+    <members>
+        <member name="M:Audit.WebApi.ApiControllerExtensions.AddAuditFilter(Microsoft.AspNetCore.Mvc.MvcOptions,System.Action{Audit.WebApi.ConfigurationApi.IAuditApiGlobalActionsSelector})">
+            <summary>
+            Adds a global Audit Filter to the MVC filter chain. Use this method to add AuditApiGlobalFilter as a global filter.
+            </summary>
+            <param name="auditConfig">The audit configuration</param>
+            <param name="mvcOptions">The MVC options</param>
+        </member>
+        <member name="M:Audit.WebApi.ApiControllerExtensions.GetCurrentAuditScope(Microsoft.AspNetCore.Mvc.ControllerBase)">
+            <summary>
+            Gets the current Audit Scope.
+            </summary>
+            <param name="apiController">The API controller.</param>
+            <returns>The current Audit Scope or NULL.</returns>
+        </member>
+        <member name="M:Audit.WebApi.ApiControllerExtensions.GetCurrentAuditScope(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Gets the current Audit Scope.
+            </summary>
+            <param name="httpContext">The http context to get the scope from.</param>
+            <returns>The current Audit Scope or NULL.</returns>
+        </member>
+        <member name="M:Audit.WebApi.AuditApiAction.ToJson">
+            <summary>
+            Serializes this Audit Action as a JSON string
+            </summary>
+        </member>
+        <member name="M:Audit.WebApi.AuditApiAction.FromJson(System.String)">
+            <summary>
+            Parses an Audit Action from its JSON string representation.
+            </summary>
+            <param name="json">JSON string with the Entity Audit Action representation.</param>
+        </member>
+        <member name="M:Audit.WebApi.AuditApiAdapter.BeforeExecutingAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,System.Boolean,System.Boolean,System.Boolean,System.String)">
+            <summary>
+            Occurs before the action method is invoked.
+            </summary>
+        </member>
+        <member name="M:Audit.WebApi.AuditApiAdapter.AfterExecutedAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Occurs after the action method is invoked.
+            </summary>
+        </member>
+        <member name="T:Audit.WebApi.AuditApiAttribute">
+            <summary>
+            This filter enable the audit on web api calls. 
+            Mark with this attribute, the controllers and/or actions that needs to be audited.
+            </summary>
+            <remarks>If you need more granular control over the settings, use the AuditApiGlobal as a global filter instead of this attribute.</remarks>
+        </member>
+        <member name="P:Audit.WebApi.AuditApiAttribute.IncludeResponseHeaders">
+            <summary>
+            Gets or sets a value indicating whether the output should include the Http Response Headers.
+            </summary>
+        </member>
+        <member name="P:Audit.WebApi.AuditApiAttribute.IncludeHeaders">
+            <summary>
+            Gets or sets a value indicating whether the output should include the Http Request Headers.
+            </summary>
+        </member>
+        <member name="P:Audit.WebApi.AuditApiAttribute.IncludeModelState">
+            <summary>
+            Gets or sets a value indicating whether the output should include Model State information.
+            </summary>
+        </member>
+        <member name="P:Audit.WebApi.AuditApiAttribute.IncludeResponseBody">
+            <summary>
+            Gets or sets a value indicating whether the output should include the Http Response body for all the requests.
+            (Use the alternative IncludeResponseBodyFor/ExcludeResponseBodyFor to log the body only for certain response status codes).
+            </summary>
+        </member>
+        <member name="P:Audit.WebApi.AuditApiAttribute.IncludeResponseBodyFor">
+            <summary>
+            Gets or sets an array of status codes that conditionally indicates when the response body should be included.
+            The response body is included only when the request return any of these status codes.
+            When set to NULL, the IncludeResponseBody boolean is used to determine whether to include the response body or not. Exclude has precedence over Include.
+            When to set to non-NULL, the IncludeResponseBody boolean is ignored.
+            </summary>
+        </member>
+        <member name="P:Audit.WebApi.AuditApiAttribute.ExcludeResponseBodyFor">
+            <summary>
+            Gets or sets an array of status codes that conditionally indicates when the response body should be excluded.
+            The response body is included only when the request return a status code not in this array.
+            When set to NULL, the IncludeResponseBodyFor or IncludeResponseBody are used to determine whether to include the response body or not. Exclude has precedence over Include.
+            When to set to non-NULL, the IncludeResponseBody boolean is ignored.
+            </summary>
+        </member>
+        <member name="P:Audit.WebApi.AuditApiAttribute.IncludeRequestBody">
+            <summary>
+            Gets or sets a value indicating whether the Request Body should be read and incuded on the event.
+            </summary>
+            <remarks>
+            When IncludeResquestBody is set to true and you are not using a [FromBody] parameter (i.e.reading the request body directly from the Request)
+            make sure you enable rewind on the request body stream, otherwise the controller won't be able to read the request body since, by default, 
+            it's a forwand-only stream that can be read only once. 
+            </remarks>
+        </member>
+        <member name="P:Audit.WebApi.AuditApiAttribute.EventTypeName">
+            <summary>
+            Gets or sets a string indicating the event type to use.
+            Can contain the following placeholders:
+            - {controller}: replaced with the controller name.
+            - {action}: replaced with the action method name.
+            - {verb}: replaced with the HTTP verb used (GET, POST, etc).
+            </summary>
+        </member>
+        <member name="P:Audit.WebApi.AuditApiAttribute.SerializeActionParameters">
+            <summary>
+            Gets or sets a value indicating whether the action arguments should be pre-serialized to the audit event.
+            </summary>
+        </member>
+        <member name="T:Audit.WebApi.AuditApiGlobalFilter">
+            <summary>
+            Action filter for auditing with customizable settings to be used as a global filter.
+            This filter allows to change the settings per request, but cannot be used as an attribute to mark controllers and actions.
+            If you don't need granular control over the settings, use the AuditApiAttribute instead.
+            </summary>
+        </member>
+        <member name="M:Audit.WebApi.AuditEventExtensions.GetWebApiAuditAction(Audit.Core.AuditScope)">
+            <summary>
+            Gets the Web API Event portion of the Audit Event for a given scope.
+            </summary>
+            <param name="auditScope">The audit scope.</param>
+        </member>
+        <member name="M:Audit.WebApi.AuditEventExtensions.GetWebApiAuditAction(Audit.Core.AuditEvent)">
+            <summary>
+            Gets the Web API Event portion of the Audit Event.
+            </summary>
+            <param name="auditEvent">The audit event.</param>
+        </member>
+        <member name="T:Audit.WebApi.AuditEventWebApi">
+            <summary>
+            Represents the output of the audit process for a Web API action
+            </summary>
+        </member>
+        <member name="P:Audit.WebApi.AuditEventWebApi.Action">
+            <summary>
+            Gets or sets the Web API action details.
+            </summary>
+        </member>
+        <member name="T:Audit.WebApi.AuditIgnoreAttribute">
+            <summary>
+            Use to selectively ignore controllers, action methods or method parameters
+            </summary>
+        </member>
+        <member name="T:Audit.WebApi.AuditMiddleware">
+            <summary>
+            Middleware to audit requests
+            </summary>
+        </member>
+        <member name="M:Audit.WebApi.AuditMiddlewareExtensions.UseAuditMiddleware(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Action{Audit.WebApi.ConfigurationApi.IAuditMiddlewareConfigurator})">
+            <summary>
+            Add the Audit middleware to the pipeline. 
+            This can be used together with AuditApi action filter.
+            </summary>
+            <param name="builder">The application builder</param>
+            <param name="config">The audit middleware configuration</param>
+        </member>
+        <member name="M:Audit.WebApi.ConfigurationApi.IAuditApiGlobalActionsSelector.LogActionIf(System.Func{Microsoft.AspNetCore.Mvc.Controllers.ControllerActionDescriptor,System.Boolean})">
+            <summary>
+            Specifies a predicate to select the actions to be audited.
+            </summary>
+            <param name="controllerActionPredicate">A function of the current ControllerActionDescriptor that returns true for the actions to be audited, or false otherwise</param>
+            <returns></returns>
+        </member>
+        <member name="M:Audit.WebApi.ConfigurationApi.IAuditApiGlobalActionsSelector.LogRequestIf(System.Func{Microsoft.AspNetCore.Http.HttpRequest,System.Boolean})">
+            <summary>
+            Specifies a predicate to select the actions to be audited.
+            </summary>
+            <param name="requestPredicate">A function of the current HTTP request that returns true for the request to be audited, or false otherwise</param>
+            <returns></returns>
+        </member>
+        <member name="M:Audit.WebApi.ConfigurationApi.IAuditApiGlobalActionsSelector.LogAllActions">
+            <summary>
+            Specifies all the controller actions to be audited.
+            </summary>
+        </member>
+        <member name="M:Audit.WebApi.ConfigurationApi.IAuditApiGlobalConfigurator.IncludeResponseHeaders(System.Boolean)">
+            <summary>
+            Specifies whether the HTTP Response headers should be included on the audit output.
+            </summary>
+            <param name="include">True to include the HTTP Response headers, false otherwise</param>
+        </member>
+        <member name="M:Audit.WebApi.ConfigurationApi.IAuditApiGlobalConfigurator.IncludeResponseHeaders(System.Func{Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext,System.Boolean})">
+            <summary>
+            Specifies a predicate to determine whether the HTTP Response headers should be included on the audit output.
+            </summary>
+            <param name="includePredicate">A function of the executing context to determine whether the HTTP Response headers should be included on the audit output</param>
+        </member>
+        <member name="M:Audit.WebApi.ConfigurationApi.IAuditApiGlobalConfigurator.IncludeHeaders(System.Boolean)">
+            <summary>
+            Specifies whether the HTTP Request headers should be included on the audit output.
+            </summary>
+            <param name="include">True to include the HTTP Request headers, false otherwise</param>
+        </member>
+        <member name="M:Audit.WebApi.ConfigurationApi.IAuditApiGlobalConfigurator.IncludeHeaders(System.Func{Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,System.Boolean})">
+            <summary>
+            Specifies a predicate to determine whether the HTTP Request headers should be included on the audit output.
+            </summary>
+            <param name="includePredicate">A function of the executing context to determine whether the HTTP Request headers should be included on the audit output</param>
+        </member>
+        <member name="M:Audit.WebApi.ConfigurationApi.IAuditApiGlobalConfigurator.IncludeRequestBody(System.Boolean)">
+            <summary>
+            Specifies whether the request body should be included on the audit output.
+            </summary>
+            <param name="include">True to include the request body, false otherwise</param>
+        </member>
+        <member name="M:Audit.WebApi.ConfigurationApi.IAuditApiGlobalConfigurator.IncludeRequestBody(System.Func{Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,System.Boolean})">
+            <summary>
+            Specifies a predicate to determine whether the request body should be included on the audit output.
+            </summary>
+            <param name="includePredicate">A function of the executing context to determine whether the request body should be included on the audit output</param>
+        </member>
+        <member name="M:Audit.WebApi.ConfigurationApi.IAuditApiGlobalConfigurator.WithEventType(System.String)">
+            <summary>
+            Specifies the event type name to use.
+            </summary>
+            <param name="eventTypeName">The event type name to use. The following placeholders can be used as part of the string: 
+            - {controller}: replaced with the controller name.
+            - {action}: replaced with the action name.
+            - {verb}: replaced with the HTTP verb used (GET, POST, etc).
+            </param>
+        </member>
+        <member name="M:Audit.WebApi.ConfigurationApi.IAuditApiGlobalConfigurator.WithEventType(System.Func{Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,System.String})">
+            <summary>
+            Specifies a predicate to determine the event type name on the audit output.
+            </summary>
+            <param name="eventTypeNamePredicate">A function of the executing context to determine the event type name. The following placeholders can be used as part of the string: 
+            - {controller}: replaced with the controller name.
+            - {action}: replaced with the action name.
+            - {verb}: replaced with the HTTP verb used (GET, POST, etc).
+            </param>
+        </member>
+        <member name="M:Audit.WebApi.ConfigurationApi.IAuditApiGlobalConfigurator.IncludeModelState(System.Boolean)">
+            <summary>
+            Specifies whether the model state should be included on the audit output.
+            </summary>
+            <param name="include">True to include the model state, false otherwise</param>
+        </member>
+        <member name="M:Audit.WebApi.ConfigurationApi.IAuditApiGlobalConfigurator.IncludeModelState(System.Func{Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext,System.Boolean})">
+            <summary>
+            Specifies a predicate to determine whether the model state should be included on the audit output.
+            </summary>
+            <param name="includePredicate">A function of the executed context to determine whether the model state should be included on the audit output</param>
+        </member>
+        <member name="M:Audit.WebApi.ConfigurationApi.IAuditApiGlobalConfigurator.IncludeResponseBody(System.Boolean)">
+            <summary>
+            Specifies whether the response body should be included on the audit output.
+            </summary>
+            <param name="include">True to include the response body, false otherwise</param>
+        </member>
+        <member name="M:Audit.WebApi.ConfigurationApi.IAuditApiGlobalConfigurator.IncludeResponseBody(System.Func{Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext,System.Boolean})">
+            <summary>
+            Specifies a predicate to determine whether the response body should be included on the audit output.
+            </summary>
+            <param name="includePredicate">A function of the executed context to determine whether the response body should be included on the audit output</param>
+        </member>
+        <member name="M:Audit.WebApi.ConfigurationApi.IAuditMiddlewareConfigurator.FilterByRequest(System.Func{Microsoft.AspNetCore.Http.HttpRequest,System.Boolean})">
+            <summary>
+            Specifies a filter function to determine if a request should be logged.
+            </summary>
+            <param name="requestPredicate">Return true to include the request on the audit output, or false otherwise.</param>
+        </member>
+        <member name="M:Audit.WebApi.ConfigurationApi.IAuditMiddlewareConfigurator.IncludeResponseHeaders(System.Boolean)">
+            <summary>
+            Specifies whether the HTTP Response headers should be included on the audit output.
+            </summary>
+            <param name="include">True to include the HTTP Response headers, false otherwise</param>
+        </member>
+        <member name="M:Audit.WebApi.ConfigurationApi.IAuditMiddlewareConfigurator.IncludeResponseHeaders(System.Func{Microsoft.AspNetCore.Http.HttpContext,System.Boolean})">
+            <summary>
+            Specifies a predicate to determine whether the HTTP Response headers should be included on the audit output.
+            </summary>
+            <param name="includePredicate">A function of the executing context to determine whether the HTTP Response headers should be included on the audit output</param>
+        </member>
+        <member name="M:Audit.WebApi.ConfigurationApi.IAuditMiddlewareConfigurator.IncludeHeaders(System.Boolean)">
+            <summary>
+            Specifies whether the HTTP Request headers should be included on the audit output.
+            </summary>
+            <param name="include">True to include the HTTP Request headers, false otherwise</param>
+        </member>
+        <member name="M:Audit.WebApi.ConfigurationApi.IAuditMiddlewareConfigurator.IncludeHeaders(System.Func{Microsoft.AspNetCore.Http.HttpContext,System.Boolean})">
+            <summary>
+            Specifies a predicate to determine whether the HTTP Request headers should be included on the audit output.
+            </summary>
+            <param name="includePredicate">A function of the executing context to determine whether the HTTP Request headers should be included on the audit output</param>
+        </member>
+        <member name="M:Audit.WebApi.ConfigurationApi.IAuditMiddlewareConfigurator.IncludeRequestBody(System.Boolean)">
+            <summary>
+            Specifies whether the request body should be included on the audit output.
+            </summary>
+            <param name="include">True to include the request body, false otherwise</param>
+        </member>
+        <member name="M:Audit.WebApi.ConfigurationApi.IAuditMiddlewareConfigurator.IncludeRequestBody(System.Func{Microsoft.AspNetCore.Http.HttpContext,System.Boolean})">
+            <summary>
+            Specifies a predicate to determine whether the request body should be included on the audit output.
+            </summary>
+            <param name="includePredicate">A function of the executing context to determine whether the request body should be included on the audit output</param>
+        </member>
+        <member name="M:Audit.WebApi.ConfigurationApi.IAuditMiddlewareConfigurator.WithEventType(System.String)">
+            <summary>
+            Specifies the event type name to use.
+            </summary>
+            <param name="eventTypeName">The event type name to use. The following placeholders can be used as part of the string: 
+            - {url}: replaced with the requst URL.
+            - {verb}: replaced with the HTTP verb used (GET, POST, etc).
+            </param>
+        </member>
+        <member name="M:Audit.WebApi.ConfigurationApi.IAuditMiddlewareConfigurator.WithEventType(System.Func{Microsoft.AspNetCore.Http.HttpContext,System.String})">
+            <summary>
+            Specifies a predicate to determine the event type name on the audit output.
+            </summary>
+            <param name="eventTypeNamePredicate">A function of the executing context to determine the event type name. The following placeholders can be used as part of the string: 
+            - {url}: replaced with the requst URL.
+            - {verb}: replaced with the HTTP verb used (GET, POST, etc).
+            </param>
+        </member>
+        <member name="M:Audit.WebApi.ConfigurationApi.IAuditMiddlewareConfigurator.IncludeResponseBody(System.Boolean)">
+            <summary>
+            Specifies whether the response body should be included on the audit output.
+            </summary>
+            <param name="include">True to include the response body, false otherwise</param>
+        </member>
+        <member name="M:Audit.WebApi.ConfigurationApi.IAuditMiddlewareConfigurator.IncludeResponseBody(System.Func{Microsoft.AspNetCore.Http.HttpContext,System.Boolean})">
+            <summary>
+            Specifies a predicate to determine whether the response body should be included on the audit output.
+            </summary>
+            <param name="includePredicate">A function of the executed context to determine whether the response body should be included on the audit output</param>
+        </member>
+    </members>
+</doc>

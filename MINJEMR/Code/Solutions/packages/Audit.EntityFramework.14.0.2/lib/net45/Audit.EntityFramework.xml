@@ -1,0 +1,806 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Audit.EntityFramework</name>
+    </assembly>
+    <members>
+        <member name="T:Audit.EntityFramework.AssociationEntry">
+            <summary>
+            Represents an Independ Association for many-to-many relationships without a relationship entity
+            </summary>
+        </member>
+        <member name="T:Audit.EntityFramework.AuditDbContext">
+            <summary>
+            Base DbContext class for Audit. Inherit your DbContext from this class to enable audit.
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.AuditDbContext.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Audit.EntityFramework.AuditDbContext" /> class.
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.AuditDbContext.#ctor(System.Data.Entity.Infrastructure.DbCompiledModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Audit.EntityFramework.AuditDbContext" /> class.
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.AuditDbContext.#ctor(System.String,System.Data.Entity.Infrastructure.DbCompiledModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Audit.EntityFramework.AuditDbContext" /> class.
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.AuditDbContext.#ctor(System.Data.Common.DbConnection,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Audit.EntityFramework.AuditDbContext" /> class.
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.AuditDbContext.#ctor(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.DbCompiledModel,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Audit.EntityFramework.AuditDbContext" /> class.
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.AuditDbContext.#ctor(System.Data.Entity.Core.Objects.ObjectContext,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Audit.EntityFramework.AuditDbContext" /> class.
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.AuditDbContext.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Audit.EntityFramework.AuditDbContext" /> class.
+            </summary>
+        </member>
+        <member name="P:Audit.EntityFramework.AuditDbContext.AuditEventType">
+            <summary>
+            To indicate the event type to use on the audit event. (Default is the context name). 
+            Can contain the following placeholders: 
+             - {context}: replaced with the Db Context type name.
+             - {database}: replaced with the database name.
+            </summary>
+        </member>
+        <member name="P:Audit.EntityFramework.AuditDbContext.AuditDisabled">
+            <summary>
+            Indicates if the Audit is disabled.
+            Default is false.
+            </summary>
+        </member>
+        <member name="P:Audit.EntityFramework.AuditDbContext.IncludeEntityObjects">
+            <summary>
+            To indicate if the output should contain the modified entities objects. (Default is false)
+            </summary>
+        </member>
+        <member name="P:Audit.EntityFramework.AuditDbContext.Mode">
+            <summary>
+            To indicate the audit operation mode. (Default is OptOut). 
+             - OptOut: All the entities are tracked by default, except those decorated with the AuditIgnore attribute. 
+             - OptIn: No entity is tracked by default, except those decorated with the AuditInclude attribute.
+            </summary>
+        </member>
+        <member name="P:Audit.EntityFramework.AuditDbContext.AuditDataProvider">
+            <summary>
+            To indicate the Audit Data Provider to use. (Default is NULL to use the configured default data provider). 
+            </summary>
+        </member>
+        <member name="P:Audit.EntityFramework.AuditDbContext.ExtraFields">
+            <summary>
+            Optional custom fields added to the audit event
+            </summary>
+        </member>
+        <member name="P:Audit.EntityFramework.AuditDbContext.IncludeIndependantAssociations">
+            <summary>
+            Value to indicate if the Independant Associations should be included. Independant associations are logged on EntityFrameworkEvent.Associations.
+            </summary>
+        </member>
+        <member name="P:Audit.EntityFramework.AuditDbContext.EntitySettings">
+            <summary>
+            A collection of settings per entity type.
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.AuditDbContext.OnScopeCreated(Audit.Core.AuditScope)">
+            <summary>
+            Called after the audit scope is created.
+            Override to specify custom logic.
+            </summary>
+            <param name="auditScope">The audit scope.</param>
+        </member>
+        <member name="M:Audit.EntityFramework.AuditDbContext.OnScopeSaving(Audit.Core.AuditScope)">
+            <summary>
+            Called after the EF operation execution and before the AuditScope saving.
+            Override to specify custom logic.
+            </summary>
+            <param name="auditScope">The audit scope.</param>
+        </member>
+        <member name="M:Audit.EntityFramework.AuditDbContext.AddAuditCustomField(System.String,System.Object)">
+            <summary>
+            Adds a custom field to the audit scope.
+            The value will be serialized when SaveChanges takes place.
+            </summary>
+            <param name="fieldName">The field name.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Audit.EntityFramework.AuditDbContext.SaveChanges">
+            <summary>
+            Saves the changes synchronously.
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.AuditDbContext.SaveChangesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Saves the changes asynchronously.
+            </summary>
+            <param name="cancellationToken">The cancellation token.</param>
+        </member>
+        <member name="M:Audit.EntityFramework.AuditDbContext.SaveChangesAsync">
+            <summary>
+            Saves the changes asynchronously.
+            </summary>
+        </member>
+        <member name="T:Audit.EntityFramework.AuditDbContextAttribute">
+            <summary>
+            Attribute to define the Audit settings for the Db Context.
+            </summary>
+        </member>
+        <member name="P:Audit.EntityFramework.AuditDbContextAttribute.IncludeIndependantAssociations">
+            <summary>
+            Value to indicate if the Independant Associations should be included. Independant associations are logged on EntityFrameworkEvent.Associations.
+            </summary>
+        </member>
+        <member name="P:Audit.EntityFramework.AuditDbContextAttribute.IncludeEntityObjects">
+            <summary>
+            To indicate if the output should contain the modified entities objects. (Default is false)
+            </summary>
+        </member>
+        <member name="P:Audit.EntityFramework.AuditDbContextAttribute.Mode">
+            <summary>
+            To indicate the audit operation mode. (Default if OptOut). 
+             - OptOut: All the entities are tracked by default, except those decorated with the AuditIgnore attribute. 
+             - OptIn: No entity is tracked by default, except those decorated with the AuditInclude attribute.
+            </summary>
+        </member>
+        <member name="P:Audit.EntityFramework.AuditDbContextAttribute.AuditEventType">
+            <summary>
+            To indicate the event type to use on the audit event. (Default is the context name). 
+            Can contain the following placeholders: 
+             - {context}: replaced with the Db Context type name.
+             - {database}: replaced with the database name.
+            </summary>
+        </member>
+        <member name="T:Audit.EntityFramework.AuditEventEntityFramework">
+            <summary>
+            Represents the output of the audit process for the Audit.EntityFramework
+            </summary>
+        </member>
+        <member name="P:Audit.EntityFramework.AuditEventEntityFramework.EntityFrameworkEvent">
+            <summary>
+            Gets or sets the entity framework event details.
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.AuditEventExtensions.GetEntityFrameworkEvent(Audit.Core.AuditScope)">
+            <summary>
+            Gets the Entity Framework Event portion of the Audit Event on the given scope.
+            </summary>
+            <param name="auditScope">The audit scope.</param>
+        </member>
+        <member name="M:Audit.EntityFramework.AuditEventExtensions.GetEntityFrameworkEvent(Audit.Core.AuditEvent)">
+            <summary>
+            Gets the Entity Framework Event portion of the Audit Event.
+            </summary>
+            <param name="auditEvent">The audit event.</param>
+        </member>
+        <member name="T:Audit.EntityFramework.AuditIgnoreAttribute">
+            <summary>
+            Used in OptOut mode to ignore an entity (class) on the Audit logs. Also can be used to ignore entity properties.
+            </summary>
+        </member>
+        <member name="T:Audit.EntityFramework.AuditIncludeAttribute">
+            <summary>
+            Used with OptIn AnnotationMode to include the entity on the Audit logs.
+            </summary>
+        </member>
+        <member name="T:Audit.EntityFramework.AuditOptionMode">
+            <summary>
+            The AuditDbContext operation mode
+            </summary>
+        </member>
+        <member name="F:Audit.EntityFramework.AuditOptionMode.OptOut">
+            <summary>
+            All the entities are audited, except those explicitly ignored with AuditIgnoreAttribute. This is the default mode.
+            </summary>
+        </member>
+        <member name="F:Audit.EntityFramework.AuditOptionMode.OptIn">
+            <summary>
+            No entity is audited except those explicitly included with AuditIncludeAttribute.
+            </summary>        
+        </member>
+        <member name="T:Audit.EntityFramework.AuditOverrideAttribute">
+            <summary>
+            Used in OptOut mode to ignore an entity (class) on the Audit logs. Also can be used to ignore entity properties.
+            </summary>
+        </member>
+        <member name="T:Audit.EntityFramework.Configuration">
+            <summary>
+            Global configuration for Audit.EntityFramework
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.Configuration.Setup">
+            <summary>
+            Configure Audit EF Settings by using a Fluent Configuration API.
+            </summary>
+        </member>
+        <member name="T:Audit.EntityFramework.ConfigurationApi.EfEntitySettings">
+            <summary>
+            Representation of the settings related to one entity type in a context
+            </summary>
+        </member>
+        <member name="F:Audit.EntityFramework.ConfigurationApi.EfEntitySettings.IgnoredProperties">
+            <summary>
+            To indicate the entity's properties (columns) to be ignored on the audit logs. Key: property name.
+            </summary>
+        </member>
+        <member name="F:Audit.EntityFramework.ConfigurationApi.EfEntitySettings.OverrideProperties">
+            <summary>
+            To indicate constant values to override properties on the audit logs. Key: property name, Value: constant value.
+            </summary>
+        </member>
+        <member name="F:Audit.EntityFramework.ConfigurationApi.EfEntitySettings.FormatProperties">
+            <summary>
+            To indicate replacement functions for the property's values on the audit logs. Key: property name, Value: function of the actual value.
+            </summary>
+        </member>
+        <member name="T:Audit.EntityFramework.ConfigurationApi.EfSettings">
+            <summary>
+            Internal representation of the settings related to one context type
+            </summary>
+        </member>
+        <member name="T:Audit.EntityFramework.ConfigurationApi.IAuditEntityMapping">
+            <summary>
+            Define the Entity to Audit-Entity mapping
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IAuditEntityMapping.Map``2(System.Action{Audit.Core.AuditEvent,Audit.EntityFramework.EventEntry,``1})">
+            <summary>
+            Maps the entity type specified on <typeparamref name="TSourceEntity"/> to the audit entity type specified on <typeparamref name="TAuditEntity"/>
+            </summary>
+            <param name="entityAction">An action to perform on the audit entity of type <typeparamref name="TAuditEntity"/> before saving it</param>
+            <typeparam name="TSourceEntity">The entity type to be audited</typeparam>
+            <typeparam name="TAuditEntity">The entity type that holds the audit of the type audited</typeparam>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IAuditEntityMapping.Map``2(System.Func{Audit.Core.AuditEvent,Audit.EntityFramework.EventEntry,``1,System.Boolean})">
+            <summary>
+            Maps the entity type specified on <typeparamref name="TSourceEntity"/> to the audit entity type specified on <typeparamref name="TAuditEntity"/>
+            </summary>
+            <param name="entityAction">A function to perform on the audit entity of type <typeparamref name="TAuditEntity"/> before saving it. 
+            Must return a boolean indicating whether to include the entity on the audit logs.</param>
+            <typeparam name="TSourceEntity">The entity type to be audited</typeparam>
+            <typeparam name="TAuditEntity">The entity type that holds the audit of the type audited</typeparam>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IAuditEntityMapping.Map``2(System.Action{``0,``1})">
+            <summary>
+            Maps the entity type specified on <typeparamref name="TSourceEntity"/> to the audit entity type specified on <typeparamref name="TAuditEntity"/>
+            </summary>
+            <param name="entityAction">An action to perform on the audit entity of type <typeparamref name="TAuditEntity"/> before saving it</param>
+            <typeparam name="TSourceEntity">The entity type to be audited</typeparam>
+            <typeparam name="TAuditEntity">The entity type that holds the audit of the type audited</typeparam>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IAuditEntityMapping.Map``2(System.Func{``0,``1,System.Boolean})">
+            <summary>
+            Maps the entity type specified on <typeparamref name="TSourceEntity"/> to the audit entity type specified on <typeparamref name="TAuditEntity"/>
+            </summary>
+            <param name="entityAction">An action to perform on the audit entity of type <typeparamref name="TAuditEntity"/> before saving it
+            Must return a boolean indicating whether to include the entity on the audit logs.</param>
+            <typeparam name="TSourceEntity">The entity type to be audited</typeparam>
+            <typeparam name="TAuditEntity">The entity type that holds the audit of the type audited</typeparam>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IAuditEntityMapping.Map``2">
+            <summary>
+            Maps the entity type specified on <typeparamref name="TSourceEntity"/> to the audit entity type specified on <typeparamref name="TAuditEntity"/>
+            </summary>
+            <typeparam name="TSourceEntity">The entity type to be audited</typeparam>
+            <typeparam name="TAuditEntity">The entity type that holds the audit of the type audited</typeparam>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IAuditEntityMapping.AuditEntityAction(System.Action{Audit.Core.AuditEvent,Audit.EntityFramework.EventEntry,System.Object})">
+            <summary>
+            Defines a common action to perform to all the audit entities before saving. 
+            </summary>
+            <param name="entityAction">A default action to perform on the audit entity before saving it</param>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IAuditEntityMapping.AuditEntityAction(System.Func{Audit.Core.AuditEvent,Audit.EntityFramework.EventEntry,System.Object,System.Boolean})">
+            <summary>
+            Defines a common action to perform to all the audit entities before saving. 
+            </summary>
+            <param name="entityAction">A default action to perform on the audit entity before saving it
+            Must return a boolean indicating whether to include the entity on the audit logs.</param>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IAuditEntityMapping.AuditEntityAction``1(System.Action{Audit.Core.AuditEvent,Audit.EntityFramework.EventEntry,``0})">
+            <summary>
+            Defines a common action to perform to all the audit entities before saving. 
+            </summary>
+            <param name="entityAction">A default action to perform on the audit entity before saving it</param>
+            <typeparam name="T">The audit entity type</typeparam>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IAuditEntityMapping.AuditEntityAction``1(System.Func{Audit.Core.AuditEvent,Audit.EntityFramework.EventEntry,``0,System.Boolean})">
+            <summary>
+            Defines a common action to perform to all the audit entities before saving. 
+            </summary>
+            <param name="entityAction">A default action to perform on the audit entity before saving it
+            Must return a boolean indicating whether to include the entity on the audit logs.</param>
+            <typeparam name="T">The audit entity type</typeparam>
+        </member>
+        <member name="T:Audit.EntityFramework.ConfigurationApi.IContextConfigurator">
+            <summary>
+            Provides a global configuration for Audit.EntityFramework
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IContextConfigurator.ForContext``1(System.Action{Audit.EntityFramework.ConfigurationApi.IContextSettingsConfigurator{``0}})">
+            <summary>
+            Provides a configuration for a specific AuditDbContext (has precedence over ForAnyContext)
+            </summary>
+            <param name="config">The context configuration</param>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IContextConfigurator.ForAnyContext(System.Action{Audit.EntityFramework.ConfigurationApi.IContextSettingsConfigurator{Audit.EntityFramework.AuditDbContext}})">
+            <summary>
+            Provides a configuration for all the AuditDbContext
+            </summary>
+            <param name="config">The context configuration</param>
+        </member>
+        <member name="T:Audit.EntityFramework.ConfigurationApi.IContextEntitySetting`1">
+            <summary>
+            The settings configuration for an Entity
+            </summary>
+            <typeparam name="TEntity">The entity type</typeparam>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IContextEntitySetting`1.Ignore``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Ignore a column on the audit trail indicating its entity property
+            </summary>
+            <typeparam name="TProp">The property type</typeparam>
+            <param name="property">The property selector. Must be a simple property expression i.e. x -> x.PropertyName</param>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IContextEntitySetting`1.Ignore(System.String)">
+            <summary>
+            Ignore a column on the audit trail indicating its name
+            </summary>
+            <param name="propertyName">The entity's property name (case sensitive)</param>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IContextEntitySetting`1.Override``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},``0)">
+            <summary>
+            Overrides a column value to a constant on the audit trail.
+            </summary>
+            <typeparam name="TProp">The property type</typeparam>
+            <param name="property">The property selector. Must be a simple property expression i.e. x -> x.PropertyName</param>
+            <param name="value">The constant value to store on the audit trail</param>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IContextEntitySetting`1.Override``1(System.String,``0)">
+            <summary>
+            Overrides a column value to a constant on the audit trail.
+            </summary>
+            <param name="propertyName">The entity's property name (case sensitive)</param>
+            <param name="value">The constant value to store on the audit trail</param>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IContextEntitySetting`1.Format``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Func{``0,``0})">
+            <summary>
+            Overrides a column value to a value given as a function of the current value.
+            </summary>
+            <param name="property">The property selector. Must be a simple property expression i.e. x -> x.PropertyName</param>
+            <param name="format">A function of the current value that returns the value to override</param>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IContextEntitySetting`1.Format``1(System.String,System.Func{``0,``0})">
+            <summary>
+            Overrides a column value to a value given as a function of the current value.
+            </summary>
+            <param name="propertyName">The entity's property name (case sensitive)</param>
+            <param name="format">A function of the current value that returns the value to override</param>
+        </member>
+        <member name="T:Audit.EntityFramework.ConfigurationApi.IContextSettingsConfigurator`1">
+            <summary>
+            The settings configuration for an AuditDbContext
+            </summary>
+            <typeparam name="T">The AuditDbContext specific type</typeparam>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IContextSettingsConfigurator`1.AuditEventType(System.String)">
+            <summary>
+            Sets the audit event type to use.
+            Can contain the following placeholders:
+            - {context}: replaced with the Db Context type name.
+            - {database}: replaced with the database name.
+            </summary>
+            <param name="eventType">Type of the event.</param>
+            <returns>IContextSettingsConfigurator&lt;T&gt;.</returns>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IContextSettingsConfigurator`1.IncludeEntityObjects(System.Boolean)">
+            <summary>
+            Sets the indicator to include/exlude the serialized entities on the event output
+            </summary>
+            <param name="include">if set to <c>true</c> the serialized entities will be included.</param>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IContextSettingsConfigurator`1.ForEntity``1(System.Action{Audit.EntityFramework.ConfigurationApi.IContextEntitySetting{``0}})">
+            <summary>
+            Sets the configuration for a specific entity (table)
+            </summary>
+            <param name="config">The configuration.</param>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IContextSettingsConfigurator`1.IncludeIndependantAssociations(System.Boolean)">
+            <summary>
+            Value to indicate if the Independant Associations should be included. Independant associations are logged on EntityFrameworkEvent.Associations.
+            </summary>
+            <param name="include">if set to <c>true</c> the serialized entities will be included.</param>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IEntityFrameworkProviderConfigurator.UseDbContext(System.Func{Audit.EntityFramework.AuditEventEntityFramework,System.Data.Entity.DbContext})">
+            <summary>
+            Provides a custom Db Context to use **for storing the Audit Events**. By default it uses the same DbContext instance that is being audited.
+            </summary>
+            <param name="dbContextBuilder">A function that given an EF audit event, returns a custom DbContext to use **for storing the audit events**.</param>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IEntityFrameworkProviderConfigurator.UseDbContext``1(System.Object[])">
+            <summary>
+            Provides a custom Db Context to use **for storing the Audit Events**. By default it uses the same DbContext instance that is being audited.
+            </summary>
+            <param name="constructorArgs">The arguments to pass to the <typeparamref name="T"/> constructor, if any.</param>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IEntityFrameworkProviderConfigurator.AuditTypeMapper(System.Func{System.Type,System.Type})">
+            <summary>
+            Specifies a function that maps an entity type to its audited type. If the function returns null for a given type, the audit event will not be saved.
+            </summary>
+            <param name="mapper">Function that maps an entity type to its audited type.</param>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IEntityFrameworkProviderConfigurator.AuditTypeNameMapper(System.Func{System.String,System.String})">
+            <summary>
+            Specifies a function that maps an entity type name to its audited type name. Both entities should be on the same assembly and namespace. If the function returns null for a given type name, the audit event will not be saved.
+            </summary>
+            <param name="mapper">Function that maps an entity type to its audited type.</param>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IEntityFrameworkProviderConfigurator.AuditTypeExplicitMapper(System.Action{Audit.EntityFramework.ConfigurationApi.IAuditEntityMapping})">
+            <summary>
+            Specifies a mapping type to type.
+            </summary>
+            <param name="config">Mapping explicit configuration.</param>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IEntityFrameworkProviderConfiguratorAction.AuditEntityAction(System.Action{Audit.Core.AuditEvent,Audit.EntityFramework.EventEntry,System.Object})">
+            <summary>
+            An action to perform on the audit entity before saving it. This action is triggered for each entity being modified.
+            </summary>
+            <param name="action">The action to perform on the audit entity before saving it. First parameter is the entire audit event, Second parameter is the entity modified entry and the third is the audit entity</param>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IEntityFrameworkProviderConfiguratorAction.AuditEntityAction``1(System.Action{Audit.Core.AuditEvent,Audit.EntityFramework.EventEntry,``0})">
+            <summary>
+            An action to perform on the audit entity before saving it. This action is triggered for each entity being modified.
+            </summary>
+            <param name="action">The action to perform on the audit entity before saving it. First parameter is the entire audit event, Second parameter is the entity modified entry and the third is the audit entity</param>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IEntityFrameworkProviderConfiguratorAction.AuditEntityAction(System.Func{Audit.Core.AuditEvent,Audit.EntityFramework.EventEntry,System.Object,System.Boolean})">
+            <summary>
+            A function to perform on the audit entity before saving it. 
+            The function must return a boolean value indicating whether to include or not the entity on the audit log.
+            </summary>
+            <param name="function">The function to perform on the audit entity before saving it. First parameter is the entire audit event, Second parameter is the entity modified entry and the third is the audit entity.
+            Must return a boolean value indicating whether to include the entity.</param>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IEntityFrameworkProviderConfiguratorAction.AuditEntityAction``1(System.Func{Audit.Core.AuditEvent,Audit.EntityFramework.EventEntry,``0,System.Boolean})">
+            <summary>
+            A function to perform on the audit entity before saving it. This is triggered for each entity being modified.
+            The function must return a boolean value indicating whether to include or not the entity on the audit log.
+            </summary>
+            <param name="function">The function to perform on the audit entity before saving it. First parameter is the entire audit event, Second parameter is the entity modified entry and the third is the audit entity.
+            Must return a boolean value indicating whether to include the entity.</param>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IEntityFrameworkProviderConfiguratorExtra.IgnoreMatchedProperties(System.Boolean)">
+            <summary>
+            Avoids the property values copy from the entity to the audited entity
+            </summary>
+            <param name="ignore">Set to true to avoid the property values copy from the entity to the audited entity (default is true)</param>
+        </member>
+        <member name="T:Audit.EntityFramework.ConfigurationApi.IExcludeConfigurator`1">
+            <summary>
+            Configurates the OptOut mode
+            </summary>
+            <typeparam name="T">The AuditDbContext type</typeparam>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IExcludeConfigurator`1.Ignore``1">
+            <summary>
+            Ignores the given entity type.
+            </summary>
+            <typeparam name="TEntity">The type of the EF entity to ignore.</typeparam>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IExcludeConfigurator`1.Ignore(System.Type)">
+            <summary>
+            Ignores the given entity type.
+            </summary>
+            <param name="entityType">The entity type to ignore.</param>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IExcludeConfigurator`1.IgnoreAny(System.Func{System.Type,System.Boolean})">
+            <summary>
+            Specifies the function that determines whether an entity is exluded or not.
+            </summary>
+            <param name="predicate">A function to test each entity type for a condition.</param>
+        </member>
+        <member name="T:Audit.EntityFramework.ConfigurationApi.IIncludeConfigurator`1">
+            <summary>
+            Configurates the OptIn mode
+            </summary>
+            <typeparam name="T">The AuditDbContext type</typeparam>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IIncludeConfigurator`1.Include``1">
+            <summary>
+            Includes the given entity type.
+            </summary>
+            <typeparam name="TEntity">The type of the EF entity to include.</typeparam>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IIncludeConfigurator`1.Include(System.Type)">
+            <summary>
+            Includes the given entity type.
+            </summary>
+            <param name="entityType">The entity type to include.</param>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IIncludeConfigurator`1.IncludeAny(System.Func{System.Type,System.Boolean})">
+            <summary>
+            Specifies the function that determines whether an entity is included or not.
+            </summary>
+            <param name="predicate">A function to test each entity type for a condition.</param>
+        </member>
+        <member name="T:Audit.EntityFramework.ConfigurationApi.IModeConfigurator`1">
+            <summary>
+            Configures the context operation mode (OptIn / OptOut)
+            </summary>
+            <typeparam name="T">The AuditDbContext type</typeparam>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IModeConfigurator`1.UseOptOut">
+            <summary>
+            Uses the opt-out mode.
+            All the entities are tracked by default, except those explicitly ignored.
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IModeConfigurator`1.UseOptIn">
+            <summary>
+            Uses the opt-in mode.
+            No entity is tracked by default, except those explicitly included.
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.ConfigurationApi.IModeConfigurator`1.Reset">
+            <summary>
+            Resets the previous configuration for this type.
+            </summary>
+        </member>
+        <member name="P:Audit.EntityFramework.ConfigurationApi.MappingInfo.TargetType">
+            <summary>
+            The Target (Audit) type 
+            </summary>
+        </member>
+        <member name="P:Audit.EntityFramework.ConfigurationApi.MappingInfo.Action">
+            <summary>
+            The Action to execute for this mapping.
+            </summary>
+        </member>
+        <member name="T:Audit.EntityFramework.DbContextHelper">
+            <summary>
+            Helper class with common behavior for AuditDbContext and AuditIdentityDbContext
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.DbContextHelper.SetConfig(Audit.EntityFramework.IAuditDbContext)">
+            <summary>
+            Sets the configuration values from attribute, local and global
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.DbContextHelper.GetValidationResults(System.Object)">
+            <summary>
+            Gets the validation results, return NULL if there are no validation errors.
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.DbContextHelper.GetStateName(System.Data.Entity.EntityState)">
+            <summary>
+            Gets the name for an entity state.
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.DbContextHelper.SaveScope(Audit.EntityFramework.IAuditDbContext,Audit.Core.AuditScope,Audit.EntityFramework.EntityFrameworkEvent)">
+            <summary>
+            Saves the scope.
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.DbContextHelper.SaveScopeAsync(Audit.EntityFramework.IAuditDbContext,Audit.Core.AuditScope,Audit.EntityFramework.EntityFrameworkEvent)">
+            <summary>
+            Saves the scope asynchronously.
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.DbContextHelper.UpdateAuditEvent(Audit.EntityFramework.EntityFrameworkEvent,Audit.EntityFramework.IAuditDbContext)">
+            <summary>
+            Updates column values and primary keys on the Audit Event after the EF save operation completes.
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.DbContextHelper.EvalIncludeFilter(System.Type,Audit.EntityFramework.ConfigurationApi.EfSettings,Audit.EntityFramework.ConfigurationApi.EfSettings)">
+            <summary>
+            Gets the include value for a given entity type.
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.DbContextHelper.EvalIgnoreFilter(System.Type,Audit.EntityFramework.ConfigurationApi.EfSettings,Audit.EntityFramework.ConfigurationApi.EfSettings)">
+            <summary>
+            Gets the exclude value for a given entity type.
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.DbContextHelper.CreateAuditScope(Audit.EntityFramework.IAuditDbContext,Audit.EntityFramework.EntityFrameworkEvent)">
+            <summary>
+            Creates the Audit scope.
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.DbContextHelper.CreateAuditScopeAsync(Audit.EntityFramework.IAuditDbContext,Audit.EntityFramework.EntityFrameworkEvent)">
+            <summary>
+            Creates the Audit scope asynchronously.
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.DbContextHelper.GetModifiedEntries(Audit.EntityFramework.IAuditDbContext)">
+            <summary>
+            Gets the modified entries to process.
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.DbContextHelper.GetTransactionId(System.Data.Common.DbTransaction,System.String)">
+            <summary>
+            Gets a unique ID for the current SQL transaction.
+            </summary>
+            <param name="transaction">The transaction.</param>
+            <param name="clientConnectionId">The client connection identifier.</param>
+            <returns>System.String.</returns>
+        </member>
+        <member name="M:Audit.EntityFramework.DbContextHelper.SaveChangesAsync(Audit.EntityFramework.IAuditDbContext,System.Func{System.Threading.Tasks.Task{System.Int32}})">
+            <summary>
+            Saves the changes asynchronously.
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.DbContextHelper.SaveChanges(Audit.EntityFramework.IAuditDbContext,System.Func{System.Int32})">
+            <summary>
+            Saves the changes synchronously.
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.DbContextHelper.GetChanges(Audit.EntityFramework.IAuditDbContext,System.Data.Entity.Infrastructure.DbEntityEntry)">
+            <summary>
+            Gets the entities changes for an entry entity.
+            </summary>
+            <param name="entry">The entry.</param>
+            <param name="context">The audit database context.</param>
+        </member>
+        <member name="M:Audit.EntityFramework.DbContextHelper.GetColumnValues(Audit.EntityFramework.IAuditDbContext,System.Data.Entity.Infrastructure.DbEntityEntry)">
+            <summary>
+            Gets the column values.
+            </summary>
+            <param name="context">The audit db context.</param>
+            <param name="entry">The entity entry.</param>
+        </member>
+        <member name="M:Audit.EntityFramework.DbContextHelper.GetEntityName(System.Data.Entity.DbContext,System.Object)">
+            <summary>
+            Gets the name of the table/entity.
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.DbContextHelper.GetCurrentTransactionId(System.Data.Entity.DbContext,System.String)">
+            <summary>
+            Tries to get the current transaction identifier.
+            </summary>
+            <param name="dbContext">The DB Context.</param>
+            <param name="clientConnectionId">The client ConnectionId.</param>
+        </member>
+        <member name="M:Audit.EntityFramework.DbContextHelper.GetPrimaryKey(System.Data.Entity.DbContext,System.Data.Entity.Infrastructure.DbEntityEntry)">
+            <summary>
+            Gets the primary key values for an entity
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.DbContextHelper.GetForeignKeys(System.Data.Entity.DbContext,System.Data.Entity.Infrastructure.DbEntityEntry)">
+            <summary>
+            Gets the foreign keys values for an entity
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.DbContextHelper.CreateAuditEvent(Audit.EntityFramework.IAuditDbContext)">
+            <summary>
+            Creates the Audit Event.
+            </summary>
+        </member>
+        <member name="T:Audit.EntityFramework.DefaultAuditContext">
+            <summary>
+            Empty default implementation of IAuditDbContext
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.EntityFrameworkEvent.GetDbContext">
+            <summary>
+            Returns the DbContext associated to this event
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.EntityFrameworkEvent.ToJson">
+            <summary>
+            Serializes this Entity Framework event as a JSON string
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.EntityFrameworkEvent.FromJson(System.String)">
+            <summary>
+            Parses an Entity Framework event from its JSON string representation.
+            </summary>
+            <param name="json">JSON string with the Entity Framework event representation.</param>
+        </member>
+        <member name="T:Audit.EntityFramework.EntityName">
+            <summary>
+            Describes a table by its schema and name
+            </summary>
+        </member>
+        <member name="P:Audit.EntityFramework.EventEntry.EntityType">
+            <summary>
+            The source entity type (not included on the output)
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.EventEntry.ToJson">
+            <summary>
+            Serializes this Event Entry as a JSON string
+            </summary>
+        </member>
+        <member name="M:Audit.EntityFramework.EventEntry.FromJson(System.String)">
+            <summary>
+            Parses an Event Entry from its JSON string representation.
+            </summary>
+            <param name="json">JSON string with the Event Entry representation.</param>
+        </member>
+        <member name="M:Audit.EntityFramework.EventEntry.GetEntry">
+            <summary>
+            Returns the DbEntityEntry associated to this audit event entry
+            </summary>
+        </member>
+        <member name="T:Audit.EntityFramework.Providers.EntityFrameworkDataProvider">
+            <summary>
+            Store the audits logs in the same EntityFramework model as the audited entities.
+            </summary>
+            <remarks>
+            Settings:
+            - AuditTypeMapper: A function that maps an entity type to its audited type (i.e. Order -> OrderAudit, etc)
+            - AuditEntityAction: An action to perform on the audit entity before saving it
+            - IgnoreMatchedProperties: Set to true to avoid the property values copy from the entity to the audited entity (default is false)
+            </remarks>
+        </member>
+        <member name="P:Audit.EntityFramework.Providers.EntityFrameworkDataProvider.AuditEntityAction">
+            <summary>
+            Function to execute on the audited entities before saving them. 
+            Returns a boolean value indicating whther to include the entity on the logs or not.
+            </summary>
+        </member>
+        <member name="P:Audit.EntityFramework.Providers.EntityFrameworkDataProvider.DbContextBuilder">
+            <summary>
+            Function that returns the DbContext to use for Audit Tables (default is the same context as the one audited)
+            </summary>
+        </member>
+        <member name="M:Audit.Core.EntityFrameworkConfiguratorExtensions.UseEntityFramework(Audit.Core.ConfigurationApi.IConfigurator,System.Func{System.Type,System.Type},System.Action{Audit.Core.AuditEvent,Audit.EntityFramework.EventEntry,System.Object},System.Boolean)">
+            <summary>
+            Store the audits logs in the same EntityFramework model as the audited entities.
+            </summary>
+        </member>
+        <member name="M:Audit.Core.EntityFrameworkConfiguratorExtensions.UseEntityFramework(Audit.Core.ConfigurationApi.IConfigurator,System.Action{Audit.EntityFramework.ConfigurationApi.IEntityFrameworkProviderConfigurator})">
+            <summary>
+            Store the audits logs in the same EntityFramework model as the audited entities.
+            </summary>
+            <param name="config">The EF provider configuration.</param>
+            <param name="configurator">The Audit.NET configurator object.</param>
+        </member>
+        <member name="T:EntityKeyHelper">
+            <summary>
+            Entity Helper Methods for EF 6
+            </summary>
+        </member>
+        <member name="M:EntityKeyHelper.GetPrimaryKeyValues(System.Object,System.Data.Entity.DbContext)">
+            <summary>
+            Gets the primary key keys and values for a given entity in a given db context.
+            </summary>
+            <param name="entity">The entity.</param>
+            <param name="context">The db context.</param>
+        </member>
+        <member name="M:EntityKeyHelper.GetForeignKeysValues(System.Object,System.Data.Entity.DbContext)">
+            <summary>
+            Gets the foreign keys and values for a given entity in a given db context.
+            </summary>
+            <param name="entity">The entity.</param>
+            <param name="context">The db context.</param>
+        </member>
+        <member name="M:EntityKeyHelper.GetTableName(System.Type,System.Data.Entity.DbContext)">
+            <summary>
+            Gets the name of the table given an entity type (or proxy) and a db context.
+            </summary>
+            <param name="type">The entity type (or proxy).</param>
+            <param name="context">The db context.</param>
+        </member>
+        <member name="M:EntityKeyHelper.GetColumnName(System.Type,System.String,System.Data.Entity.DbContext)">
+            <summary>
+            Gets the name of the column given an entity type (or proxy), a property name and a db context.
+            </summary>
+            <param name="type">The entity type (or proxy).</param>
+            <param name="propertyName">The property name.</param>
+            <param name="context">The db context.</param>
+        </member>
+    </members>
+</doc>

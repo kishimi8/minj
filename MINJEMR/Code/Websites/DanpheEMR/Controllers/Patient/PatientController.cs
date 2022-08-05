@@ -1238,6 +1238,7 @@ namespace DanpheEMR.Controllers
             string contentType;
 
             if (!provider.TryGetContentType(path, out contentType))
+
             {
                 contentType = "application/octet-stream";
             }

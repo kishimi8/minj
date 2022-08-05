@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DanpheEMR.DalLayer</RootNamespace>
     <AssemblyName>DanpheEMR.DalLayer</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -383,7 +383,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DanpheEMR.Core\DanpheEMR.Core.csproj">
-      <Project>{60955CC2-3E42-4C29-9C75-483D93519B6D}</Project>
+      <Project>{60955cc2-3e42-4c29-9c75-483d93519b6d}</Project>
       <Name>DanpheEMR.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\DanpheEMR.Security\DanpheEMR.Security.csproj">

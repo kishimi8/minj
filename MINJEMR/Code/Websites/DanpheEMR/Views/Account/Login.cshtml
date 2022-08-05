@@ -128,7 +128,7 @@
             position: absolute;
             height: 100%;
             width: 100%;
-            background: #1d33e1;
+            background: #4CAF50;
             opacity: 0.8;
             top: 0px;
             left: 0px;
@@ -150,7 +150,7 @@
                 font-weight: 500;
                 font-size: 14px;
                 margin-top: 10px;
-                background: #5a6ae1;
+                background: #2d6948;
                 padding: 15px 15px;
                 margin: 20px auto;
                 text-shadow: 0px 3px 1px rgba(0,0,0,0.3);
@@ -168,8 +168,8 @@
             }
 
     .btn-primary {
-        background-color: #5867dd;
-        border-color: #5867dd;
+        background-color: #2d6948;
+        border-color: #2d6948;
         color: #fff;
         height: 50px;
         padding-left: 2em;
@@ -181,7 +181,7 @@
 
     a.c-7 {
         font-weight: 600;
-        color: #5867dd;
+        color: #2d6948;
         margin: 15px auto;
     }
 
@@ -234,10 +234,10 @@
             font-size: 11px;
             font-weight: normal;
         }
-            .rem-me label input{
-                float: left;
-                margin-top: 1px;
-            }
+        .rem-me label input{
+            float: left;
+            margin-top: 1px;
+        }
     .form-group {
         margin-bottom: 0px !important;
     }
@@ -256,28 +256,27 @@
     <div class="row" style="width: 100%;">
         <div class="col-md-12">
             <div class="row">
-                <div class="col-md-4">
-                    <div class="left-img" style=" background-image: url('/themes/theme-default/images/login-left.jpg'); position: relative;">
+                <div class="col-md-8">
+                    <div class="left-img" style=" background-image: url('/themes/theme-default/images/login-new.jpg'); position: relative;">
                         <div class="">
-                            <h1>Danphe Emr</h1>
+                            <h1>MINJ EMR</h1>    
                             <p>A Complete <b style="color: #00ffa1; font-weight: 600 ">Healthcare Management Solution</b> for Hospitals, Clinics and Pharmacy.</p>
                             <ul class="feature">
                                 <li><span>&#9745;</span>EMR</li>
                                 <li><span>&#9745;</span>ERP</li>
-                                <li><span>&#9745;</span>Disease Registry</li>
-                                <li><span>&#9745;</span>Health Information Exchange</li>
-                                <li><span>&#9745;</span>Syndromic Surveillance</li>
                                 <li><span>&#9745;</span>Patient Portal</li>
+                                <li><span>&#9745;</span>Integrated LIS</li>
+                                <li><span>&#9745;</span>Integrated RIS</li>
                             </ul>
                             @*<div style="margin-top: 20px;">
-                                    Our &nbsp;<a class="text-right termscondition" href="#" original-title="terms and conditions">Terms & Condition</a>&nbsp;
-                                </div>*@
+            Our &nbsp;<a class="text-right termscondition" href="#" original-title="terms and conditions">Terms & Condition</a>&nbsp;
+        </div>*@
                         </div>
                         <p class="text-center footer-btm-cprt">
                             <a class="text-right termscondition" href="#" original-title="terms and conditions">Terms & Condition</a><br />
-                            &copy; Copyright 2022 @*<a href="http://www.danphehealth.com/" target="_blank" title="DanpheHealth Pvt. Ltd.">Danphe Health</a>*@ @*NextChanges: get website and company name from appsettings file*@
-                            <a href="#" target="_blank" title="">Danphe EMR. All Rights Reserved.</a>
-
+                            &copy; Copyright 2022 @*<a href="http://www.danphehealth.com/" target="_blank" title="Minjirya HealthCare Ltd.">Danphe Health</a>*@ @*NextChanges: get website and company name from appsettings file*@
+                        <a href="#" target="_blank" title="">Minjirya HealthCare. All Rights Reserved.</a>
+             
                         </p>
                         @*<div style="position: absolute; left: 0; bottom: 30px; font-size: 12px;">
                                 <span>
@@ -287,10 +286,10 @@
                             </div>*@
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-4">
                     <div class="l-c">
                         <div class="row">
-                            <div class="col-md-offset-4 col-md-4">
+                            <div class="col-md-offset-1 col-md-11">
                                 @*below message should be shown in UAT server so set to display block in UAT server..*@
                                 <div style="
         width: 100%;
@@ -304,8 +303,8 @@
         display: none;
         border-radius: 8px;
     ">
-                                    DanpheEMR TEST-SERVER <br />
-                                    <span style="font-size: 15px;">Only to be used for UAT and Training Purpose</span>
+                                    MINJEMR  <br />
+                                    <span style="font-size: 15px;">Minjirya Healthcare Services</span>
                                 </div>
 
                                 <div class="form-wrapper">
@@ -315,7 +314,7 @@
                                         <div class="form-horizontal">
 
                                             <div class="form-group text-center">
-                                                <img style="width:60%; margin-top:10px !important;" src="~/themes/theme-default/images/danphe-logo.png" alt="Alternate Text" />
+                                                <img style="width:70%; margin-top:10px !important;" src="~/themes/theme-default/images/logo.png" alt="Alternate Text" />
                                             </div>
 
                                             <div class="form-group" >
@@ -395,17 +394,15 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            @{ 
-                                                string versionNumber = (string)ViewData["applicationVersionNum"];
-                                            }
-                                            <div class="form-group">
-                                                <div class="col-sm-12">
-                                                    <div class="text-center">
-                                                        <span class="txt-xs" style="font-weight: 600;line-height: 5;">Danphe EMR Version @versionNumber </span>
 
+                                            <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <div class="text-center">
+                                                            <span class="txt-xs" style="font-weight: 600;line-height: 5;">MINJ EMR Version 1.0.1</span>@*NextChanges:get product name and version number from appsettings and show here*@
+                                                            
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
                                         </div>
                                     }
@@ -420,7 +417,6 @@
 
 
 </div>
-
 
 
 <!--Login div-->

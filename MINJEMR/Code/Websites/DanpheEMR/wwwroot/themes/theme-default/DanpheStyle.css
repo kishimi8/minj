@@ -408,10 +408,8 @@ input[type=text]:focus, input[type=number]:focus, input[type=tel]:focus, select:
     /*opacity: 1;*/
 }
 .page-header.navbar {
-    height: 52px;
-    /*background-color: #006687;*/
-    background-color: #5f4fc6;
-    font-family: 'Quicksand'
+    min-height: 68px;
+    font-family: 'Quicksand';
 }
 .page-content-wrapper .page-content {
     padding-top: 25px;
@@ -1073,7 +1071,7 @@ table.info-table tr td {
 /*custom.css ends*/
 div:not(.gen-sticker-wrapper) {
     box-sizing: border-box;
-    -moz-box-sizing: border-box;
+    -moz-box-sizing: border-box; 
     -webkit-box-sizing: border-box;
 }
 .page-sidebar .page-sidebar-menu > li > a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li > a {
