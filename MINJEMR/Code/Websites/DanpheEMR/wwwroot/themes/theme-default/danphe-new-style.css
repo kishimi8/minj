@@ -132,7 +132,7 @@ body{
     z-index: 9;
 }
     .page-sidebar .page-sidebar-menu > li > a {
-        background: #0773bc !important;
+        background: #a8cf45 !important;
         color: #fff !important;
         font-family: 'Quicksand','Open Sans', sans-serif !important;
         border-left: none !important;
@@ -144,7 +144,7 @@ body{
         border-top: none;
     }
 .page-sidebar .page-sidebar-menu > li > a.left-nav-active, .page-sidebar .page-sidebar-menu > li > a:hover{
-	background: #3e96f1 !important;
+	background: #26c281 !important;
     box-shadow: 0px 0px 15px rgba(1, 21, 173, 0.10) !important;
 }
 .page-sidebar .page-sidebar-menu > li > a img
